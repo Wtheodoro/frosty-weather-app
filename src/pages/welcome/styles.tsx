@@ -1,5 +1,4 @@
 import styled, { keyframes } from 'styled-components'
-import { LogoStorm } from '../../components'
 
 export const Container = styled.main`
   max-width: 400px;
