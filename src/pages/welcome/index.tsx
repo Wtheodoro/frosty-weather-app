@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
   Button,
   LogoStorm,
@@ -13,6 +14,9 @@ import {
 } from './styles'
 
 const Welcome = () => {
+  const navigate = useNavigate()
+  const pushToApp = () => navigate('/')
+
   return (
     <Container>
       <div>
@@ -33,7 +37,7 @@ const Welcome = () => {
 
       <p>Get to know your weather maps and radar preciptation forecast</p>
 
-      <Button>Get Started</Button>
+      <Button onClick={pushToApp}>Get Started</Button>
     </Container>
   )
 }
