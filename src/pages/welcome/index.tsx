@@ -1,6 +1,10 @@
 import React from 'react'
-import { PagehigherOrderComponent } from '..'
-import { Button, LogoStorm, LogoRain } from '../../components'
+import {
+  Button,
+  LogoStorm,
+  LogoRain,
+  PagehigherOrderComponent,
+} from '../../components'
 import {
   Container,
   LogoWrapper,
