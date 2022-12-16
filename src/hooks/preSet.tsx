@@ -63,9 +63,19 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
     }
   }
 
+  const getCitiesWeather = async () => {
+    const weathers = await Promise.all(
+      featuredCities.map(
+        async (city) => await weatherServices.getCityWeather(city)
+      )
+    )
+
+    setFeaturedWeathers(weathers)
+  }
+
   useEffect(() => {
     if (!hasSomePreSettedCity) return
-    featuredCities.forEach((city) => getCityWeather(city))
+    getCitiesWeather()
   }, [])
 
   return (
