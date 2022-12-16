@@ -1,18 +1,21 @@
 import React from 'react'
 import { PagehigherOrderComponent, WeatherCard } from '../../components'
 import { usePreSet } from '../../hooks/preSet'
+import { Container, WeatherCardsWrapper } from './styles'
 
 const Home = () => {
   const { featuredWeathers } = usePreSet()
 
   return (
-    <div>
+    <Container>
       <h1>Today's Report</h1>
 
-      {featuredWeathers.map((featuredWeather) => (
-        <WeatherCard key={featuredWeather.id} {...featuredWeather} />
-      ))}
-    </div>
+      <WeatherCardsWrapper>
+        {featuredWeathers.map((featuredWeather) => (
+          <WeatherCard key={featuredWeather.id} {...featuredWeather} />
+        ))}
+      </WeatherCardsWrapper>
+    </Container>
   )
 }
 

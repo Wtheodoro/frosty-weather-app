@@ -4,7 +4,13 @@ import weathers from '../../constants/weather'
 import { IWeather } from '../../types/weather'
 import { Container, MainInfoWrapper, SubItemsWrapper, SubItem } from './styles'
 
-const WeatherCard: React.FC<IWeather> = ({ main, weather, wind, clouds }) => {
+const WeatherCard: React.FC<IWeather> = ({
+  main,
+  weather,
+  wind,
+  clouds,
+  name,
+}) => {
   console.log(main)
   console.log(weather[0])
 
@@ -25,6 +31,8 @@ const WeatherCard: React.FC<IWeather> = ({ main, weather, wind, clouds }) => {
     <Container>
       <MainInfoWrapper>
         {WeatherIconManeger[currentWeather]}
+
+        <p>{name}</p>
 
         <h2>{weather[0].description}</h2>
 

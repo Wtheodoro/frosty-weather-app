@@ -1,12 +1,14 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  width: 380px;
-  height: 550px;
+  width: fit-content;
+  height: 600px;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  /* background: lightcoral; */
 `
 export const MainInfoWrapper = styled.div`
   display: flex;
