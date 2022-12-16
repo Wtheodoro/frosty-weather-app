@@ -1,5 +1,5 @@
 import React from 'react'
-import { Layout, Gradient, RedDotBlur, DotsWrapper } from './styles'
+import { Layout, RedDotBlur, DotsWrapper } from './styles'
 
 const PagehigherOrderComponent = (Component: React.ComponentType) => () => {
   return (
@@ -9,7 +9,7 @@ const PagehigherOrderComponent = (Component: React.ComponentType) => () => {
 
       <DotsWrapper>
         <RedDotBlur color='yellow' />
-        <RedDotBlur color='red' />
+        <RedDotBlur color='blue' />
       </DotsWrapper>
     </Layout>
   )

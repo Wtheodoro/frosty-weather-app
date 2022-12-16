@@ -15,6 +15,11 @@ export const Container = styled.main`
     margin-top: 20px;
   }
 
+  span {
+    font-weight: bold;
+    color: #ff003d;
+  }
+
   svg {
     width: 200px;
     height: 220px;

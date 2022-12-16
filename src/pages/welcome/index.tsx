@@ -23,7 +23,9 @@ const Welcome = () => {
         </LogoWrapper>
       </div>
 
-      <h1>Discover the Weather in Your City</h1>
+      <h1>
+        Discover the Weather in Your City with <span>Frosty</span>
+      </h1>
 
       <p>Get to know your weather maps and radar preciptation forecast</p>
 

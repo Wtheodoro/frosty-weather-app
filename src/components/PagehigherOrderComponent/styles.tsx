@@ -13,18 +13,6 @@ export const Layout = styled.div`
   overflow: hidden;
 `
 
-export const Gradient = styled.div`
-  position: absolute;
-  width: 404px;
-  height: 800px;
-  left: 20%;
-  top: 5%;
-
-  background: rgba(149, 66, 232, 0.35);
-  filter: blur(175px);
-  transform: rotate(-114.2deg);
-`
-
 interface IDotBlur {
   color?: 'blue' | 'yellow' | 'red'
 }
@@ -48,7 +36,6 @@ export const RedDotBlur = styled.div<IDotBlur>`
   margin-right: auto;
 
   filter: blur(60px);
-  transform: rotate(-114.2deg);
 
   ${({ color }) => blurColorModifier[color || 'blue']}
 `
@@ -59,4 +46,9 @@ export const DotsWrapper = styled.div`
   margin-right: auto;
   left: 0;
   right: 0;
+
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+  transform: rotate(-143.2deg);
 `
