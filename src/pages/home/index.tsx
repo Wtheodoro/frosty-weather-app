@@ -4,6 +4,7 @@ import { usePreSet } from '../../hooks/preSet'
 
 const Home = () => {
   const { featuredCities } = usePreSet()
+
   return (
     <div>
       <h1>HOME PAGE</h1>

@@ -1,4 +1,6 @@
-import React, { createContext, useState, useContext } from 'react'
+import React, { createContext, useState, useContext, useEffect } from 'react'
+import weatherServices from '../services/weather-services'
+import { IWeather } from '../types/weather'
 
 interface IPreSet {
   featuredCities: string[]
@@ -17,9 +19,9 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
     const citiesString = localStorage.getItem('@frosty:featuredCities')
 
     if (citiesString) return JSON.parse(citiesString)
-
-    return []
   })
+
+  const [featuredWeathers, setFeaturedWeathers] = useState<IWeather[]>([])
 
   const hasSomePreSettedCity = !!featuredCities.length
 
@@ -37,11 +39,30 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
     if (!currentCityAlreadyChoosen) newSetOfCities = [...featuredCities, city]
 
     setFeaturedCities(newSetOfCities)
+    getCityWeather(city)
     localStorage.setItem(
       '@frosty:featuredCities',
       JSON.stringify(newSetOfCities)
     )
   }
+
+  const getCityWeather = async (currentCityName: string) => {
+    const currentCityAlreadyRequested = featuredWeathers.find(
+      (city) =>
+        city?.name?.toLocaleLowerCase() === currentCityName.toLocaleLowerCase()
+    )
+
+    if (!currentCityAlreadyRequested) {
+      const currentWeather = await weatherServices.getCityWeather(
+        currentCityName
+      )
+      setFeaturedWeathers([...featuredWeathers, currentWeather])
+    }
+  }
+
+  useEffect(() => {
+    featuredCities.forEach((city) => getCityWeather(city))
+  }, [])
 
   return (
     <PreSet.Provider
