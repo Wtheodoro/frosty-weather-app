@@ -13,4 +13,5 @@ export const Container = styled.button<IConatainer>`
   color: white;
   font-weight: bold;
   opacity: ${(props) => (props.disabled ? '0.4' : '1')};
+  cursor: pointer;
 `

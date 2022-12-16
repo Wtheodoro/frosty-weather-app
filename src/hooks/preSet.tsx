@@ -4,6 +4,7 @@ import { IWeather } from '../types/weather'
 
 interface IPreSet {
   featuredCities: string[]
+  featuredWeathers: IWeather[]
   hasSomePreSettedCity: boolean
   updateFeaturedCities: (cities: any) => void
 }
@@ -19,6 +20,8 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
     const citiesString = localStorage.getItem('@frosty:featuredCities')
 
     if (citiesString) return JSON.parse(citiesString)
+
+    return []
   })
 
   const [featuredWeathers, setFeaturedWeathers] = useState<IWeather[]>([])
@@ -61,12 +64,18 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
   }
 
   useEffect(() => {
+    if (!hasSomePreSettedCity) return
     featuredCities.forEach((city) => getCityWeather(city))
   }, [])
 
   return (
     <PreSet.Provider
-      value={{ featuredCities, hasSomePreSettedCity, updateFeaturedCities }}
+      value={{
+        featuredCities,
+        hasSomePreSettedCity,
+        updateFeaturedCities,
+        featuredWeathers,
+      }}
     >
       {children}
     </PreSet.Provider>
