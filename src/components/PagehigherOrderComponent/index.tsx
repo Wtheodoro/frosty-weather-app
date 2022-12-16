@@ -1,11 +1,12 @@
 import React from 'react'
-import { Layout, RedDotBlur, DotsWrapper } from './styles'
+import { Layout, RedDotBlur, DotsWrapper, ComponentWrapper } from './styles'
 
 const PagehigherOrderComponent = (Component: React.ComponentType) => () => {
   return (
     <Layout>
-      <Component />
-      {/* <Gradient /> */}
+      <ComponentWrapper>
+        <Component />
+      </ComponentWrapper>
 
       <DotsWrapper>
         <RedDotBlur color='yellow' />

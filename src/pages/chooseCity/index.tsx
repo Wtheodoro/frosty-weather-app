@@ -7,7 +7,8 @@ import { CitiesPickerWrapper, Container } from './styles'
 
 const ChooseCity = () => {
   const navigate = useNavigate()
-  const { updateFeaturedCities, featuredCities } = usePreSet()
+  const { updateFeaturedCities, featuredCities, hasSomePreSettedCity } =
+    usePreSet()
 
   const pushToHome = () => navigate('/home')
 
@@ -31,7 +32,9 @@ const ChooseCity = () => {
         ))}
       </CitiesPickerWrapper>
 
-      <Button onClick={pushToHome}>Ready!</Button>
+      <Button onClick={pushToHome} disabled={!hasSomePreSettedCity}>
+        Ready!
+      </Button>
     </Container>
   )
 }

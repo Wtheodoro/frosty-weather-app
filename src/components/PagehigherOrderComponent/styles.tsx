@@ -13,6 +13,11 @@ export const Layout = styled.div`
   overflow: hidden;
 `
 
+export const ComponentWrapper = styled.div`
+  position: absolute;
+  z-index: 10;
+`
+
 interface IDotBlur {
   color?: 'blue' | 'yellow' | 'red'
 }
@@ -51,4 +56,5 @@ export const DotsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   transform: rotate(-143.2deg);
+  z-index: 0;
 `

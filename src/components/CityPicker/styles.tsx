@@ -11,4 +11,5 @@ export const Container = styled.div<IContainer>`
   text-align: center;
   color: ${(props) => (props.isChoosen ? 'white' : '#0095ff')};
   background: ${(props) => (props.isChoosen ? '#0095ff' : 'transparent')};
+  user-select: none;
 `
