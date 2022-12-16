@@ -6,6 +6,7 @@ import {
   LogoRain,
   PagehigherOrderComponent,
 } from '../../components'
+import { usePreSet } from '../../hooks/preSet'
 import {
   Container,
   LogoWrapper,
@@ -15,7 +16,13 @@ import {
 
 const Welcome = () => {
   const navigate = useNavigate()
-  const pushToApp = () => navigate('/')
+  const { hasSomePreSettedCity } = usePreSet()
+
+  const pushToApp = () => {
+    if (hasSomePreSettedCity) return navigate('/home')
+
+    navigate('/chooseCity')
+  }
 
   return (
     <Container>
