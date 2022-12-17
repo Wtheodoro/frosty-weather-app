@@ -29,7 +29,7 @@ export const WeatherCardsWrapper = styled.div<IWeatherCardsWrapper>`
 
   @media (min-width: 768px) {
     height: calc(100vh - 85px);
-    width: calc(100vw - 125px);
+    width: calc(100vw - 90px);
     padding: 0;
     overflow-y: scroll;
     display: ${(props) => (props.centralizerCards ? 'flex' : 'grid')};

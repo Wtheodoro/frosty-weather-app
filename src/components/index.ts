@@ -20,6 +20,9 @@ import ConfigIcon from './icons/ConfigIcon'
 import HomeIcon from './icons/HomeIcon'
 import LogoutIcon from './icons/LogoutIcon'
 import EarthIcon from './icons/EarthIcon'
+import ClearNight from './svgs/ClearNight'
+import CloudyNight from './svgs/CloudyNight'
+import CloudyDay from './svgs/CloudyDay'
 
 export {
   PagehigherOrderComponent,
@@ -44,4 +47,7 @@ export {
   HomeIcon,
   LogoutIcon,
   EarthIcon,
+  ClearNight,
+  CloudyNight,
+  CloudyDay,
 }

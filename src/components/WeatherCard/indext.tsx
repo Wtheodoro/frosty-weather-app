@@ -10,6 +10,9 @@ import {
   Sunrise,
   Moonrise,
   EarthIcon,
+  ClearNight,
+  CloudyNight,
+  CloudyDay,
 } from '..'
 import MOCK_WEATHERS from '../../constants/weather'
 import celsiusToFahrenheit from '../../helpers/celsiusToFahrenheit'
@@ -51,14 +54,18 @@ const WeatherCard: React.FC<IWeatherCard> = ({
     ? weather[0].main
     : 'Clear'
 
+  const isDay = weather[0].icon.includes('d')
+
   const WeatherIconManeger: { [key: string]: React.ReactNode } = {
-    Clear: <ClearDay />,
+    Clear: isDay ? <ClearDay /> : <ClearNight />,
     Thunderstorm: <Thunder />,
     Drizzle: <Drizzle />,
     Rain: <Drizzle />,
     Snow: <Snow />,
-    Clouds: <Cloud />,
+    Clouds: isDay ? <CloudyDay /> : <CloudyNight />,
   }
+
+  console.log(`${name} is ${isDay ? 'Day' : 'Night'}`)
 
   const localSunrise = preSetAsCountryLocationTime
     ? unixTimestampToLocalTime({
