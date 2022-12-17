@@ -25,16 +25,16 @@ export const LogoWrapper = styled.div`
     display: block;
     position: absolute;
     top: 20px;
+    margin-left: 10px;
 
     p:nth-child(-n + 1) {
       margin-left: -10px;
     }
 
     p {
-      margin-left: 5px;
       font-size: 32px;
       font-weight: bolder;
-      color: #ff003d;
+      color: white;
     }
   }
 `
