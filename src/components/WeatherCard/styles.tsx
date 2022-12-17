@@ -23,6 +23,7 @@ export const MainInfoWrapper = styled.div`
 
   > h2 {
     font-size: 32px;
+    text-align: center;
   }
 `
 

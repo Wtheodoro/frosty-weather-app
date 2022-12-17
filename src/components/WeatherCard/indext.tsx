@@ -13,6 +13,7 @@ import {
 import MOCK_WEATHERS from '../../constants/weather'
 import celsiusToFahrenheit from '../../helpers/celsiusToFahrenheit'
 import unixTimestampToLocalTime from '../../helpers/unixTimestampToLocalTime'
+import unixTimestampToMyLocalTime from '../../helpers/unixTimestampToMyLocalTime'
 import { IWeather } from '../../types/weather'
 import {
   Container,
@@ -35,7 +36,8 @@ const WeatherCard: React.FC<IWeatherCard> = ({
   wind,
   clouds,
   name,
-  sys,
+  sys: { sunrise, sunset },
+  timezone,
   preSetAsFahrenheit,
   toggleSettingsTempUnity,
 }) => {
@@ -52,15 +54,25 @@ const WeatherCard: React.FC<IWeatherCard> = ({
     Clouds: <Cloud />,
   }
 
-  const localSunrise = unixTimestampToLocalTime({
-    timestamp: sys.sunrise,
-    location: sys.country,
-  })
+  const myLocal = false
 
-  const localSunset = unixTimestampToLocalTime({
-    timestamp: sys.sunset,
-    location: sys.country,
-  })
+  const localSunrise = myLocal
+    ? unixTimestampToMyLocalTime({
+        timestamp: sunrise,
+      })
+    : unixTimestampToLocalTime({
+        timestamp: sunrise,
+        timezone,
+      })
+
+  const localSunset = myLocal
+    ? unixTimestampToMyLocalTime({
+        timestamp: sunset,
+      })
+    : unixTimestampToLocalTime({
+        timestamp: sunset,
+        timezone,
+      })
 
   const temp = preSetAsFahrenheit ? celsiusToFahrenheit(main.temp) : main.temp
 
