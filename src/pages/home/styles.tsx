@@ -50,10 +50,6 @@ export const WeatherCardsWrapper = styled.div<IWeatherCardsWrapper>`
     justify-content: ${(props) =>
       props.centralizerCards ? 'center' : 'space-evenly'};
 
-    ::-webkit-scrollbar {
-      display: block;
-    }
-
     > div + div {
       margin-left: 0;
     }
