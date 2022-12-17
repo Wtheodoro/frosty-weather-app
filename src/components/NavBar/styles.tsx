@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
+  position: relative;
   width: 100%;
   height: 70px;
   background: #171829;
@@ -13,6 +14,28 @@ export const Container = styled.div`
     width: 100px;
     height: 100%;
     flex-direction: column;
+    padding-top: 50px;
+  }
+`
+
+export const LogoWrapper = styled.div`
+  display: none;
+
+  @media (min-width: 768px) {
+    display: block;
+    position: absolute;
+    top: 20px;
+
+    p:nth-child(-n + 1) {
+      margin-left: -10px;
+    }
+
+    p {
+      margin-left: 5px;
+      font-size: 32px;
+      font-weight: bolder;
+      color: #ff003d;
+    }
   }
 `
 

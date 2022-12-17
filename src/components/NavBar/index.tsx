@@ -4,7 +4,7 @@ import CardsIcon from '../icons/CardsIcon'
 import CoffeIcon from '../icons/CoffeIcon'
 import HomeIcon from '../icons/HomeIcon'
 import LogoutIcon from '../icons/LogoutIcon'
-import { Container, IconWrapper } from './styles'
+import { Container, IconWrapper, LogoWrapper } from './styles'
 
 const NavBar = () => {
   const navigate = useNavigate()
@@ -12,6 +12,11 @@ const NavBar = () => {
 
   return (
     <Container>
+      <LogoWrapper>
+        <p>Fro</p>
+        <p>Sty</p>
+      </LogoWrapper>
+
       <IconWrapper
         onClick={() => navigate('/home')}
         active={pathname === '/home'}
