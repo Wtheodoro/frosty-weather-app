@@ -35,6 +35,7 @@ export const WeatherCardsWrapper = styled.div<IWeatherCardsWrapper>`
     display: ${(props) => (props.centralizerCards ? 'flex' : 'grid')};
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 100px 0;
+    justify-items: center;
 
     justify-content: ${(props) =>
       props.centralizerCards ? 'center' : 'space-between'};
