@@ -10,7 +10,7 @@ export const Container = styled.div`
 
   > h1 {
     text-align: center;
-    margin-bottom: 40px;
+    margin: 20px 0;
   }
 
   @media (min-width: 768px) {
