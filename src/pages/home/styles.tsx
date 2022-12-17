@@ -1,8 +1,19 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: 100px;
+
   > h1 {
     text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    padding-bottom: 0;
   }
 `
 
@@ -17,7 +28,7 @@ export const WeatherCardsWrapper = styled.div<IWeatherCardsWrapper>`
   width: 100vw;
   overflow-x: scroll;
   overflow-y: hidden;
-  padding: 0 80px;
+  padding: 0 55px;
 
   > div + div {
     margin-left: 100px;
@@ -36,7 +47,7 @@ export const WeatherCardsWrapper = styled.div<IWeatherCardsWrapper>`
     gap: 50px;
 
     justify-content: ${(props) =>
-      props.centralizerCards ? 'center' : 'space-between'};
+      props.centralizerCards ? 'center' : 'space-evenly'};
 
     ::-webkit-scrollbar {
       display: block;

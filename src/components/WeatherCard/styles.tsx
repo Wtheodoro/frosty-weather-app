@@ -1,8 +1,8 @@
 import styled, { keyframes } from 'styled-components'
 
 export const Container = styled.div`
-  width: 400px;
-  height: 600px;
+  min-width: 300px;
+  height: 550px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -14,13 +14,20 @@ export const MainInfoWrapper = styled.div`
   align-items: center;
 
   > svg {
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
   }
 
   > h2 {
     font-size: 32px;
     text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    > svg {
+      width: 250px;
+      height: 250px;
+    }
   }
 `
 
