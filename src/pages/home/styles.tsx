@@ -29,13 +29,11 @@ export const WeatherCardsWrapper = styled.div<IWeatherCardsWrapper>`
 
   @media (min-width: 768px) {
     height: calc(100vh - 85px);
-    width: calc(100vw - 90px);
+    width: calc(100vw - 120px);
     padding: 0;
     overflow-y: scroll;
-    display: ${(props) => (props.centralizerCards ? 'flex' : 'grid')};
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 100px 0;
-    justify-items: center;
+    flex-wrap: wrap;
+    gap: 50px;
 
     justify-content: ${(props) =>
       props.centralizerCards ? 'center' : 'space-between'};
