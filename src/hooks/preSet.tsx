@@ -6,7 +6,7 @@ interface IPreSet {
   featuredCities: string[]
   dataWeathers: IWeather[]
   hasSomePreSettedCity: boolean
-  updateFeaturedCities: (cities: any) => void
+  updateFeaturedCities: (city: string) => void
   preSetAsFahrenheit: boolean
   toggleSettingsTempUnity: () => void
   preSetAsCountryLocationTime: boolean
