@@ -9,6 +9,8 @@ const Home = () => {
     featuredCities,
     toggleSettingsTempUnity,
     preSetAsFahrenheit,
+    toggleSettingsLocationTime,
+    preSetAsCountryLocationTime,
   } = usePreSet()
 
   const featuredWeathers = dataWeathers.filter((data) =>
@@ -28,6 +30,8 @@ const Home = () => {
             {...featuredWeather}
             toggleSettingsTempUnity={toggleSettingsTempUnity}
             preSetAsFahrenheit={preSetAsFahrenheit}
+            toggleSettingsLocationTime={toggleSettingsLocationTime}
+            preSetAsCountryLocationTime={preSetAsCountryLocationTime}
           />
         ))}
 

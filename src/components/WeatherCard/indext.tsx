@@ -9,6 +9,7 @@ import {
   Snow,
   Sunrise,
   Moonrise,
+  EarthIcon,
 } from '..'
 import MOCK_WEATHERS from '../../constants/weather'
 import celsiusToFahrenheit from '../../helpers/celsiusToFahrenheit'
@@ -23,11 +24,14 @@ import {
   CityName,
   TempText,
   SubItemsSwitter,
+  ClickableSubItem,
 } from './styles'
 
 type IWeatherCard = {
   preSetAsFahrenheit: boolean
   toggleSettingsTempUnity: () => void
+  preSetAsCountryLocationTime: boolean
+  toggleSettingsLocationTime: () => void
 } & IWeather
 
 const WeatherCard: React.FC<IWeatherCard> = ({
@@ -40,6 +44,8 @@ const WeatherCard: React.FC<IWeatherCard> = ({
   timezone,
   preSetAsFahrenheit,
   toggleSettingsTempUnity,
+  preSetAsCountryLocationTime,
+  toggleSettingsLocationTime,
 }) => {
   const currentWeather = MOCK_WEATHERS.includes(weather[0].main)
     ? weather[0].main
@@ -54,24 +60,22 @@ const WeatherCard: React.FC<IWeatherCard> = ({
     Clouds: <Cloud />,
   }
 
-  const myLocal = false
-
-  const localSunrise = myLocal
-    ? unixTimestampToMyLocalTime({
-        timestamp: sunrise,
-      })
-    : unixTimestampToLocalTime({
+  const localSunrise = preSetAsCountryLocationTime
+    ? unixTimestampToLocalTime({
         timestamp: sunrise,
         timezone,
       })
-
-  const localSunset = myLocal
-    ? unixTimestampToMyLocalTime({
-        timestamp: sunset,
+    : unixTimestampToMyLocalTime({
+        timestamp: sunrise,
       })
-    : unixTimestampToLocalTime({
+
+  const localSunset = preSetAsCountryLocationTime
+    ? unixTimestampToLocalTime({
         timestamp: sunset,
         timezone,
+      })
+    : unixTimestampToMyLocalTime({
+        timestamp: sunset,
       })
 
   const temp = preSetAsFahrenheit ? celsiusToFahrenheit(main.temp) : main.temp
@@ -99,6 +103,20 @@ const WeatherCard: React.FC<IWeatherCard> = ({
             <p>{localSunrise}</p>
             <p>Sunrise</p>
           </SubItem>
+
+          <ClickableSubItem onClick={toggleSettingsLocationTime}>
+            <EarthIcon />
+
+            {preSetAsCountryLocationTime ? (
+              <p>
+                Country <br /> location
+              </p>
+            ) : (
+              <p>
+                My <br /> Location
+              </p>
+            )}
+          </ClickableSubItem>
 
           <SubItem>
             <Moonrise />

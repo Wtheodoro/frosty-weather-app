@@ -3,12 +3,9 @@ import styled, { keyframes } from 'styled-components'
 export const Container = styled.div`
   width: 400px;
   height: 600px;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
-  /* background: lightcoral; */
 `
 export const MainInfoWrapper = styled.div`
   display: flex;
@@ -38,6 +35,10 @@ export const TempText = styled.p`
     font-size: 32px;
     margin: -6px 0 0 6px;
     color: #339cff;
+  }
+
+  &:hover {
+    scale: 1.1;
   }
 `
 
@@ -75,6 +76,25 @@ export const SubItem = styled.div`
   }
 `
 
+export const ClickableSubItem = styled(SubItem)`
+  cursor: pointer;
+
+  p {
+    font-size: 12px;
+    text-align: center;
+  }
+
+  svg {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 20px;
+  }
+
+  &:hover {
+    scale: 1.1;
+  }
+`
+
 export const CityName = styled.p`
   font-size: 32px;
   color: #339cff;
@@ -82,11 +102,12 @@ export const CityName = styled.p`
 const FirstAppearAnimation = keyframes`
   0%, 40% {
     opacity: 1;
+    pointer-events: all;
   }
 
   60%, 100% {
     opacity: 0;
-
+    pointer-events: none;
   }
 `
 
@@ -107,9 +128,11 @@ export const SubItemsSwitter = styled.section`
 
   ${SubItemsWrapper}:nth-child(1) {
     animation: ${FirstAppearAnimation} 8s infinite alternate;
+    z-index: 10;
   }
 
   ${SubItemsWrapper}:nth-child(2) {
     animation: ${SecondAppearAnimation} 8s infinite alternate;
+    z-index: 0;
   }
 `

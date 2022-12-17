@@ -9,6 +9,8 @@ interface IPreSet {
   updateFeaturedCities: (cities: any) => void
   preSetAsFahrenheit: boolean
   toggleSettingsTempUnity: () => void
+  preSetAsCountryLocationTime: boolean
+  toggleSettingsLocationTime: () => void
 }
 
 interface IPresetProvider {
@@ -18,6 +20,7 @@ interface IPresetProvider {
 const PreSet = createContext<IPreSet>({} as IPreSet)
 
 const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
+  const [dataWeathers, setdataWeathers] = useState<IWeather[]>([])
   const [featuredCities, setFeaturedCities] = useState<string[]>(() => {
     const citiesString = localStorage.getItem('@frosty:featuredCities')
 
@@ -25,12 +28,19 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
 
     return []
   })
-  const [dataWeathers, setdataWeathers] = useState<IWeather[]>([])
   const [preSetAsFahrenheit, setPreSetAsFahrenheit] = useState<boolean>(() => {
     const settings = localStorage.getItem('@frosty:settingsAsFahrenheit')
 
     return !!settings
   })
+  const [preSetAsCountryLocationTime, setPreSetAsCountryLocationTime] =
+    useState<boolean>(() => {
+      const settings = localStorage.getItem(
+        '@frosty:settingsAsCountryLocationTime'
+      )
+
+      return !!settings
+    })
 
   const toggleSettingsTempUnity = () => {
     if (preSetAsFahrenheit) {
@@ -41,6 +51,17 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
 
     setPreSetAsFahrenheit(true)
     localStorage.setItem('@frosty:settingsAsFahrenheit', 'true')
+  }
+
+  const toggleSettingsLocationTime = () => {
+    if (preSetAsCountryLocationTime) {
+      setPreSetAsCountryLocationTime(false)
+      localStorage.removeItem('@frosty:settingsAsCountryLocationTime')
+      return
+    }
+
+    setPreSetAsCountryLocationTime(true)
+    localStorage.setItem('@frosty:settingsAsCountryLocationTime', 'true')
   }
 
   const hasSomePreSettedCity = !!featuredCities.length
@@ -107,6 +128,8 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
         dataWeathers,
         preSetAsFahrenheit,
         toggleSettingsTempUnity,
+        preSetAsCountryLocationTime,
+        toggleSettingsLocationTime,
       }}
     >
       {children}

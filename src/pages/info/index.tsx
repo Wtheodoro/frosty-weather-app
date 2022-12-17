@@ -5,7 +5,7 @@ import { usePreSet } from '../../hooks/preSet'
 import { Container } from './styles'
 
 const Info = () => {
-  const { preSetAsFahrenheit } = usePreSet()
+  const { preSetAsFahrenheit, preSetAsCountryLocationTime } = usePreSet()
   const navigate = useNavigate()
 
   return (
@@ -14,6 +14,16 @@ const Info = () => {
         Want to see temperature in{' '}
         <span>{preSetAsFahrenheit ? 'Celsius' : 'Fahrenheit'}</span>? <br />
         Just click on the temperature in Weather on{' '}
+        <span onClick={() => navigate('/home')}>Home</span> page
+      </h3>
+
+      <h3>
+        Want to see sunrise and sunset in{' '}
+        <span>
+          {preSetAsCountryLocationTime ? 'your location' : 'country'}{' '}
+        </span>
+        time? <br />
+        Just click on the Earth icon on{' '}
         <span onClick={() => navigate('/home')}>Home</span> page
       </h3>
 

@@ -15,6 +15,10 @@ export const Container = styled.div`
   align-items: center;
   text-align: center;
 
+  h3 {
+    margin-top: 20px;
+  }
+
   h3 span {
     color: #339ccf;
   }

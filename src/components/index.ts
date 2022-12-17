@@ -19,6 +19,7 @@ import CoffeIcon from './icons/CoffeIcon'
 import ConfigIcon from './icons/ConfigIcon'
 import HomeIcon from './icons/HomeIcon'
 import LogoutIcon from './icons/LogoutIcon'
+import EarthIcon from './icons/EarthIcon'
 
 export {
   PagehigherOrderComponent,
@@ -42,4 +43,5 @@ export {
   ConfigIcon,
   HomeIcon,
   LogoutIcon,
+  EarthIcon,
 }
