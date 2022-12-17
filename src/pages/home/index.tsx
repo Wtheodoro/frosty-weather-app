@@ -1,6 +1,7 @@
 import React from 'react'
 import { PagehigherOrderComponent, WeatherCard } from '../../components'
 import { usePreSet } from '../../hooks/preSet'
+import useHorizontalScroll from '../../hooks/useHorizontalScroll'
 import { Container, WeatherCardsWrapper } from './styles'
 
 const Home = () => {
@@ -10,6 +11,8 @@ const Home = () => {
     toggleSettingsTempUnity,
     preSetAsFahrenheit,
   } = usePreSet()
+
+  const scrollRef = useHorizontalScroll()
 
   const featuredWeathers = dataWeathers.filter((data) =>
     featuredCities.includes(data.name)
@@ -21,7 +24,7 @@ const Home = () => {
     <Container>
       <h1>Today's Report</h1>
 
-      <WeatherCardsWrapper centralizerCards={showFourLessCards}>
+      <WeatherCardsWrapper centralizerCards={showFourLessCards} ref={scrollRef}>
         {featuredWeathers.map((featuredWeather) => (
           <WeatherCard
             key={featuredWeather?.id}
