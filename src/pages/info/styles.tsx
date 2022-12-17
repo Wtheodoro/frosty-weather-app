@@ -13,6 +13,11 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
+
+  h3 span {
+    color: #339ccf;
+  }
 
   a {
     text-decoration: none;
@@ -24,7 +29,8 @@ export const Container = styled.div`
     animation: ${hiThereAnimation} 8s infinite alternate;
   }
 
-  button {
-    margin-top: 100px;
+  button,
+  > div {
+    margin-top: 70px;
   }
 `
