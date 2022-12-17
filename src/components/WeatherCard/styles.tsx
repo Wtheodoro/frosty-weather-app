@@ -3,6 +3,7 @@ import styled, { keyframes } from 'styled-components'
 export const Container = styled.div`
   min-width: 300px;
   height: 100%;
+  max-height: 550px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
