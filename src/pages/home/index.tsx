@@ -30,6 +30,13 @@ const Home = () => {
             preSetAsFahrenheit={preSetAsFahrenheit}
           />
         ))}
+
+        {!featuredWeathers.length && (
+          <p>
+            Please, choose at least one city so you can see some weather
+            information
+          </p>
+        )}
       </WeatherCardsWrapper>
     </Container>
   )

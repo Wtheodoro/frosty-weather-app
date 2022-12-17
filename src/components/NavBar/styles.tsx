@@ -44,6 +44,8 @@ interface IIconWrapper {
 }
 
 export const IconWrapper = styled.div<IIconWrapper>`
+  cursor: pointer;
+
   > svg {
     width: ${(props) => (props.active ? '50px' : '30px')};
     height: ${(props) => (props.active ? '50px' : '30px')};
