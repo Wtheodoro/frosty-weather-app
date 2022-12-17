@@ -10,9 +10,6 @@ const Home = () => {
     featuredCities.includes(data.name)
   )
 
-  console.log(dataWeathers)
-  console.log(featuredWeathers)
-
   return (
     <Container>
       <h1>Today's Report</h1>
