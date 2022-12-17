@@ -4,7 +4,7 @@ import { IWeather } from '../types/weather'
 
 interface IPreSet {
   featuredCities: string[]
-  featuredWeathers: IWeather[]
+  dataWeathers: IWeather[]
   hasSomePreSettedCity: boolean
   updateFeaturedCities: (cities: any) => void
 }
@@ -24,7 +24,7 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
     return []
   })
 
-  const [featuredWeathers, setFeaturedWeathers] = useState<IWeather[]>([])
+  const [dataWeathers, setdataWeathers] = useState<IWeather[]>([])
 
   const hasSomePreSettedCity = !!featuredCities.length
 
@@ -50,7 +50,7 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
   }
 
   const getCityWeather = async (currentCityName: string) => {
-    const currentCityAlreadyRequested = featuredWeathers.find(
+    const currentCityAlreadyRequested = dataWeathers.find(
       (city) =>
         city?.name?.toLocaleLowerCase() === currentCityName.toLocaleLowerCase()
     )
@@ -59,23 +59,23 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
       const currentWeather = await weatherServices.getCityWeather(
         currentCityName
       )
-      setFeaturedWeathers([...featuredWeathers, currentWeather])
+      setdataWeathers([...dataWeathers, currentWeather])
     }
   }
 
-  const getCitiesWeather = async () => {
+  const getCitiesWeatherOnAppInit = async () => {
     const weathers = await Promise.all(
       featuredCities.map(
         async (city) => await weatherServices.getCityWeather(city)
       )
     )
 
-    setFeaturedWeathers(weathers)
+    setdataWeathers(weathers)
   }
 
   useEffect(() => {
     if (!hasSomePreSettedCity) return
-    getCitiesWeather()
+    getCitiesWeatherOnAppInit()
   }, [])
 
   return (
@@ -84,7 +84,7 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
         featuredCities,
         hasSomePreSettedCity,
         updateFeaturedCities,
-        featuredWeathers,
+        dataWeathers,
       }}
     >
       {children}

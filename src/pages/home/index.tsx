@@ -4,7 +4,14 @@ import { usePreSet } from '../../hooks/preSet'
 import { Container, WeatherCardsWrapper } from './styles'
 
 const Home = () => {
-  const { featuredWeathers } = usePreSet()
+  const { dataWeathers, featuredCities } = usePreSet()
+
+  const featuredWeathers = dataWeathers.filter((data) =>
+    featuredCities.includes(data.name)
+  )
+
+  console.log(dataWeathers)
+  console.log(featuredWeathers)
 
   return (
     <Container>
@@ -12,7 +19,7 @@ const Home = () => {
 
       <WeatherCardsWrapper>
         {featuredWeathers.map((featuredWeather) => (
-          <WeatherCard key={featuredWeather.id} {...featuredWeather} />
+          <WeatherCard key={featuredWeather?.id} {...featuredWeather} />
         ))}
       </WeatherCardsWrapper>
     </Container>

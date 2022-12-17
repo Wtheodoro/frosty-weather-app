@@ -24,18 +24,18 @@ export const MainInfoWrapper = styled.div`
   > h2 {
     font-size: 32px;
   }
+`
 
-  > p {
-    margin-top: 20px;
-    font-size: 50px;
-    font-weight: bolder;
-    display: flex;
+export const TempText = styled.p`
+  margin-top: 20px;
+  font-size: 50px;
+  font-weight: bolder;
+  display: flex;
 
-    > span {
-      font-size: 32px;
-      margin: -6px 0 0 6px;
-      color: #339cff;
-    }
+  > span {
+    font-size: 32px;
+    margin: -6px 0 0 6px;
+    color: #339cff;
   }
 `
 
@@ -44,6 +44,7 @@ export const SubItemsWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  margin: 0;
 `
 
 export const SubItem = styled.div`
@@ -64,4 +65,7 @@ export const SubItem = styled.div`
   }
 `
 
-export const IconWrapper = styled.div``
+export const CityName = styled.p`
+  font-size: 32px;
+  color: #339cff;
+`

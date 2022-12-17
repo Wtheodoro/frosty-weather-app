@@ -2,7 +2,14 @@ import React from 'react'
 import { ClearDay, Cloud, Humidity, Wind, Thunder, Drizzle, Snow } from '..'
 import MOCK_WEATHERS from '../../constants/weather'
 import { IWeather } from '../../types/weather'
-import { Container, MainInfoWrapper, SubItemsWrapper, SubItem } from './styles'
+import {
+  Container,
+  MainInfoWrapper,
+  SubItemsWrapper,
+  SubItem,
+  CityName,
+  TempText,
+} from './styles'
 
 const WeatherCard: React.FC<IWeather> = ({
   main,
@@ -11,9 +18,6 @@ const WeatherCard: React.FC<IWeather> = ({
   clouds,
   name,
 }) => {
-  console.log(main)
-  console.log(weather[0])
-
   const currentWeather = MOCK_WEATHERS.includes(weather[0].main)
     ? weather[0].main
     : 'Clear'
@@ -32,14 +36,14 @@ const WeatherCard: React.FC<IWeather> = ({
       <MainInfoWrapper>
         {WeatherIconManeger[currentWeather]}
 
-        <p>{name}</p>
+        <CityName>{name}</CityName>
 
         <h2>{weather[0].description}</h2>
 
-        <p>
+        <TempText>
           {Math.round(main.temp)}
           <span>°C</span>
-        </p>
+        </TempText>
       </MainInfoWrapper>
 
       <SubItemsWrapper>

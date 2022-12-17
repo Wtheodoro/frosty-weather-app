@@ -12,8 +12,9 @@ export const WeatherCardsWrapper = styled.div`
   width: 100vw;
   overflow-x: scroll;
   overflow-y: hidden;
+  padding: 0 80px;
 
-  div {
-    padding: 0 30px;
+  > div + div {
+    margin-left: 100px;
   }
 `
