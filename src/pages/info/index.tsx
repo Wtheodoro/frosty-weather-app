@@ -25,4 +25,4 @@ const Info = () => {
   )
 }
 
-export default PagehigherOrderComponent(Info)
+export default PagehigherOrderComponent(Info, true)

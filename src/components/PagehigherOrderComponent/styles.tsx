@@ -12,9 +12,17 @@ export const Layout = styled.div`
   align-items: center;
 `
 
-export const ComponentWrapper = styled.div`
+interface IComponentWrapper {
+  increseLeftMargin?: boolean
+}
+
+export const ComponentWrapper = styled.div<IComponentWrapper>`
   position: absolute;
   z-index: 10;
+
+  @media (min-width: 768px) {
+    margin-left: ${(props) => (props.increseLeftMargin ? '120px' : '0')};
+  }
 `
 
 interface IDotBlur {
@@ -56,4 +64,18 @@ export const DotsWrapper = styled.div`
   justify-content: space-between;
   transform: rotate(-143.2deg);
   z-index: 0;
+`
+
+export const NavWrapper = styled.div`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 20px;
+  z-index: 10;
+
+  @media (min-width: 768px) {
+    left: 0;
+    height: 100%;
+    width: 100px;
+  }
 `

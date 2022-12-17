@@ -13,6 +13,12 @@ import Snow from './svgs/Snow'
 import CustomButton from './CustomButton'
 import Sunrise from './svgs/Sunrise'
 import Moonrise from './svgs/Moonrise'
+import NavBar from './NavBar'
+import CardsIcon from './icons/CardsIcon'
+import CoffeIcon from './icons/CoffeIcon'
+import ConfigIcon from './icons/ConfigIcon'
+import HomeIcon from './icons/HomeIcon'
+import LogoutIcon from './icons/LogoutIcon'
 
 export {
   PagehigherOrderComponent,
@@ -30,4 +36,10 @@ export {
   CustomButton,
   Sunrise,
   Moonrise,
+  NavBar,
+  CardsIcon,
+  CoffeIcon,
+  ConfigIcon,
+  HomeIcon,
+  LogoutIcon,
 }

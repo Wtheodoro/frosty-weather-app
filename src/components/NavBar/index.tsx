@@ -1,0 +1,40 @@
+import React from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import CardsIcon from '../icons/CardsIcon'
+import CoffeIcon from '../icons/CoffeIcon'
+import HomeIcon from '../icons/HomeIcon'
+import LogoutIcon from '../icons/LogoutIcon'
+import { Container, IconWrapper } from './styles'
+
+const NavBar = () => {
+  const navigate = useNavigate()
+  const { pathname } = useLocation()
+
+  return (
+    <Container>
+      <IconWrapper
+        onClick={() => navigate('/home')}
+        active={pathname === '/home'}
+      >
+        <HomeIcon />
+      </IconWrapper>
+      <IconWrapper
+        onClick={() => navigate('/chooseCity')}
+        active={pathname === '/chooseCity'}
+      >
+        <CardsIcon />
+      </IconWrapper>
+      <IconWrapper
+        onClick={() => navigate('/info')}
+        active={pathname === '/info'}
+      >
+        <CoffeIcon />
+      </IconWrapper>
+      <IconWrapper onClick={() => navigate('/')} active={pathname === '/'}>
+        <LogoutIcon />
+      </IconWrapper>
+    </Container>
+  )
+}
+
+export default NavBar

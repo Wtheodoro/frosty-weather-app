@@ -33,4 +33,4 @@ const Home = () => {
   )
 }
 
-export default PagehigherOrderComponent(Home)
+export default PagehigherOrderComponent(Home, true)

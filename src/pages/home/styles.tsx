@@ -8,6 +8,7 @@ export const Container = styled.div`
 
 export const WeatherCardsWrapper = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
   width: 100vw;
   overflow-x: scroll;

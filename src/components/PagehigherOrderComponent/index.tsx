@@ -1,19 +1,33 @@
 import React from 'react'
-import { Layout, RedDotBlur, DotsWrapper, ComponentWrapper } from './styles'
+import NavBar from '../NavBar'
+import {
+  Layout,
+  RedDotBlur,
+  DotsWrapper,
+  ComponentWrapper,
+  NavWrapper,
+} from './styles'
 
-const PagehigherOrderComponent = (Component: React.ComponentType) => () => {
-  return (
-    <Layout>
-      <ComponentWrapper>
-        <Component />
-      </ComponentWrapper>
+const PagehigherOrderComponent =
+  (Component: React.ComponentType, showNavBar?: boolean) => () => {
+    return (
+      <Layout>
+        <ComponentWrapper increseLeftMargin={showNavBar}>
+          <Component />
+        </ComponentWrapper>
 
-      <DotsWrapper>
-        <RedDotBlur color='yellow' />
-        <RedDotBlur color='blue' />
-      </DotsWrapper>
-    </Layout>
-  )
-}
+        <DotsWrapper>
+          <RedDotBlur color='yellow' />
+          <RedDotBlur color='blue' />
+        </DotsWrapper>
+
+        {showNavBar && (
+          <NavWrapper>
+            <NavBar />
+          </NavWrapper>
+        )}
+      </Layout>
+    )
+  }
 
 export default PagehigherOrderComponent
