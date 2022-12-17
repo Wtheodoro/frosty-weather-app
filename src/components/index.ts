@@ -11,6 +11,8 @@ import Thunder from './svgs/Thunder'
 import Drizzle from './svgs/Drizzle'
 import Snow from './svgs/Snow'
 import CustomButton from './CustomButton'
+import Sunrise from './svgs/Sunrise'
+import Moonrise from './svgs/Moonrise'
 
 export {
   PagehigherOrderComponent,
@@ -26,4 +28,6 @@ export {
   Drizzle,
   Snow,
   CustomButton,
+  Sunrise,
+  Moonrise,
 }

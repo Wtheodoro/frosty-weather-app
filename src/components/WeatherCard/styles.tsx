@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 export const Container = styled.div`
   width: 400px;
@@ -27,7 +27,7 @@ export const MainInfoWrapper = styled.div`
 `
 
 export const TempText = styled.p`
-  margin-top: 20px;
+  margin: 20px 0 0 38px;
   font-size: 50px;
   font-weight: bolder;
   display: flex;
@@ -40,6 +40,10 @@ export const TempText = styled.p`
 `
 
 export const SubItemsWrapper = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -68,4 +72,38 @@ export const SubItem = styled.div`
 export const CityName = styled.p`
   font-size: 32px;
   color: #339cff;
+`
+const FirstAppearAnimation = keyframes`
+  0%, 40% {
+    opacity: 1;
+  }
+
+  60%, 100% {
+    opacity: 0;
+
+  }
+`
+
+const SecondAppearAnimation = keyframes`
+  0%, 40%  {
+    opacity: 0;
+  }
+
+  60%, 100% {
+    opacity: 1;
+
+  }
+`
+
+export const SubItemsSwitter = styled.section`
+  position: relative;
+  height: 90px;
+
+  ${SubItemsWrapper}:nth-child(1) {
+    animation: ${FirstAppearAnimation} 8s infinite alternate;
+  }
+
+  ${SubItemsWrapper}:nth-child(2) {
+    animation: ${SecondAppearAnimation} 8s infinite alternate;
+  }
 `

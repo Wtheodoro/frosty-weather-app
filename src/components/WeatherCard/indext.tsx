@@ -1,6 +1,17 @@
 import React from 'react'
-import { ClearDay, Cloud, Humidity, Wind, Thunder, Drizzle, Snow } from '..'
+import {
+  ClearDay,
+  Cloud,
+  Humidity,
+  Wind,
+  Thunder,
+  Drizzle,
+  Snow,
+  Sunrise,
+  Moonrise,
+} from '..'
 import MOCK_WEATHERS from '../../constants/weather'
+import unixTimestampToLocalTime from '../../helpers/unixTimestampToLocalTime'
 import { IWeather } from '../../types/weather'
 import {
   Container,
@@ -9,6 +20,7 @@ import {
   SubItem,
   CityName,
   TempText,
+  SubItemsSwitter,
 } from './styles'
 
 const WeatherCard: React.FC<IWeather> = ({
@@ -17,6 +29,7 @@ const WeatherCard: React.FC<IWeather> = ({
   wind,
   clouds,
   name,
+  sys,
 }) => {
   const currentWeather = MOCK_WEATHERS.includes(weather[0].main)
     ? weather[0].main
@@ -30,6 +43,16 @@ const WeatherCard: React.FC<IWeather> = ({
     Snow: <Snow />,
     Clouds: <Cloud />,
   }
+
+  const localSunrise = unixTimestampToLocalTime({
+    timestamp: sys.sunrise,
+    location: sys.country,
+  })
+
+  const localSunset = unixTimestampToLocalTime({
+    timestamp: sys.sunset,
+    location: sys.country,
+  })
 
   return (
     <Container>
@@ -46,28 +69,46 @@ const WeatherCard: React.FC<IWeather> = ({
         </TempText>
       </MainInfoWrapper>
 
-      <SubItemsWrapper>
-        <SubItem>
-          <Wind />
+      <SubItemsSwitter>
+        <SubItemsWrapper>
+          <SubItem>
+            <Sunrise />
 
-          <p>Wind</p>
-          <p>{wind.speed} m/h</p>
-        </SubItem>
+            <p>{localSunrise}</p>
+            <p>Sunrise</p>
+          </SubItem>
 
-        <SubItem>
-          <Humidity />
+          <SubItem>
+            <Moonrise />
 
-          <p>{main.humidity} %</p>
-          <p>Humidity</p>
-        </SubItem>
+            <p>{localSunset}</p>
+            <p>Sunset</p>
+          </SubItem>
+        </SubItemsWrapper>
 
-        <SubItem>
-          <Cloud />
+        <SubItemsWrapper>
+          <SubItem>
+            <Wind />
 
-          <p>{clouds.all} %</p>
-          <p>Cloudiness</p>
-        </SubItem>
-      </SubItemsWrapper>
+            <p>Wind</p>
+            <p>{wind.speed} m/h</p>
+          </SubItem>
+
+          <SubItem>
+            <Humidity />
+
+            <p>{main.humidity} %</p>
+            <p>Humidity</p>
+          </SubItem>
+
+          <SubItem>
+            <Cloud />
+
+            <p>{clouds.all} %</p>
+            <p>Cloudiness</p>
+          </SubItem>
+        </SubItemsWrapper>
+      </SubItemsSwitter>
     </Container>
   )
 }
