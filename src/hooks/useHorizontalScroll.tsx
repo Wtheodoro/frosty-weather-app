@@ -5,9 +5,14 @@ const useHorizontalScroll = () => {
 
   useEffect(() => {
     const el = elRef.current
+    const isTouchPad = el.wheelDeltaY
+      ? el.wheelDeltaY === -3 * el.deltaY
+      : el.deltaMode === 0
+
+    console.log(isTouchPad)
     if (el) {
       const onWheel = (e: any) => {
-        if (e.deltaY == 0) return
+        if (e.deltaY === 0) return
         e.preventDefault()
         el.scrollTo({
           left: el.scrollLeft + e.deltaY,
