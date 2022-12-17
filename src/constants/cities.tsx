@@ -1,5 +1,6 @@
 const MOCK_CITIES = [
   'Campinas',
+  'Lisbon',
   'Tokyo',
   'Paris',
   'Miami',
