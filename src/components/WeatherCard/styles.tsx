@@ -51,6 +51,10 @@ export const SubItemsWrapper = styled.div`
   align-items: center;
   width: 100%;
   margin: 0;
+
+  @media (min-width: 768px) {
+    justify-content: space-around;
+  }
 `
 
 export const SubItem = styled.div`

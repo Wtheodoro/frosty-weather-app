@@ -15,11 +15,13 @@ const Home = () => {
     featuredCities.includes(data.name)
   )
 
+  const showFourLessCards = featuredWeathers.length < 4
+
   return (
     <Container>
       <h1>Today's Report</h1>
 
-      <WeatherCardsWrapper>
+      <WeatherCardsWrapper centralizerCards={showFourLessCards}>
         {featuredWeathers.map((featuredWeather) => (
           <WeatherCard
             key={featuredWeather?.id}

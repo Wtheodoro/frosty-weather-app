@@ -6,9 +6,13 @@ export const Container = styled.div`
   }
 `
 
-export const WeatherCardsWrapper = styled.div`
+interface IWeatherCardsWrapper {
+  centralizerCards: boolean
+}
+
+export const WeatherCardsWrapper = styled.div<IWeatherCardsWrapper>`
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   width: 100vw;
   overflow-x: scroll;
@@ -21,5 +25,14 @@ export const WeatherCardsWrapper = styled.div`
 
   ::-webkit-scrollbar {
     display: none;
+  }
+
+  @media (min-width: 768px) {
+    justify-content: ${(props) =>
+      props.centralizerCards ? 'center' : 'space-between'};
+
+    ::-webkit-scrollbar {
+      display: block;
+    }
   }
 `
