@@ -6,7 +6,6 @@ export const Layout = styled.div`
   height: 100vh;
   background: #0b0c1e;
   color: white;
-  padding: 40px 20px;
   display: flex;
   justify-content: center;
   align-items: center;

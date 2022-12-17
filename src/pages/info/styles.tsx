@@ -12,10 +12,10 @@ export const Container = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   text-align: center;
-  padding-bottom: 80px;
+  padding: 40px 20px;
 
   h3 {
     margin-top: 20px;
