@@ -1,6 +1,6 @@
 import React from 'react'
 import { ClearDay, Cloud, Humidity, Wind, Thunder, Drizzle, Snow } from '..'
-import weathers from '../../constants/weather'
+import MOCK_WEATHERS from '../../constants/weather'
 import { IWeather } from '../../types/weather'
 import { Container, MainInfoWrapper, SubItemsWrapper, SubItem } from './styles'
 
@@ -14,7 +14,7 @@ const WeatherCard: React.FC<IWeather> = ({
   console.log(main)
   console.log(weather[0])
 
-  const currentWeather = weathers.includes(weather[0].main)
+  const currentWeather = MOCK_WEATHERS.includes(weather[0].main)
     ? weather[0].main
     : 'Clear'
 
