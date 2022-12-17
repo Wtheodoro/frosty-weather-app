@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
-  Button,
+  CustomButton,
   LogoStorm,
   LogoRain,
   PagehigherOrderComponent,
@@ -44,7 +44,7 @@ const Welcome = () => {
 
       <p>Get to know your weather maps and radar preciptation forecast</p>
 
-      <Button onClick={pushToApp}>Get Started</Button>
+      <CustomButton onClick={pushToApp}>Get Started</CustomButton>
     </Container>
   )
 }

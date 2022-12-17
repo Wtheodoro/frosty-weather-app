@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, PagehigherOrderComponent } from '../../components'
+import { CustomButton, PagehigherOrderComponent } from '../../components'
 import { Container } from './styles'
 
 const Info = () => {
@@ -15,11 +15,11 @@ const Info = () => {
       </div>
 
       <a href='https://www.walisontsx.com/' target='__blank'>
-        <Button>me</Button>
+        <CustomButton>me</CustomButton>
       </a>
 
       <a href='https://www.youtube.com/watch?v=h_D3VFfhvs4' target='__blank'>
-        <Button>Enjoy</Button>
+        <CustomButton>Enjoy</CustomButton>
       </a>
     </Container>
   )

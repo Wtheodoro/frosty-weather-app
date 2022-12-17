@@ -1,6 +1,10 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button, CityPicker, PagehigherOrderComponent } from '../../components'
+import {
+  CustomButton,
+  CityPicker,
+  PagehigherOrderComponent,
+} from '../../components'
 import MOCK_CITIES from '../../constants/cities'
 import { usePreSet } from '../../hooks/preSet'
 import { CitiesPickerWrapper, Container } from './styles'
@@ -32,9 +36,9 @@ const ChooseCity = () => {
         ))}
       </CitiesPickerWrapper>
 
-      <Button onClick={pushToHome} disabled={!hasSomePreSettedCity}>
+      <CustomButton onClick={pushToHome} disabled={!hasSomePreSettedCity}>
         Ready!
-      </Button>
+      </CustomButton>
     </Container>
   )
 }

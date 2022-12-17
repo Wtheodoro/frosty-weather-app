@@ -1,16 +1,20 @@
 import React from 'react'
 import { Container } from './styles'
 
-interface IButton {
+interface ICustomButton {
   children: string
   onClick?: () => void
   disabled?: boolean
 }
 
-const Button: React.FC<IButton> = ({ children, onClick, disabled }) => {
+const CustomButton: React.FC<ICustomButton> = ({
+  children,
+  onClick,
+  disabled,
+}) => {
   return (
     <Container
-      data-testid='button-test-id'
+      data-testid='CustomButton-test-id'
       onClick={onClick}
       disabled={disabled}
     >
@@ -19,4 +23,4 @@ const Button: React.FC<IButton> = ({ children, onClick, disabled }) => {
   )
 }
 
-export default Button
+export default CustomButton
