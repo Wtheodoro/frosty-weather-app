@@ -31,6 +31,7 @@ export const TempText = styled.p`
   font-size: 50px;
   font-weight: bolder;
   display: flex;
+  cursor: pointer;
 
   > span {
     font-size: 32px;

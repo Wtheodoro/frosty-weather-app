@@ -7,6 +7,8 @@ interface IPreSet {
   dataWeathers: IWeather[]
   hasSomePreSettedCity: boolean
   updateFeaturedCities: (cities: any) => void
+  preSetAsFahrenheit: boolean
+  toggleSettingsTempUnity: () => void
 }
 
 interface IPresetProvider {
@@ -23,8 +25,23 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
 
     return []
   })
-
   const [dataWeathers, setdataWeathers] = useState<IWeather[]>([])
+  const [preSetAsFahrenheit, setPreSetAsFahrenheit] = useState<boolean>(() => {
+    const settings = localStorage.getItem('@frosty:settingsAsFahrenheit')
+
+    return !!settings
+  })
+
+  const toggleSettingsTempUnity = () => {
+    if (preSetAsFahrenheit) {
+      setPreSetAsFahrenheit(false)
+      localStorage.removeItem('@frosty:settingsAsFahrenheit')
+      return
+    }
+
+    setPreSetAsFahrenheit(true)
+    localStorage.setItem('@frosty:settingsAsFahrenheit', 'true')
+  }
 
   const hasSomePreSettedCity = !!featuredCities.length
 
@@ -39,6 +56,7 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
       newSetOfCities = featuredCities.filter(
         (featuredCity) => featuredCity !== city
       )
+
     if (!currentCityAlreadyChoosen) newSetOfCities = [...featuredCities, city]
 
     await getCityWeather(city)
@@ -86,6 +104,8 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
         hasSomePreSettedCity,
         updateFeaturedCities,
         dataWeathers,
+        preSetAsFahrenheit,
+        toggleSettingsTempUnity,
       }}
     >
       {children}

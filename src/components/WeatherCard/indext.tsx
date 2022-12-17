@@ -11,6 +11,7 @@ import {
   Moonrise,
 } from '..'
 import MOCK_WEATHERS from '../../constants/weather'
+import celsiusToFahrenheit from '../../helpers/celsiusToFahrenheit'
 import unixTimestampToLocalTime from '../../helpers/unixTimestampToLocalTime'
 import { IWeather } from '../../types/weather'
 import {
@@ -23,13 +24,20 @@ import {
   SubItemsSwitter,
 } from './styles'
 
-const WeatherCard: React.FC<IWeather> = ({
+type IWeatherCard = {
+  preSetAsFahrenheit: boolean
+  toggleSettingsTempUnity: () => void
+} & IWeather
+
+const WeatherCard: React.FC<IWeatherCard> = ({
   main,
   weather,
   wind,
   clouds,
   name,
   sys,
+  preSetAsFahrenheit,
+  toggleSettingsTempUnity,
 }) => {
   const currentWeather = MOCK_WEATHERS.includes(weather[0].main)
     ? weather[0].main
@@ -54,6 +62,10 @@ const WeatherCard: React.FC<IWeather> = ({
     location: sys.country,
   })
 
+  const temp = preSetAsFahrenheit
+    ? celsiusToFahrenheit(Math.round(main.temp))
+    : Math.round(main.temp)
+
   return (
     <Container>
       <MainInfoWrapper>
@@ -63,9 +75,9 @@ const WeatherCard: React.FC<IWeather> = ({
 
         <h2>{weather[0].description}</h2>
 
-        <TempText>
-          {Math.round(main.temp)}
-          <span>°C</span>
+        <TempText onClick={toggleSettingsTempUnity}>
+          {temp}
+          <span>{preSetAsFahrenheit ? '°F' : '°C'}</span>
         </TempText>
       </MainInfoWrapper>
 

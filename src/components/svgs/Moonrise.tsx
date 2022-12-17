@@ -20,14 +20,14 @@ const Moonrise = () => {
       >
         <rect fill='white' x='76' y='7' width='160' height='179' />
         <path
-          fill-rule='evenodd'
-          clip-rule='evenodd'
+          fillRule='evenodd'
+          clipRule='evenodd'
           d='M231 153.125C228.947 153.271 226.874 153.345 224.785 153.345C176.875 153.345 138.037 114.345 138.037 66.2353C138.037 44.8009 145.746 25.1746 158.532 10C113.524 13.1997 78 50.879 78 96.8899C78 144.999 116.838 184 164.748 184C191.312 184 215.087 172.01 231 153.125Z'
         />
       </mask>
       <path
-        fill-rule='evenodd'
-        clip-rule='evenodd'
+        fillRule='evenodd'
+        clipRule='evenodd'
         d='M231 153.125C228.947 153.271 226.874 153.345 224.785 153.345C176.875 153.345 138.037 114.345 138.037 66.2353C138.037 44.8009 145.746 25.1746 158.532 10C113.524 13.1997 78 50.879 78 96.8899C78 144.999 116.838 184 164.748 184C191.312 184 215.087 172.01 231 153.125Z'
         fill='url(#paint0_linear_2_1170)'
       />
@@ -40,13 +40,13 @@ const Moonrise = () => {
         d='M38.7732 4.04102C36.8263 -0.0136695 31.1737 -0.0136774 29.2268 4.04102L22.6831 17.6699C22.1939 18.6887 21.2558 19.3816 20.186 19.5414L5.55368 21.7269C1.16309 22.3827 -0.514471 27.8708 2.60077 30.9921L13.1888 41.6007C13.9749 42.3883 14.3399 43.5315 14.1519 44.6578L11.6525 59.6374C10.9212 64.02 15.4233 67.4976 19.3787 65.3601L32.4663 58.2877C33.4274 57.7683 34.5726 57.7683 35.5337 58.2877L48.6212 65.3601C52.5767 67.4976 57.0788 64.02 56.3475 59.6374L53.8481 44.6578C53.6601 43.5315 54.0251 42.3883 54.8112 41.6007L65.3992 30.9921C68.5145 27.8708 66.8369 22.3827 62.4463 21.7269L47.814 19.5414C46.7442 19.3816 45.8061 18.6887 45.3169 17.6699L38.7732 4.04102Z'
         fill='url(#paint2_linear_2_1170)'
         stroke='url(#paint3_linear_2_1170)'
-        stroke-width='2'
+        strokeWidth='2'
       />
       <path
         d='M234.437 73.1262C233.03 70.2913 228.97 70.2913 227.563 73.1262L223.269 81.7794C223.003 82.3151 222.488 82.689 221.888 82.7756L212.286 84.1633C209.148 84.6167 207.879 88.4635 210.163 90.6772L217.111 97.4128C217.542 97.8309 217.738 98.4315 217.637 99.0189L215.996 108.53C215.456 111.66 218.755 114.021 221.556 112.556L230.145 108.066C230.68 107.786 231.32 107.786 231.855 108.066L240.444 112.556C243.245 114.021 246.544 111.66 246.004 108.53L244.363 99.0189C244.262 98.4315 244.458 97.8309 244.889 97.4128L251.837 90.6772C254.121 88.4635 252.852 84.6167 249.714 84.1633L240.112 82.7756C239.512 82.689 238.997 82.3151 238.731 81.7794L234.437 73.1262Z'
         fill='url(#paint4_linear_2_1170)'
         stroke='url(#paint5_linear_2_1170)'
-        stroke-width='2'
+        strokeWidth='2'
       />
       <defs>
         <linearGradient
@@ -57,8 +57,8 @@ const Moonrise = () => {
           y2='183.913'
           gradientUnits='userSpaceOnUse'
         >
-          <stop stop-color='#FFEFB8' />
-          <stop offset='1' stop-color='#FFD600' />
+          <stop stopColor='#FFEFB8' />
+          <stop offset='1' stopColor='#FFD600' />
         </linearGradient>
         <linearGradient
           id='paint1_linear_2_1170'
@@ -68,8 +68,8 @@ const Moonrise = () => {
           y2='213.907'
           gradientUnits='userSpaceOnUse'
         >
-          <stop stop-color='#FFF2AF' />
-          <stop offset='1' stop-color='#CEBA00' />
+          <stop stopColor='#FFF2AF' />
+          <stop offset='1' stopColor='#CEBA00' />
         </linearGradient>
         <linearGradient
           id='paint2_linear_2_1170'
@@ -79,8 +79,8 @@ const Moonrise = () => {
           y2='64.3051'
           gradientUnits='userSpaceOnUse'
         >
-          <stop stop-color='#FFF59F' />
-          <stop offset='1' stop-color='#EDD500' />
+          <stop stopColor='#FFF59F' />
+          <stop offset='1' stopColor='#EDD500' />
         </linearGradient>
         <linearGradient
           id='paint3_linear_2_1170'
@@ -90,8 +90,8 @@ const Moonrise = () => {
           y2='86.3122'
           gradientUnits='userSpaceOnUse'
         >
-          <stop stop-color='#FFF6A6' />
-          <stop offset='1' stop-color='#D1BC00' />
+          <stop stopColor='#FFF6A6' />
+          <stop offset='1' stopColor='#D1BC00' />
         </linearGradient>
         <linearGradient
           id='paint4_linear_2_1170'
@@ -101,8 +101,8 @@ const Moonrise = () => {
           y2='112.032'
           gradientUnits='userSpaceOnUse'
         >
-          <stop stop-color='#FFF59F' />
-          <stop offset='1' stop-color='#EDD500' />
+          <stop stopColor='#FFF59F' />
+          <stop offset='1' stopColor='#EDD500' />
         </linearGradient>
         <linearGradient
           id='paint5_linear_2_1170'
@@ -112,8 +112,8 @@ const Moonrise = () => {
           y2='126.34'
           gradientUnits='userSpaceOnUse'
         >
-          <stop stop-color='#FFF6A6' />
-          <stop offset='1' stop-color='#D1BC00' />
+          <stop stopColor='#FFF6A6' />
+          <stop offset='1' stopColor='#D1BC00' />
         </linearGradient>
       </defs>
     </svg>
