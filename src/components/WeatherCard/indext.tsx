@@ -62,9 +62,7 @@ const WeatherCard: React.FC<IWeatherCard> = ({
     location: sys.country,
   })
 
-  const temp = preSetAsFahrenheit
-    ? celsiusToFahrenheit(Math.round(main.temp))
-    : Math.round(main.temp)
+  const temp = preSetAsFahrenheit ? celsiusToFahrenheit(main.temp) : main.temp
 
   return (
     <Container>
@@ -76,7 +74,7 @@ const WeatherCard: React.FC<IWeatherCard> = ({
         <h2>{weather[0].description}</h2>
 
         <TempText onClick={toggleSettingsTempUnity}>
-          {temp}
+          {Math.round(temp)}
           <span>{preSetAsFahrenheit ? '°F' : '°C'}</span>
         </TempText>
       </MainInfoWrapper>

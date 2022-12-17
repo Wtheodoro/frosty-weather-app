@@ -59,9 +59,10 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
 
     if (!currentCityAlreadyChoosen) newSetOfCities = [...featuredCities, city]
 
+    setFeaturedCities(newSetOfCities)
+
     await getCityWeather(city)
 
-    setFeaturedCities(newSetOfCities)
     localStorage.setItem(
       '@frosty:featuredCities',
       JSON.stringify(newSetOfCities)
