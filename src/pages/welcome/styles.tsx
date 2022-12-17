@@ -2,10 +2,10 @@ import styled, { keyframes } from 'styled-components'
 
 export const Container = styled.main`
   max-width: 400px;
-  height: 60vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 
   h1,

@@ -9,11 +9,13 @@ const hiThereAnimation = keyframes`
 `
 
 export const Container = styled.div`
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   text-align: center;
+  padding-bottom: 80px;
 
   h3 {
     margin-top: 20px;

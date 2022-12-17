@@ -1,19 +1,19 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
+  height: 100%;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 
   span {
     font-weight: bold;
   }
-
-  button {
-    margin-top: 100px;
-  }
 `
 
 export const CitiesPickerWrapper = styled.div`
-  margin-top: 100px;
   max-width: 600px;
   display: flex;
   flex-wrap: wrap;

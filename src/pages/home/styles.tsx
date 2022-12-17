@@ -1,15 +1,16 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  padding-bottom: 100px;
+  padding-bottom: 80px;
 
   > h1 {
     text-align: center;
+    margin-bottom: 40px;
   }
 
   @media (min-width: 768px) {

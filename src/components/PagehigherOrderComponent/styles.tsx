@@ -2,8 +2,8 @@ import styled, { css } from 'styled-components'
 
 export const Layout = styled.div`
   position: relative;
-  min-width: 100vw;
-  min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
   background: #0b0c1e;
   color: white;
   padding: 40px 20px;
@@ -19,8 +19,9 @@ interface IComponentWrapper {
 }
 
 export const ComponentWrapper = styled.div<IComponentWrapper>`
-  position: absolute;
+  position: relative;
   z-index: 10;
+  height: 100%;
 
   @media (min-width: 768px) {
     margin-left: ${(props) => (props.increseLeftMargin ? '120px' : '0')};
