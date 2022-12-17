@@ -17,4 +17,8 @@ export const WeatherCardsWrapper = styled.div`
   > div + div {
     margin-left: 100px;
   }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `
