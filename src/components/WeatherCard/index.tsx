@@ -86,7 +86,7 @@ const WeatherCard: React.FC<IWeatherCard> = ({
   const temp = preSetAsFahrenheit ? celsiusToFahrenheit(main.temp) : main.temp
 
   return (
-    <Container>
+    <Container data-testid='weatherCard-test-id'>
       <MainInfoWrapper>
         {WeatherIconManeger[currentWeather]}
 
@@ -101,7 +101,7 @@ const WeatherCard: React.FC<IWeatherCard> = ({
       </MainInfoWrapper>
 
       <SubItemsSwitter>
-        <SubItemsWrapper>
+        <SubItemsWrapper data-testid='sunsetSunrise-test-id'>
           <SubItem>
             <Sunrise />
 
@@ -131,7 +131,7 @@ const WeatherCard: React.FC<IWeatherCard> = ({
           </SubItem>
         </SubItemsWrapper>
 
-        <SubItemsWrapper>
+        <SubItemsWrapper data-testid='windHumidityCloudness-test-id'>
           <SubItem>
             <Wind />
 

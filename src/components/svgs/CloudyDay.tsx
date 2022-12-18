@@ -3,6 +3,7 @@ import React from 'react'
 const CloudyDay = () => {
   return (
     <svg
+      data-testid='cloudyDay-test-id'
       width='394'
       height='380'
       viewBox='0 0 394 380'
