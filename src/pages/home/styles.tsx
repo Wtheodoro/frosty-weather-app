@@ -42,7 +42,7 @@ export const WeatherCardsWrapper = styled.div<IWeatherCardsWrapper>`
   @media (min-width: 768px) {
     height: calc(100vh - 85px);
     width: calc(100vw - 120px);
-    padding: 0;
+    padding: 0 0 50px 0;
     overflow-y: scroll;
     flex-wrap: wrap;
     gap: 50px;
