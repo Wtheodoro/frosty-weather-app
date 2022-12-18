@@ -14,9 +14,7 @@ const ChooseCity = () => {
   const { updateFeaturedCities, featuredCities, hasSomePreSettedCity } =
     usePreSet()
 
-  const pushToHome = () => {
-    setTimeout(() => navigate('/home'), 200)
-  }
+  const pushToHome = () => navigate('/home')
 
   return (
     <Container>
