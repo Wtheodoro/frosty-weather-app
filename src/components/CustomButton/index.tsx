@@ -14,7 +14,7 @@ const CustomButton: React.FC<ICustomButton> = ({
 }) => {
   return (
     <Container
-      data-testid='CustomButton-test-id'
+      data-testid='customButton-test-id'
       onClick={onClick}
       disabled={disabled}
     >
