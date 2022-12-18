@@ -133,7 +133,7 @@ const WeatherCard: React.FC<IWeatherCard> = ({
           </SubItem>
         </SubItemsWrapper>
 
-        <SubItemsWrapper>
+        {/* <SubItemsWrapper>
           <SubItem>
             <Wind />
 
@@ -154,7 +154,7 @@ const WeatherCard: React.FC<IWeatherCard> = ({
             <p>{clouds.all} %</p>
             <p>Cloudiness</p>
           </SubItem>
-        </SubItemsWrapper>
+        </SubItemsWrapper> */}
       </SubItemsSwitter>
     </Container>
   )

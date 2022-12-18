@@ -134,7 +134,7 @@ export const SubItemsSwitter = styled.section`
   position: relative;
   height: 90px;
 
-  ${SubItemsWrapper}:nth-child(1) {
+  /* ${SubItemsWrapper}:nth-child(1) {
     animation: ${FirstAppearAnimation} 8s infinite alternate;
     z-index: 10;
   }
@@ -142,5 +142,5 @@ export const SubItemsSwitter = styled.section`
   ${SubItemsWrapper}:nth-child(2) {
     animation: ${SecondAppearAnimation} 8s infinite alternate;
     z-index: 0;
-  }
+  } */
 `
