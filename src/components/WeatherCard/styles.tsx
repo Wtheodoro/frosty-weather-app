@@ -1,12 +1,24 @@
 import styled, { keyframes } from 'styled-components'
 
 export const Container = styled.div`
-  min-width: 300px;
+  min-width: 100vw;
   height: 100%;
   max-height: 550px;
+  padding: 0 40px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin: 0 auto;
+  margin-top: -20px;
+
+  @media (min-width: 600px) {
+    min-width: 400px;
+  }
+
+  @media (min-width: 768px) {
+    min-width: 400px;
+    margin: 0;
+  }
 `
 export const MainInfoWrapper = styled.div`
   display: flex;

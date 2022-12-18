@@ -6,7 +6,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  padding-bottom: 80px;
+  padding-bottom: 100px;
 
   > h1 {
     text-align: center;
@@ -27,9 +27,9 @@ export const WeatherCardsWrapper = styled.div<IWeatherCardsWrapper>`
   justify-content: start;
   align-items: center;
   width: 100vw;
+  height: 100%;
   overflow-x: scroll;
   overflow-y: hidden;
-  padding: 0 55px;
 
   > div + div {
     margin-left: 100px;

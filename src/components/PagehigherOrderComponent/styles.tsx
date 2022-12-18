@@ -72,12 +72,13 @@ export const NavWrapper = styled.div`
   position: absolute;
   bottom: 0;
   width: 100%;
-  padding: 20px;
+  padding: 0 20px 20px;
   z-index: 10;
 
   @media (min-width: 768px) {
     left: 0;
     height: 100%;
     width: 100px;
+    padding: 20px;
   }
 `
