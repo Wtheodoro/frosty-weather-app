@@ -21,6 +21,7 @@ const PreSet = createContext<IPreSet>({} as IPreSet)
 
 const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
   const [dataWeathers, setdataWeathers] = useState<IWeather[]>([])
+  const [citiesWaitingData, setCitiesWaitingData] = useState<string[]>([])
   const [featuredCities, setFeaturedCities] = useState<string[]>(() => {
     const citiesString = localStorage.getItem('@frosty:featuredCities')
 
@@ -91,16 +92,25 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
   }
 
   const getCityWeather = async (currentCityName: string) => {
-    const currentCityAlreadyRequested = dataWeathers.find(
-      (city) =>
-        city?.name?.toLocaleLowerCase() === currentCityName.toLocaleLowerCase()
-    )
+    if (citiesWaitingData.includes(currentCityName)) return
+
+    setCitiesWaitingData([...citiesWaitingData, currentCityName])
+
+    const currentCityAlreadyRequested = dataWeathers
+      .map((dataWeather) => dataWeather.name)
+      .includes(currentCityName)
 
     if (!currentCityAlreadyRequested) {
       const currentWeather = await weatherServices.getCityWeather(
         currentCityName
       )
+
       setdataWeathers([...dataWeathers, currentWeather])
+      setCitiesWaitingData(
+        citiesWaitingData.filter(
+          (cityWaiting) => cityWaiting !== currentCityName
+        )
+      )
     }
   }
 
