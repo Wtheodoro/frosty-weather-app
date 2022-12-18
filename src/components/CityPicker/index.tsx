@@ -12,7 +12,11 @@ const CityPicker: React.FC<ICityPicker> = ({
   onClick,
   isChoosen,
 }) => (
-  <Container onClick={onClick} isChoosen={isChoosen}>
+  <Container
+    data-testid='cityPicker-test-id'
+    onClick={onClick}
+    isChoosen={isChoosen}
+  >
     {children}
   </Container>
 )

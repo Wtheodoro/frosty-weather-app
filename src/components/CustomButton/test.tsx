@@ -15,7 +15,7 @@ describe('<Button />', () => {
     expect(button).toBeInTheDocument()
   })
 
-  it('Post must have the correct post owner name', () => {
+  it('Should show the correct children text', () => {
     render(<CutomButton {...ButtonProps} />)
 
     const button = screen.getByText(/button jest/i)
