@@ -3,14 +3,7 @@ export interface IWeather {
     lon: number
     lat: number
   }
-  weather: [
-    {
-      id: number
-      main: string
-      description: string
-      icon: string
-    }
-  ]
+  weather: IWether[]
   base: string
   main: {
     temp: number
@@ -40,4 +33,11 @@ export interface IWeather {
   id: number
   name: string
   cod: number
+}
+
+interface IWether {
+  id: number
+  main: string
+  description: string
+  icon: string
 }
