@@ -11,7 +11,7 @@ const NavBar = () => {
   const { pathname } = useLocation()
 
   return (
-    <Container>
+    <Container data-testid='navBar-test-id'>
       <LogoWrapper>
         <p>Fro</p>
         <p>Sty</p>
