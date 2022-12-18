@@ -105,7 +105,7 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
         currentCityName
       )
 
-      setdataWeathers([...dataWeathers, currentWeather])
+      setdataWeathers((prevData) => [...prevData, currentWeather])
       setCitiesWaitingData(
         citiesWaitingData.filter(
           (cityWaiting) => cityWaiting !== currentCityName
