@@ -65,8 +65,6 @@ const WeatherCard: React.FC<IWeatherCard> = ({
     Clouds: isDay ? <CloudyDay /> : <CloudyNight />,
   }
 
-  console.log(`${name} is ${isDay ? 'Day' : 'Night'}`)
-
   const localSunrise = preSetAsCountryLocationTime
     ? unixTimestampToLocalTime({
         timestamp: sunrise,
