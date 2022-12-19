@@ -13,8 +13,7 @@ const NavBar = () => {
   return (
     <Container data-testid='navBar-test-id'>
       <LogoWrapper>
-        <p>Fro</p>
-        <p>Sty</p>
+        <img src='/frosty-logo.png' alt='frosty logo' />
       </LogoWrapper>
 
       <IconWrapper

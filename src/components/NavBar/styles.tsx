@@ -22,19 +22,15 @@ export const LogoWrapper = styled.div`
   display: none;
 
   @media (min-width: 768px) {
-    display: block;
     position: absolute;
-    top: 20px;
-    margin-left: 10px;
+    top: 40px;
+    display: block;
+    border-radius: 50%;
 
-    p:nth-child(-n + 1) {
-      margin-left: -10px;
-    }
-
-    p {
-      font-size: 32px;
-      font-weight: bolder;
-      color: white;
+    > img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
     }
   }
 `

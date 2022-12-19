@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { CustomButton, PagehigherOrderComponent } from '../../components'
 import { usePreSet } from '../../hooks/preSet'
-import { Container } from './styles'
+import { Container, LogoWrapper } from './styles'
 
 const Info = () => {
   const { preSetAsFahrenheit, preSetAsCountryLocationTime } = usePreSet()
@@ -10,6 +10,10 @@ const Info = () => {
 
   return (
     <Container>
+      <LogoWrapper>
+        <img src='/frosty-logo.png' alt='frosty logo' />
+      </LogoWrapper>
+
       <h3>
         Want to see temperature in{' '}
         <span>{preSetAsFahrenheit ? 'Celsius' : 'Fahrenheit'}</span>? <br />

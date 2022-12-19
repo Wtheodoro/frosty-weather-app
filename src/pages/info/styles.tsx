@@ -15,7 +15,7 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  padding: 40px 20px;
+  padding: 40px 20px 110px;
 
   h3 {
     margin-top: 20px;
@@ -35,8 +35,17 @@ export const Container = styled.div`
     animation: ${hiThereAnimation} 8s infinite alternate;
   }
 
-  button,
-  > div {
-    margin-top: 70px;
+  @media (min-width: 768px) {
+    padding: 20px;
+  }
+`
+
+export const LogoWrapper = styled.div`
+  border-radius: 50%;
+
+  > img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
   }
 `
