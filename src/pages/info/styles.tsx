@@ -1,12 +1,4 @@
-import styled, { keyframes } from 'styled-components'
-
-const hiThereAnimation = keyframes`
-  30% { transform: scale(1.2); }
-  40%, 60% { transform: rotate(-20deg) scale(1.2); }
-  50% { transform: rotate(20deg) scale(1.2); }
-  70% { transform: rotate(0deg) scale(1.2); }
-  100% { transform: scale(1); }
-`
+import styled from 'styled-components'
 
 export const Container = styled.div`
   height: 100%;
@@ -23,16 +15,13 @@ export const Container = styled.div`
 
   h3 span {
     color: #339ccf;
+    cursor: pointer;
   }
 
   a {
     text-decoration: none;
     font-weight: bold;
     color: #ff003d;
-  }
-
-  a + a {
-    animation: ${hiThereAnimation} 8s infinite alternate;
   }
 
   @media (min-width: 768px) {

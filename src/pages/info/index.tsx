@@ -15,6 +15,12 @@ const Info = () => {
       </LogoWrapper>
 
       <h3>
+        Can't find a specific city? <br />
+        No problem, you can add manually on{' '}
+        <span onClick={() => navigate('/chooseCity')}>Choose City</span> page
+      </h3>
+
+      <h3>
         Want to see temperature in{' '}
         <span>{preSetAsFahrenheit ? 'Celsius' : 'Fahrenheit'}</span>? <br />
         Just click on the temperature in Weather on{' '}
@@ -33,10 +39,6 @@ const Info = () => {
 
       <a href='https://www.walisontsx.com/' target='__blank'>
         <CustomButton>me</CustomButton>
-      </a>
-
-      <a href='https://www.youtube.com/watch?v=h_D3VFfhvs4' target='__blank'>
-        <CustomButton>Enjoy</CustomButton>
       </a>
 
       <div>
