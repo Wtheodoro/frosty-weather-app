@@ -35,7 +35,7 @@ const Home = () => {
           />
         ))}
 
-        {!featuredWeathers.length && (
+        {!featuredCities.length && (
           <p>
             Please, choose at least one city so you can see some weather
             information
