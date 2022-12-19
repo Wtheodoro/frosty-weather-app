@@ -1,37 +1,48 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { usePreSet } from '../../hooks/preSet'
 import CustomButton from '../CustomButton'
-import { Container } from './styles'
+import { Container, SearchWrapper, Message } from './styles'
 
 interface IAddCityMenu {
   onClose: () => void
+  isOpen: boolean
 }
 
-const AddCityMenu: React.FC<IAddCityMenu> = ({ onClose }) => {
+const AddCityMenu: React.FC<IAddCityMenu> = ({ onClose, isOpen }) => {
   const [newCityName, setNewCityName] = useState<string>('')
 
-  const { getNewCityWeather, newCityErrorMessage } = usePreSet()
+  const { getNewCityWeather, newCityMessage, setnewCityMessage } = usePreSet()
+
+  useEffect(() => {
+    return () => setnewCityMessage('')
+  }, [setnewCityMessage])
 
   return (
-    <Container>
-      <p>Well, no problem! Just add your city in the field below.</p>
+    <Container data-testid='addCityMenu-test-id' isOpen={isOpen}>
+      <p>
+        Ooops, looks like your city is not on our list, is it true? <br />
+        Well, no problem! Just add your city in the field below.
+      </p>
 
-      <p>Ooops, looks like your city is not on our list, is it true?</p>
+      <SearchWrapper>
+        <input
+          type='text'
+          onChange={({ target }) => setNewCityName(target.value)}
+        />
 
-      <input
-        type='text'
-        onChange={({ target }) => setNewCityName(target.value)}
-      />
+        <CustomButton
+          onClick={() => getNewCityWeather(newCityName.toLowerCase())}
+          styleType='white'
+        >
+          Search
+        </CustomButton>
+      </SearchWrapper>
 
-      <CustomButton
-        onClick={() => getNewCityWeather(newCityName.toLowerCase())}
-      >
-        verify
+      <CustomButton onClick={onClose} styleType='white'>
+        Close
       </CustomButton>
 
-      {newCityErrorMessage}
-
-      <CustomButton onClick={onClose}>Done!</CustomButton>
+      <Message>{newCityMessage}</Message>
     </Container>
   )
 }

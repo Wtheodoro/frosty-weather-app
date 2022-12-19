@@ -1,12 +1,19 @@
 import styled from 'styled-components'
 
-export const Container = styled.div`
+interface IContainer {
+  isSecondPlan: boolean
+}
+
+export const Container = styled.div<IContainer>`
   height: 100%;
+  width: 100vw;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  opacity: ${(props) => (props.isSecondPlan ? '0.4' : '1')};
+  transition: opacity 0.3s ease-in-out;
 
   span {
     font-weight: bold;

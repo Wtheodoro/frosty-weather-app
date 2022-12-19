@@ -12,9 +12,10 @@ interface IPreSet {
   toggleSettingsTempUnity: () => void
   preSetAsCountryLocationTime: boolean
   toggleSettingsLocationTime: () => void
-  newCityErrorMessage: string
+  newCityMessage: string
   getNewCityWeather: (newCityName: string) => void
   citiesToChoose: string[]
+  setnewCityMessage: (message: string) => void
 }
 
 interface IPresetProvider {
@@ -37,7 +38,7 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
 
     return MOCK_CITIES
   })
-  const [newCityErrorMessage, setNewCityErrorMessage] = useState<string>('')
+  const [newCityMessage, setnewCityMessage] = useState<string>('')
   const [dataWeathers, setdataWeathers] = useState<IWeather[]>([])
   const [citiesWaitingData, setCitiesWaitingData] = useState<string[]>([])
   const [featuredCities, setFeaturedCities] = useState<string[]>(() => {
@@ -69,14 +70,17 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
     if (citiesWaitingData.includes(newCityName)) return
 
     setCitiesWaitingData([...citiesWaitingData, newCityName])
+    setnewCityMessage('')
 
     const currentWeather = await weatherServices.getCityWeather(newCityName)
 
     if (currentWeather.message === 'city not found') {
-      return setNewCityErrorMessage(
+      return setnewCityMessage(
         `Sorry, It looks like we dont have ${newCityName} weather information yet.`
       )
     }
+
+    setnewCityMessage(`Uhul! We found ${newCityName} weather informations.`)
 
     setdataWeathers((prevData) => [...prevData, currentWeather])
     addCityOnCitiesToChooseList(currentWeather.name)
@@ -179,9 +183,10 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
         toggleSettingsTempUnity,
         preSetAsCountryLocationTime,
         toggleSettingsLocationTime,
-        newCityErrorMessage,
+        newCityMessage,
         getNewCityWeather,
         citiesToChoose,
+        setnewCityMessage,
       }}
     >
       {children}

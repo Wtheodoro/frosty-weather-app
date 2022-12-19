@@ -3,22 +3,31 @@ import { Container } from './styles'
 
 interface ICityPicker {
   children: string
-  onClick?: () => void
+  onClick: () => void
   isChoosen?: boolean
+  disabled?: boolean
 }
 
 const CityPicker: React.FC<ICityPicker> = ({
   children,
   onClick,
   isChoosen,
-}) => (
-  <Container
-    data-testid='cityPicker-test-id'
-    onClick={onClick}
-    isChoosen={isChoosen}
-  >
-    {children}
-  </Container>
-)
+  disabled,
+}) => {
+  const handleClick = () => {
+    if (disabled) return
+    onClick()
+  }
+
+  return (
+    <Container
+      data-testid='cityPicker-test-id'
+      onClick={handleClick}
+      isChoosen={isChoosen}
+    >
+      {children}
+    </Container>
+  )
+}
 
 export default CityPicker
