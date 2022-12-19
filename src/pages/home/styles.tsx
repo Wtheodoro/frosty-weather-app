@@ -34,7 +34,7 @@ export const WeatherCardsWrapper = styled.div<IWeatherCardsWrapper>`
   flex-wrap: ${(props) => (props.isMobile ? 'hidden' : 'wrap')};
 
   > div + div {
-    margin-left: ${(props) => (props.isMobile ? '100px' : 'auto')};
+    margin: ${(props) => (props.isMobile ? '0 0 0 100px' : '20px auto')};
   }
 
   ::-webkit-scrollbar {
