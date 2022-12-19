@@ -39,7 +39,7 @@ export const WeatherCardsWrapper = styled.div<IWeatherCardsWrapper>`
   }
 
   > div + div {
-    margin: ${(props) => (props.isMobile ? '0 0 0 100px' : '20px auto')};
+    margin: ${(props) => (props.isMobile ? '0 0 0 100px' : '20px 0 0 0')};
   }
 
   ::-webkit-scrollbar {
