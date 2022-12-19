@@ -4,6 +4,7 @@ import CityPicker from '.'
 
 const CityPickerProps = {
   children: 'city picker jest',
+  onClick: () => {},
 }
 
 describe('<CityPicker />', () => {
@@ -26,7 +27,7 @@ describe('<CityPicker />', () => {
   it('Should call onClick function when city picker is clicked', () => {
     const mockCallBack = jest.fn()
 
-    render(<CityPicker onClick={mockCallBack} {...CityPickerProps} />)
+    render(<CityPicker {...CityPickerProps} onClick={mockCallBack} />)
 
     const cityPicker = screen.getByTestId('cityPicker-test-id')
 
