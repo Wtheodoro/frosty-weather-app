@@ -20,6 +20,7 @@ export const Container = styled.div`
 
 interface IWeatherCardsWrapper {
   centralizerCards: boolean
+  isMobile: boolean
 }
 
 export const WeatherCardsWrapper = styled.div<IWeatherCardsWrapper>`
@@ -28,11 +29,12 @@ export const WeatherCardsWrapper = styled.div<IWeatherCardsWrapper>`
   align-items: center;
   width: 100vw;
   height: 100%;
-  overflow-x: scroll;
-  overflow-y: hidden;
+  overflow-x: ${(props) => (props.isMobile ? 'scroll' : 'hidden')};
+  overflow-y: ${(props) => (props.isMobile ? 'hidden' : 'scroll')};
+  flex-wrap: ${(props) => (props.isMobile ? 'hidden' : 'wrap')};
 
   > div + div {
-    margin-left: 100px;
+    margin-left: ${(props) => (props.isMobile ? '100px' : 'auto')};
   }
 
   ::-webkit-scrollbar {
@@ -44,7 +46,6 @@ export const WeatherCardsWrapper = styled.div<IWeatherCardsWrapper>`
     width: calc(100vw - 120px);
     padding: 0 0 50px 0;
     overflow-y: scroll;
-    flex-wrap: wrap;
     gap: 50px;
 
     justify-content: ${(props) =>

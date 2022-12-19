@@ -2,6 +2,7 @@ import React from 'react'
 import { PagehigherOrderComponent, WeatherCard } from '../../components'
 import { usePreSet } from '../../hooks/preSet'
 import { Container, WeatherCardsWrapper } from './styles'
+import { isMobile } from 'react-device-detect'
 
 const Home = () => {
   const {
@@ -19,11 +20,16 @@ const Home = () => {
 
   const showFourLessCards = featuredWeathers.length < 4
 
+  console.log(isMobile)
+
   return (
     <Container>
       <h1>Today's Report</h1>
 
-      <WeatherCardsWrapper centralizerCards={showFourLessCards}>
+      <WeatherCardsWrapper
+        centralizerCards={showFourLessCards}
+        isMobile={isMobile}
+      >
         {featuredWeathers.map((featuredWeather) => (
           <WeatherCard
             key={featuredWeather?.id}
