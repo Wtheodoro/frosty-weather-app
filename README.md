@@ -1,5 +1,9 @@
 # Frosty Weather web app
 
+## UX
+
+This web app was built focused on User Experience, new users can start using the app with 2 clicks to use and 1 click for non new users.
+
 Check the deploy [`preview`](https://www.frosty.walisontsx.com/)
 
 ![GIF](https://github.com/Wtheodoro/frosty-weather-app/blob/main/public/gif/frosty-mobile-preview.gif)
