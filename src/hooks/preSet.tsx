@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react'
+import MOCK_CITIES from '../constants/cities'
 import weatherServices from '../services/weather-services'
 import { IWeather } from '../types/weather'
 
@@ -11,6 +12,9 @@ interface IPreSet {
   toggleSettingsTempUnity: () => void
   preSetAsCountryLocationTime: boolean
   toggleSettingsLocationTime: () => void
+  newCityErrorMessage: string
+  getNewCityWeather: (newCityName: string) => void
+  citiesToChoose: string[]
 }
 
 interface IPresetProvider {
@@ -20,6 +24,20 @@ interface IPresetProvider {
 const PreSet = createContext<IPreSet>({} as IPreSet)
 
 const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
+  const [citiesToChoose, setCitiesToChoose] = useState<string[]>(() => {
+    const citiesString = localStorage.getItem('@frosty:featuredCities')
+
+    if (citiesString) {
+      const mockWithSavedCities = [...MOCK_CITIES, ...JSON.parse(citiesString)]
+
+      return mockWithSavedCities.filter(
+        (item, index) => mockWithSavedCities.indexOf(item) === index
+      )
+    }
+
+    return MOCK_CITIES
+  })
+  const [newCityErrorMessage, setNewCityErrorMessage] = useState<string>('')
   const [dataWeathers, setdataWeathers] = useState<IWeather[]>([])
   const [citiesWaitingData, setCitiesWaitingData] = useState<string[]>([])
   const [featuredCities, setFeaturedCities] = useState<string[]>(() => {
@@ -42,6 +60,31 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
 
       return !!settings
     })
+
+  const addCityOnCitiesToChooseList = (newCityName: string) =>
+    setCitiesToChoose([...citiesToChoose, newCityName])
+
+  const getNewCityWeather = async (newCityName: string) => {
+    if (citiesToChoose.includes(newCityName)) return
+    if (citiesWaitingData.includes(newCityName)) return
+
+    setCitiesWaitingData([...citiesWaitingData, newCityName])
+
+    const currentWeather = await weatherServices.getCityWeather(newCityName)
+
+    if (currentWeather.message === 'city not found') {
+      return setNewCityErrorMessage(
+        `Sorry, It looks like we dont have ${newCityName} weather information yet.`
+      )
+    }
+
+    setdataWeathers((prevData) => [...prevData, currentWeather])
+    addCityOnCitiesToChooseList(newCityName)
+    updateFeaturedCities(newCityName)
+    setCitiesWaitingData(
+      citiesWaitingData.filter((cityWaiting) => cityWaiting !== newCityName)
+    )
+  }
 
   const toggleSettingsTempUnity = () => {
     if (preSetAsFahrenheit) {
@@ -100,18 +143,14 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
       .map((dataWeather) => dataWeather.name)
       .includes(currentCityName)
 
-    if (!currentCityAlreadyRequested) {
-      const currentWeather = await weatherServices.getCityWeather(
-        currentCityName
-      )
+    if (currentCityAlreadyRequested) return
 
-      setdataWeathers((prevData) => [...prevData, currentWeather])
-      setCitiesWaitingData(
-        citiesWaitingData.filter(
-          (cityWaiting) => cityWaiting !== currentCityName
-        )
-      )
-    }
+    const currentWeather = await weatherServices.getCityWeather(currentCityName)
+
+    setdataWeathers((prevData) => [...prevData, currentWeather])
+    setCitiesWaitingData(
+      citiesWaitingData.filter((cityWaiting) => cityWaiting !== currentCityName)
+    )
   }
 
   const getCitiesWeatherOnAppInit = async () => {
@@ -140,6 +179,9 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
         toggleSettingsTempUnity,
         preSetAsCountryLocationTime,
         toggleSettingsLocationTime,
+        newCityErrorMessage,
+        getNewCityWeather,
+        citiesToChoose,
       }}
     >
       {children}
