@@ -32,6 +32,11 @@ export const WeatherCardsWrapper = styled.div<IWeatherCardsWrapper>`
   overflow-x: ${(props) => (props.isMobile ? 'scroll' : 'hidden')};
   overflow-y: ${(props) => (props.isMobile ? 'hidden' : 'scroll')};
   flex-wrap: ${(props) => (props.isMobile ? 'hidden' : 'wrap')};
+  scroll-snap-type: x mandatory;
+
+  > div {
+    scroll-snap-align: center;
+  }
 
   > div + div {
     margin: ${(props) => (props.isMobile ? '0 0 0 100px' : '20px auto')};
