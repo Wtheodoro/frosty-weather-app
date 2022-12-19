@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import WeatherCard from '.'
-import { debug } from 'console'
 
 const WeatherCardProps = {
   coord: {

@@ -1,4 +1,4 @@
-import { act, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import NavBar from '.'
 import { renderWithRoute } from '../../utils/tests/renderWithRoute'
