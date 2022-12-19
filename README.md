@@ -15,6 +15,7 @@ Check the deploy [`preview`](https://www.frosty.walisontsx.com/)
 - Practice Clean Code fundamentals
 - Practice with global states
 - Practice best practice to persist request data without any library
+- Practice mobile first design concepts
 - Practice open weather api
 - Test with Jest + React Testing Library
 
