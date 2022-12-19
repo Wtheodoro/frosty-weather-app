@@ -57,8 +57,10 @@ export const TempText = styled.p`
     color: #339cff;
   }
 
-  &:hover {
-    scale: 1.1;
+  @media (min-width: 768px) {
+    &:hover {
+      scale: 1.1;
+    }
   }
 `
 
@@ -110,8 +112,10 @@ export const ClickableSubItem = styled(SubItem)`
     margin-bottom: 20px;
   }
 
-  &:hover {
-    scale: 1.1;
+  @media (min-width: 768px) {
+    &:hover {
+      scale: 1.1;
+    }
   }
 `
 
