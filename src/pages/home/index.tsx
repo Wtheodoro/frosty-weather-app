@@ -20,9 +20,6 @@ const Home = () => {
 
   const showFourLessCards = featuredWeathers.length < 4
 
-  console.log(featuredCities)
-  console.log(dataWeathers)
-
   return (
     <Container>
       <h1>Today's Report</h1>

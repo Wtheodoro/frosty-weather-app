@@ -1,15 +1,15 @@
 const MOCK_CITIES = [
-  'campinas',
-  'lisbon',
-  'tokyo',
-  'paris',
-  'miami',
-  'hong kong',
-  'london',
-  'new orleans',
-  'sydney',
-  'orlando',
-  'bangkok',
+  'Campinas',
+  'Lisbon',
+  'Tokyo',
+  'Paris',
+  'Miami',
+  'Hong Kong',
+  'London',
+  'New Orleans',
+  'Sydney',
+  'Orlando',
+  'Bangkok',
 ]
 
 export default MOCK_CITIES

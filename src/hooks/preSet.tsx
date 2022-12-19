@@ -79,8 +79,8 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
     }
 
     setdataWeathers((prevData) => [...prevData, currentWeather])
-    addCityOnCitiesToChooseList(newCityName)
-    updateFeaturedCities(newCityName)
+    addCityOnCitiesToChooseList(currentWeather.name)
+    updateFeaturedCities(currentWeather.name, true)
     setCitiesWaitingData(
       citiesWaitingData.filter((cityWaiting) => cityWaiting !== newCityName)
     )
@@ -110,7 +110,7 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
 
   const hasSomePreSettedCity = !!featuredCities.length
 
-  const updateFeaturedCities = async (city: string) => {
+  const updateFeaturedCities = async (city: string, isCustomCity?: boolean) => {
     const currentCityAlreadyChoosen = featuredCities.find(
       (featuredCity: string) => featuredCity === city
     )
@@ -126,7 +126,7 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
 
     setFeaturedCities(newSetOfCities)
 
-    await getCityWeather(city)
+    if (!isCustomCity) await getCityWeather(city)
 
     localStorage.setItem(
       '@frosty:featuredCities',
