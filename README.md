@@ -3,7 +3,6 @@
 Check the deploy [`preview`](https://www.frosty.walisontsx.com/)
 
 ![GIF](https://github.com/Wtheodoro/frosty-weather-app/blob/main/public/gif/frosty-mobile-preview.gif)
-![GIF](https://github.com/Wtheodoro/frosty-weather-app/blob/main/public/gif/frosty-desktop-preview.gif)
 
 ## `Project purpose`
 
@@ -19,6 +18,8 @@ Check the deploy [`preview`](https://www.frosty.walisontsx.com/)
 
 - React
 - Styled component
+
+![GIF](https://github.com/Wtheodoro/frosty-weather-app/blob/main/public/gif/frosty-desktop-preview.gif)
 
 ## `Step by step to run this project`
 
