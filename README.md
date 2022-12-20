@@ -2,7 +2,7 @@
 
 ## UX
 
-This web app was built focused on User Experience, new users can start using the app with 2 clicks to use and 1 click for non new users.
+This web app was built focused on User Experience, new users can start using the app with 3 clicks to use and 1 click for non new users.
 
 Check the deploy [`preview`](https://www.frosty.walisontsx.com/)
 
