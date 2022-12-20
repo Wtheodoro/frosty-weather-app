@@ -36,6 +36,7 @@ export const WeatherCardsWrapper = styled.div<IWeatherCardsWrapper>`
 
   > div {
     scroll-snap-align: center;
+    scroll-snap-stop: always;
   }
 
   > div + div {
