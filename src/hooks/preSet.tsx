@@ -74,6 +74,19 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
 
     const currentWeather = await weatherServices.getCityWeather(newCityName)
 
+    const citiesDataAlreadyRequested = dataWeathers.map(
+      (dataWeather) => dataWeather.id
+    )
+
+    const isCurrentCityAlreadyRequested = citiesDataAlreadyRequested.includes(
+      currentWeather.id
+    )
+
+    if (isCurrentCityAlreadyRequested)
+      return setnewCityMessage(
+        `It looks like we already have ${newCityName} selected.`
+      )
+
     if (currentWeather.message === 'city not found') {
       return setnewCityMessage(
         `Sorry, It looks like we don't have ${newCityName} weather information yet.`
