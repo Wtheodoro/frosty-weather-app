@@ -21,6 +21,8 @@ export const Container = styled.div<IContainer>`
 `
 
 export const CitiesPickerWrapper = styled.div`
+  max-height: 100%;
+  overflow-y: scroll;
   max-width: 600px;
   display: flex;
   flex-wrap: wrap;
