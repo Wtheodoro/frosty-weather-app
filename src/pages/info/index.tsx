@@ -15,26 +15,26 @@ const Info = () => {
       </LogoWrapper>
 
       <h3>
-        Can't find a specific city? <br />
+        Can't you find a specific city? <br />
         No problem, you can add manually on{' '}
-        <span onClick={() => navigate('/chooseCity')}>Choose City</span> page
+        <span onClick={() => navigate('/chooseCity')}>Choose City</span> page.
       </h3>
 
       <h3>
-        Want to see temperature in{' '}
+        Do you want to see temperature in{' '}
         <span>{preSetAsFahrenheit ? 'Celsius' : 'Fahrenheit'}</span>? <br />
         Just click on the temperature in Weather on{' '}
-        <span onClick={() => navigate('/home')}>Home</span> page
+        <span onClick={() => navigate('/home')}>Home</span> page.
       </h3>
 
       <h3>
-        Want to see sunrise and sunset in{' '}
+        Do you want to see sunrise and sunset in{' '}
         <span>
           {preSetAsCountryLocationTime ? 'your location' : 'country'}{' '}
         </span>
         time? <br />
         Just click on the Earth icon on{' '}
-        <span onClick={() => navigate('/home')}>Home</span> page
+        <span onClick={() => navigate('/home')}>Home</span> page.
       </h3>
 
       <a href='https://www.walisontsx.com/' target='__blank'>
