@@ -29,4 +29,8 @@ export const CitiesPickerWrapper = styled.div`
   justify-content: center;
   gap: 20px;
   padding: 20px;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `
