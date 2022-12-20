@@ -76,7 +76,7 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
 
     if (currentWeather.message === 'city not found') {
       return setnewCityMessage(
-        `Sorry, It looks like we dont have ${newCityName} weather information yet.`
+        `Sorry, It looks like we don't have ${newCityName} weather information yet.`
       )
     }
 
