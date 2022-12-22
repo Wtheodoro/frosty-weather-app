@@ -6,7 +6,8 @@ import { useAppContext } from '../../hooks/useAppContext'
 import { CitiesPickerWrapper, Container } from './styles'
 
 const ChooseCity = () => {
-  const [showAddCityMenu, setAddCityMenu] = useState<boolean>(false)
+  const [isAddCityMenuVisible, setIsAddCityMenuVisible] =
+    useState<boolean>(false)
   const navigate = useNavigate()
   const {
     citiesToChoose,
@@ -17,24 +18,31 @@ const ChooseCity = () => {
 
   const pushToHome = () => navigate('/home')
 
-  const toggleShowAddCityMenu = () => setAddCityMenu(!showAddCityMenu)
+  const toggleisAddCityMenuVisible = () =>
+    setIsAddCityMenuVisible(!isAddCityMenuVisible)
 
   const handleContainerClick = () => {
-    if (!showAddCityMenu) return
+    if (!isAddCityMenuVisible) return
 
-    setAddCityMenu(false)
+    setIsAddCityMenuVisible(false)
   }
 
   return (
     <>
-      <Container isSecondPlan={showAddCityMenu} onClick={handleContainerClick}>
+      <Container
+        isSecondPlan={isAddCityMenuVisible}
+        onClick={handleContainerClick}
+      >
         <h1>CHOOSE CITY</h1>
 
         <p>
           Please choose <span>one</span> or <span>more</span> cities to display
         </p>
 
-        <Button onClick={toggleShowAddCityMenu} disabled={showAddCityMenu}>
+        <Button
+          onClick={toggleisAddCityMenuVisible}
+          disabled={isAddCityMenuVisible}
+        >
           + add city
         </Button>
 
@@ -44,7 +52,7 @@ const ChooseCity = () => {
               key={city}
               isChoosen={featuredCities.includes(city)}
               onClick={() => updateFeaturedCities(city)}
-              disabled={showAddCityMenu}
+              disabled={isAddCityMenuVisible}
             >
               {city}
             </CityPicker>
@@ -55,7 +63,10 @@ const ChooseCity = () => {
           Ready!
         </Button>
       </Container>
-      <AddCityMenu onClose={toggleShowAddCityMenu} isOpen={showAddCityMenu} />
+      <AddCityMenu
+        onClose={toggleisAddCityMenuVisible}
+        isOpen={isAddCityMenuVisible}
+      />
     </>
   )
 }
