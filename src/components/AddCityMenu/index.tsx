@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useAppContext } from '../../hooks/useAppContext'
 import Button from '../Button'
 import { Container, SearchWrapper, Message } from './styles'
@@ -14,9 +14,10 @@ const AddCityMenu: React.FC<IAddCityMenu> = ({ onClose, isOpen }) => {
   const { getNewCityWeather, newCityMessage, setnewCityMessage } =
     useAppContext()
 
-  useEffect(() => {
-    return () => setnewCityMessage('')
-  }, [setnewCityMessage])
+  const handleCloseClick = () => {
+    setnewCityMessage('')
+    onClose()
+  }
 
   return (
     <Container data-testid='addCityMenu-test-id' isOpen={isOpen}>
@@ -39,7 +40,7 @@ const AddCityMenu: React.FC<IAddCityMenu> = ({ onClose, isOpen }) => {
         </Button>
       </SearchWrapper>
 
-      <Button onClick={onClose} styleType='white'>
+      <Button onClick={handleCloseClick} styleType='white'>
         Close
       </Button>
 
