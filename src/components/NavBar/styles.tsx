@@ -1,6 +1,7 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-export const Container = styled.div`
+export const Container = styled.nav`
   position: relative;
   width: 100%;
   height: 70px;
@@ -36,14 +37,14 @@ export const LogoWrapper = styled.div`
 `
 
 interface IIconWrapper {
-  active: boolean
+  active: 'true' | 'false'
 }
 
-export const IconWrapper = styled.div<IIconWrapper>`
+export const IconWrapper = styled(Link)<IIconWrapper>`
   cursor: pointer;
 
   > svg {
-    width: ${(props) => (props.active ? '50px' : '30px')};
-    height: ${(props) => (props.active ? '50px' : '30px')};
+    width: ${(props) => (props.active === 'true' ? '50px' : '30px')};
+    height: ${(props) => (props.active === 'true' ? '50px' : '30px')};
   }
 `

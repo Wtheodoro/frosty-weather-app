@@ -7,7 +7,6 @@ import LogoutIcon from '../icons/LogoutIcon'
 import { Container, IconWrapper, LogoWrapper } from './styles'
 
 const NavBar = () => {
-  const navigate = useNavigate()
   const { pathname } = useLocation()
 
   return (
@@ -16,25 +15,22 @@ const NavBar = () => {
         <img src='/frosty-logo.png' alt='frosty logo' />
       </LogoWrapper>
 
-      <IconWrapper
-        onClick={() => navigate('/home')}
-        active={pathname === '/home'}
-      >
+      <IconWrapper to='/home' active={pathname === '/home' ? 'true' : 'false'}>
         <HomeIcon />
       </IconWrapper>
+
       <IconWrapper
-        onClick={() => navigate('/chooseCity')}
-        active={pathname === '/chooseCity'}
+        to='/chooseCity'
+        active={pathname === '/chooseCity' ? 'true' : 'false'}
       >
         <CardsIcon />
       </IconWrapper>
-      <IconWrapper
-        onClick={() => navigate('/info')}
-        active={pathname === '/info'}
-      >
+
+      <IconWrapper to='/info' active={pathname === '/info' ? 'true' : 'false'}>
         <CoffeIcon />
       </IconWrapper>
-      <IconWrapper onClick={() => navigate('/')} active={pathname === '/'}>
+
+      <IconWrapper to='/' active={pathname === '/' ? 'true' : 'false'}>
         <LogoutIcon />
       </IconWrapper>
     </Container>
