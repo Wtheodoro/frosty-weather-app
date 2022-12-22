@@ -10,7 +10,7 @@ import Cloud from './svgs/Cloud'
 import Thunder from './svgs/Thunder'
 import Drizzle from './svgs/Drizzle'
 import Snow from './svgs/Snow'
-import CustomButton from './CustomButton'
+import Button from './Button'
 import Sunrise from './svgs/Sunrise'
 import Moonrise from './svgs/Moonrise'
 import NavBar from './NavBar'
@@ -37,7 +37,7 @@ export {
   Thunder,
   Drizzle,
   Snow,
-  CustomButton,
+  Button,
   Sunrise,
   Moonrise,
   NavBar,

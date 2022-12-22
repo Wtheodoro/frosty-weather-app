@@ -1,10 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import {
-  CustomButton,
-  CityPicker,
-  PagehigherOrderComponent,
-} from '../../components'
+import { Button, CityPicker, PagehigherOrderComponent } from '../../components'
 import AddCityMenu from '../../components/AddCityMenu'
 import { usePreSet } from '../../hooks/preSet'
 import { CitiesPickerWrapper, Container } from './styles'
@@ -38,12 +34,9 @@ const ChooseCity = () => {
           Please choose <span>one</span> or <span>more</span> cities to display
         </p>
 
-        <CustomButton
-          onClick={toggleShowAddCityMenu}
-          disabled={showAddCityMenu}
-        >
+        <Button onClick={toggleShowAddCityMenu} disabled={showAddCityMenu}>
           + add city
-        </CustomButton>
+        </Button>
 
         <CitiesPickerWrapper>
           {citiesToChoose.map((city) => (
@@ -58,9 +51,9 @@ const ChooseCity = () => {
           ))}
         </CitiesPickerWrapper>
 
-        <CustomButton onClick={pushToHome} disabled={!hasSomePreSettedCity}>
+        <Button onClick={pushToHome} disabled={!hasSomePreSettedCity}>
           Ready!
-        </CustomButton>
+        </Button>
       </Container>
       <AddCityMenu onClose={toggleShowAddCityMenu} isOpen={showAddCityMenu} />
     </>

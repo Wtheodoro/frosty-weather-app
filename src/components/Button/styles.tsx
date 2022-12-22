@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components'
-import { ButtonstyleType } from '.'
+import { ButtonStyleType } from '.'
 
 interface IConatainer {
   disabled?: boolean
-  styleType: ButtonstyleType
+  styleType: ButtonStyleType
 }
 
 const buttonColorModifier = {
@@ -19,7 +19,7 @@ const buttonColorModifier = {
   `,
 }
 
-export const Container = styled.button<IConatainer>`
+export const Wrapper = styled.button<IConatainer>`
   padding: 1rem 2rem;
   text-decoration: none;
   border-radius: 8px;

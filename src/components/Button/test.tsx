@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import CutomButton from '.'
+import Button from '.'
 
 const ButtonProps = {
   children: 'button jest',
@@ -8,15 +8,15 @@ const ButtonProps = {
 
 describe('<Button />', () => {
   it('Should render button component correctly', () => {
-    render(<CutomButton {...ButtonProps} />)
+    render(<Button {...ButtonProps} />)
 
-    const button = screen.getByTestId('customButton-test-id')
+    const button = screen.getByTestId('button-test-id')
 
     expect(button).toBeInTheDocument()
   })
 
   it('Should show the correct children text', () => {
-    render(<CutomButton {...ButtonProps} />)
+    render(<Button {...ButtonProps} />)
 
     const button = screen.getByText(/button jest/i)
 
@@ -26,9 +26,9 @@ describe('<Button />', () => {
   it('Should call onClick function when button is clicked', () => {
     const mockCallBack = jest.fn()
 
-    render(<CutomButton onClick={mockCallBack} {...ButtonProps} />)
+    render(<Button onClick={mockCallBack} {...ButtonProps} />)
 
-    const button = screen.getByTestId('customButton-test-id')
+    const button = screen.getByTestId('button-test-id')
 
     fireEvent.click(button)
 

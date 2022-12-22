@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { CustomButton, PagehigherOrderComponent } from '../../components'
+import { Button, PagehigherOrderComponent } from '../../components'
 import { usePreSet } from '../../hooks/preSet'
 import { Container, LogoWrapper } from './styles'
 
@@ -38,7 +38,7 @@ const Info = () => {
       </h3>
 
       <a href='https://www.walisontsx.com/' target='__blank'>
-        <CustomButton>me</CustomButton>
+        <Button>me</Button>
       </a>
 
       <div>

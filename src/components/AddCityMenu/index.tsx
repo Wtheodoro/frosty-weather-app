@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { usePreSet } from '../../hooks/preSet'
-import CustomButton from '../CustomButton'
+import Button from '../Button'
 import { Container, SearchWrapper, Message } from './styles'
 
 interface IAddCityMenu {
@@ -30,17 +30,17 @@ const AddCityMenu: React.FC<IAddCityMenu> = ({ onClose, isOpen }) => {
           onChange={({ target }) => setNewCityName(target.value)}
         />
 
-        <CustomButton
+        <Button
           onClick={() => getNewCityWeather(newCityName.toLowerCase())}
           styleType='white'
         >
           Search
-        </CustomButton>
+        </Button>
       </SearchWrapper>
 
-      <CustomButton onClick={onClose} styleType='white'>
+      <Button onClick={onClose} styleType='white'>
         Close
-      </CustomButton>
+      </Button>
 
       <Message>{newCityMessage}</Message>
     </Container>
