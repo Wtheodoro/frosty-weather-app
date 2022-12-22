@@ -1,4 +1,10 @@
-import React, { createContext, useState, useContext, useEffect } from 'react'
+import React, {
+  createContext,
+  useState,
+  useContext,
+  useEffect,
+  useCallback,
+} from 'react'
 import MOCK_CITIES from '../constants/cities'
 import weatherServices from '../services/weather-services'
 import { IWeather } from '../types/weather'
@@ -29,7 +35,10 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
     const citiesString = localStorage.getItem('@frosty:featuredCities')
 
     if (citiesString) {
-      const mockWithSavedCities = [...MOCK_CITIES, ...JSON.parse(citiesString)]
+      const mockWithSavedCities: string[] = [
+        ...MOCK_CITIES,
+        ...JSON.parse(citiesString),
+      ]
 
       return mockWithSavedCities.filter(
         (item, index) => mockWithSavedCities.indexOf(item) === index
@@ -39,7 +48,7 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
     return MOCK_CITIES
   })
   const [newCityMessage, setnewCityMessage] = useState<string>('')
-  const [dataWeathers, setdataWeathers] = useState<IWeather[]>([])
+  const [dataWeathers, setDataWeathers] = useState<IWeather[]>([])
   const [citiesWaitingData, setCitiesWaitingData] = useState<string[]>([])
   const [featuredCities, setFeaturedCities] = useState<string[]>(() => {
     const citiesString = localStorage.getItem('@frosty:featuredCities')
@@ -97,7 +106,7 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
 
     setnewCityMessage(`Uhul! We found ${newCityName} weather informations.`)
 
-    setdataWeathers((prevData) => [...prevData, currentWeather])
+    setDataWeathers((prevData) => [...prevData, currentWeather])
     addCityOnCitiesToChooseList(currentWeather.name)
     updateFeaturedCities(currentWeather.name, true)
     setCitiesWaitingData(
@@ -166,26 +175,24 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
 
     const currentWeather = await weatherServices.getCityWeather(currentCityName)
 
-    setdataWeathers((prevData) => [...prevData, currentWeather])
+    setDataWeathers((prevData) => [...prevData, currentWeather])
     setCitiesWaitingData(
       citiesWaitingData.filter((cityWaiting) => cityWaiting !== currentCityName)
     )
   }
 
-  const getCitiesWeatherOnAppInit = async () => {
+  const getCitiesWeatherOnAppInit = useCallback(async () => {
     const weathers = await Promise.all(
-      featuredCities.map(
-        async (city) => await weatherServices.getCityWeather(city)
-      )
+      featuredCities.map(weatherServices.getCityWeather)
     )
 
-    setdataWeathers(weathers)
-  }
+    setDataWeathers(weathers)
+  }, [featuredCities])
 
   useEffect(() => {
     if (!hasSomeFeaturedCity) return
     getCitiesWeatherOnAppInit()
-  }, [])
+  }, [getCitiesWeatherOnAppInit, hasSomeFeaturedCity])
 
   return (
     <AppContext.Provider
