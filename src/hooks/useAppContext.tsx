@@ -3,14 +3,14 @@ import MOCK_CITIES from '../constants/cities'
 import weatherServices from '../services/weather-services'
 import { IWeather } from '../types/weather'
 
-interface IPreSet {
+interface IAppContext {
   featuredCities: string[]
   dataWeathers: IWeather[]
-  hasSomePreSettedCity: boolean
+  hasSomeFeaturedCity: boolean
   updateFeaturedCities: (city: string) => void
-  preSetAsFahrenheit: boolean
+  isTemperatureInFahrenheit: boolean
   toggleSettingsTempUnity: () => void
-  preSetAsCountryLocationTime: boolean
+  isCountryLocationTime: boolean
   toggleSettingsLocationTime: () => void
   newCityMessage: string
   getNewCityWeather: (newCityName: string) => void
@@ -18,13 +18,13 @@ interface IPreSet {
   setnewCityMessage: (message: string) => void
 }
 
-interface IPresetProvider {
+interface IAppContextProvider {
   children: React.ReactNode
 }
 
-const PreSet = createContext<IPreSet>({} as IPreSet)
+const AppContext = createContext<IAppContext>({} as IAppContext)
 
-const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
+const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
   const [citiesToChoose, setCitiesToChoose] = useState<string[]>(() => {
     const citiesString = localStorage.getItem('@frosty:featuredCities')
 
@@ -48,19 +48,21 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
 
     return []
   })
-  const [preSetAsFahrenheit, setPreSetAsFahrenheit] = useState<boolean>(() => {
-    const settings = localStorage.getItem('@frosty:settingsAsFahrenheit')
-
-    return !!settings
-  })
-  const [preSetAsCountryLocationTime, setPreSetAsCountryLocationTime] =
+  const [isTemperatureInFahrenheit, setIsTemperatureInFahrenheit] =
     useState<boolean>(() => {
+      const settings = localStorage.getItem('@frosty:settingsAsFahrenheit')
+
+      return !!settings
+    })
+  const [isCountryLocationTime, setIsCountryLocationTime] = useState<boolean>(
+    () => {
       const settings = localStorage.getItem(
         '@frosty:settingsAsCountryLocationTime'
       )
 
       return !!settings
-    })
+    }
+  )
 
   const addCityOnCitiesToChooseList = (newCityName: string) =>
     setCitiesToChoose([...citiesToChoose, newCityName])
@@ -104,28 +106,28 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
   }
 
   const toggleSettingsTempUnity = () => {
-    if (preSetAsFahrenheit) {
-      setPreSetAsFahrenheit(false)
+    if (isTemperatureInFahrenheit) {
+      setIsTemperatureInFahrenheit(false)
       localStorage.removeItem('@frosty:settingsAsFahrenheit')
       return
     }
 
-    setPreSetAsFahrenheit(true)
+    setIsTemperatureInFahrenheit(true)
     localStorage.setItem('@frosty:settingsAsFahrenheit', 'true')
   }
 
   const toggleSettingsLocationTime = () => {
-    if (preSetAsCountryLocationTime) {
-      setPreSetAsCountryLocationTime(false)
+    if (isCountryLocationTime) {
+      setIsCountryLocationTime(false)
       localStorage.removeItem('@frosty:settingsAsCountryLocationTime')
       return
     }
 
-    setPreSetAsCountryLocationTime(true)
+    setIsCountryLocationTime(true)
     localStorage.setItem('@frosty:settingsAsCountryLocationTime', 'true')
   }
 
-  const hasSomePreSettedCity = !!featuredCities.length
+  const hasSomeFeaturedCity = !!featuredCities.length
 
   const updateFeaturedCities = async (city: string, isCustomCity?: boolean) => {
     const currentCityAlreadyChoosen = featuredCities.find(
@@ -181,20 +183,20 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
   }
 
   useEffect(() => {
-    if (!hasSomePreSettedCity) return
+    if (!hasSomeFeaturedCity) return
     getCitiesWeatherOnAppInit()
   }, [])
 
   return (
-    <PreSet.Provider
+    <AppContext.Provider
       value={{
         featuredCities,
-        hasSomePreSettedCity,
+        hasSomeFeaturedCity,
         updateFeaturedCities,
         dataWeathers,
-        preSetAsFahrenheit,
+        isTemperatureInFahrenheit,
         toggleSettingsTempUnity,
-        preSetAsCountryLocationTime,
+        isCountryLocationTime,
         toggleSettingsLocationTime,
         newCityMessage,
         getNewCityWeather,
@@ -203,13 +205,13 @@ const PreSetProvider: React.FC<IPresetProvider> = ({ children }) => {
       }}
     >
       {children}
-    </PreSet.Provider>
+    </AppContext.Provider>
   )
 }
 
-function usePreSet(): IPreSet {
-  const context = useContext(PreSet)
+function useAppContext(): IAppContext {
+  const context = useContext(AppContext)
   return context
 }
 
-export { PreSetProvider, usePreSet }
+export { AppContextProvider, useAppContext }

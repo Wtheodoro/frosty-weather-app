@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, CityPicker, PagehigherOrderComponent } from '../../components'
 import AddCityMenu from '../../components/AddCityMenu'
-import { usePreSet } from '../../hooks/preSet'
+import { useAppContext } from '../../hooks/useAppContext'
 import { CitiesPickerWrapper, Container } from './styles'
 
 const ChooseCity = () => {
@@ -12,8 +12,8 @@ const ChooseCity = () => {
     citiesToChoose,
     updateFeaturedCities,
     featuredCities,
-    hasSomePreSettedCity,
-  } = usePreSet()
+    hasSomeFeaturedCity,
+  } = useAppContext()
 
   const pushToHome = () => navigate('/home')
 
@@ -51,7 +51,7 @@ const ChooseCity = () => {
           ))}
         </CitiesPickerWrapper>
 
-        <Button onClick={pushToHome} disabled={!hasSomePreSettedCity}>
+        <Button onClick={pushToHome} disabled={!hasSomeFeaturedCity}>
           Ready!
         </Button>
       </Container>

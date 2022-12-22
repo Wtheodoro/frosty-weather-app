@@ -1,11 +1,11 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, PagehigherOrderComponent } from '../../components'
-import { usePreSet } from '../../hooks/preSet'
+import { useAppContext } from '../../hooks/useAppContext'
 import { Container, LogoWrapper } from './styles'
 
 const Info = () => {
-  const { preSetAsFahrenheit, preSetAsCountryLocationTime } = usePreSet()
+  const { isTemperatureInFahrenheit, isCountryLocationTime } = useAppContext()
   const navigate = useNavigate()
 
   return (
@@ -22,16 +22,15 @@ const Info = () => {
 
       <h3>
         Do you want to see temperature in{' '}
-        <span>{preSetAsFahrenheit ? 'Celsius' : 'Fahrenheit'}</span>? <br />
+        <span>{isTemperatureInFahrenheit ? 'Celsius' : 'Fahrenheit'}</span>?{' '}
+        <br />
         Just click on the temperature in Weather on{' '}
         <span onClick={() => navigate('/home')}>Home</span> page.
       </h3>
 
       <h3>
         Do you want to see sunrise and sunset in{' '}
-        <span>
-          {preSetAsCountryLocationTime ? 'your location' : 'country'}{' '}
-        </span>
+        <span>{isCountryLocationTime ? 'your location' : 'country'} </span>
         time? <br />
         Just click on the Earth icon on{' '}
         <span onClick={() => navigate('/home')}>Home</span> page.

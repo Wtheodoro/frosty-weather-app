@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { usePreSet } from '../../hooks/preSet'
+import { useAppContext } from '../../hooks/useAppContext'
 import Button from '../Button'
 import { Container, SearchWrapper, Message } from './styles'
 
@@ -11,7 +11,8 @@ interface IAddCityMenu {
 const AddCityMenu: React.FC<IAddCityMenu> = ({ onClose, isOpen }) => {
   const [newCityName, setNewCityName] = useState<string>('')
 
-  const { getNewCityWeather, newCityMessage, setnewCityMessage } = usePreSet()
+  const { getNewCityWeather, newCityMessage, setnewCityMessage } =
+    useAppContext()
 
   useEffect(() => {
     return () => setnewCityMessage('')

@@ -44,9 +44,9 @@ const WeatherCardProps = {
   id: 1850144,
   name: 'Tokyo',
   cod: 200,
-  preSetAsFahrenheit: false,
+  isTemperatureInFahrenheit: false,
   toggleSettingsTempUnity: () => {},
-  preSetAsCountryLocationTime: false,
+  isCountryLocationTime: false,
   toggleSettingsLocationTime: () => {},
 }
 
@@ -88,7 +88,9 @@ describe('<CityPicker />', () => {
   })
 
   it('Should render weather with temperature in Fahrenheit', () => {
-    render(<WeatherCard {...WeatherCardProps} preSetAsFahrenheit={true} />)
+    render(
+      <WeatherCard {...WeatherCardProps} isTemperatureInFahrenheit={true} />
+    )
 
     const temp = screen.getByText(roundTemperatureValue(37.2))
     const unity = screen.getByText(/°F/i)

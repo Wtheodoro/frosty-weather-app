@@ -31,9 +31,9 @@ import {
 } from './styles'
 
 type IWeatherCard = {
-  preSetAsFahrenheit: boolean
+  isTemperatureInFahrenheit: boolean
   toggleSettingsTempUnity: () => void
-  preSetAsCountryLocationTime: boolean
+  isCountryLocationTime: boolean
   toggleSettingsLocationTime: () => void
 } & IWeather
 
@@ -45,9 +45,9 @@ const WeatherCard: React.FC<IWeatherCard> = ({
   name,
   sys: { sunrise, sunset },
   timezone,
-  preSetAsFahrenheit,
+  isTemperatureInFahrenheit,
   toggleSettingsTempUnity,
-  preSetAsCountryLocationTime,
+  isCountryLocationTime,
   toggleSettingsLocationTime,
 }) => {
   const currentWeather = MOCK_WEATHERS.includes(weather[0].main)
@@ -65,7 +65,7 @@ const WeatherCard: React.FC<IWeatherCard> = ({
     Clouds: isDay ? <CloudyDay /> : <CloudyNight />,
   }
 
-  const localSunrise = preSetAsCountryLocationTime
+  const localSunrise = isCountryLocationTime
     ? unixTimestampToLocalTime({
         timestamp: sunrise,
         timezone,
@@ -74,7 +74,7 @@ const WeatherCard: React.FC<IWeatherCard> = ({
         timestamp: sunrise,
       })
 
-  const localSunset = preSetAsCountryLocationTime
+  const localSunset = isCountryLocationTime
     ? unixTimestampToLocalTime({
         timestamp: sunset,
         timezone,
@@ -83,7 +83,9 @@ const WeatherCard: React.FC<IWeatherCard> = ({
         timestamp: sunset,
       })
 
-  const temp = preSetAsFahrenheit ? celsiusToFahrenheit(main.temp) : main.temp
+  const temp = isTemperatureInFahrenheit
+    ? celsiusToFahrenheit(main.temp)
+    : main.temp
 
   return (
     <Container data-testid='weatherCard-test-id'>
@@ -96,7 +98,7 @@ const WeatherCard: React.FC<IWeatherCard> = ({
 
         <TempText onClick={toggleSettingsTempUnity}>
           {Math.round(temp)}
-          <span>{preSetAsFahrenheit ? '°F' : '°C'}</span>
+          <span>{isTemperatureInFahrenheit ? '°F' : '°C'}</span>
         </TempText>
       </MainInfoWrapper>
 
@@ -112,7 +114,7 @@ const WeatherCard: React.FC<IWeatherCard> = ({
           <ClickableSubItem onClick={toggleSettingsLocationTime}>
             <EarthIcon />
 
-            {preSetAsCountryLocationTime ? (
+            {isCountryLocationTime ? (
               <p>
                 Country <br /> location
               </p>

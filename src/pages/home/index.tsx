@@ -1,6 +1,6 @@
 import React from 'react'
 import { PagehigherOrderComponent, WeatherCard } from '../../components'
-import { usePreSet } from '../../hooks/preSet'
+import { useAppContext } from '../../hooks/useAppContext'
 import { Container, WeatherCardsWrapper } from './styles'
 import { isMobile } from 'react-device-detect'
 
@@ -9,10 +9,11 @@ const Home = () => {
     dataWeathers,
     featuredCities,
     toggleSettingsTempUnity,
-    preSetAsFahrenheit,
+    isTemperatureInFahrenheit,
+
     toggleSettingsLocationTime,
-    preSetAsCountryLocationTime,
-  } = usePreSet()
+    isCountryLocationTime,
+  } = useAppContext()
 
   const featuredWeathers = dataWeathers.filter((data) =>
     featuredCities.includes(data.name)
@@ -33,9 +34,9 @@ const Home = () => {
             key={featuredWeather?.id}
             {...featuredWeather}
             toggleSettingsTempUnity={toggleSettingsTempUnity}
-            preSetAsFahrenheit={preSetAsFahrenheit}
+            isTemperatureInFahrenheit={isTemperatureInFahrenheit}
             toggleSettingsLocationTime={toggleSettingsLocationTime}
-            preSetAsCountryLocationTime={preSetAsCountryLocationTime}
+            isCountryLocationTime={isCountryLocationTime}
           />
         ))}
 

@@ -2,13 +2,13 @@ import './index.css'
 import App from './App'
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
-import { PreSetProvider } from './hooks/preSet'
+import { AppContextProvider } from './hooks/useAppContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <StrictMode>
-    <PreSetProvider>
+    <AppContextProvider>
       <App />
-    </PreSetProvider>
+    </AppContextProvider>
   </StrictMode>
 )

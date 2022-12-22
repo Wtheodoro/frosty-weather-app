@@ -1,10 +1,10 @@
 import { render, RenderResult } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
-import { PreSetProvider } from '../../hooks/preSet'
+import { AppContextProvider } from '../../hooks/useAppContext'
 
 export const renderWithRoute = (children: React.ReactNode): RenderResult =>
   render(
-    <PreSetProvider>
+    <AppContextProvider>
       <BrowserRouter>{children}</BrowserRouter>
-    </PreSetProvider>
+    </AppContextProvider>
   )
