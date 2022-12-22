@@ -4,7 +4,7 @@ interface IContainer {
   isChoosen?: boolean
 }
 
-export const Container = styled.div<IContainer>`
+export const Wrapper = styled.li<IContainer>`
   border: 1px solid #0095ff;
   padding: 20px 30px;
   border-radius: 16px;

@@ -20,7 +20,7 @@ export const Container = styled.div<IContainer>`
   }
 `
 
-export const CitiesPickerWrapper = styled.div`
+export const CitiesPickerWrapper = styled.ul`
   max-height: 75%;
   overflow-y: scroll;
   max-width: 600px;
@@ -29,6 +29,7 @@ export const CitiesPickerWrapper = styled.div`
   justify-content: center;
   gap: 20px;
   padding: 20px;
+  list-style: none;
 
   ::-webkit-scrollbar {
     display: none;

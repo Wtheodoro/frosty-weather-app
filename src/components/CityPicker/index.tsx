@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container } from './styles'
+import { Wrapper } from './styles'
 
 interface ICityPicker {
   children: string
@@ -20,13 +20,13 @@ const CityPicker: React.FC<ICityPicker> = ({
   }
 
   return (
-    <Container
+    <Wrapper
       data-testid='cityPicker-test-id'
       onClick={handleClick}
       isChoosen={isChoosen}
     >
       {children}
-    </Container>
+    </Wrapper>
   )
 }
 
