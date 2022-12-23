@@ -182,9 +182,9 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
   }
 
   useEffect(() => {
-    if (!choosenCitiesNames.length) return
     getCitiesWeatherOnAppInit()
-  }, [choosenCitiesNames.length, getCitiesWeatherOnAppInit])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <AppContext.Provider
