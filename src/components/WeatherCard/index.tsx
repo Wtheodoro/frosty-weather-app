@@ -148,14 +148,14 @@ const WeatherCard: React.FC<IWeatherCard> = ({
           <SubItem>
             <Humidity />
 
-            <p>{localizedPercentage(main.humidity)}</p>
+            <p>{localizedPercentage(main.humidity / 100)}</p>
             <p>Humidity</p>
           </SubItem>
 
           <SubItem>
             <Cloud />
 
-            <p>{localizedPercentage(clouds.all)}</p>
+            <p>{localizedPercentage(clouds.all / 100)}</p>
             <p>Cloudiness</p>
           </SubItem>
         </SubItemsWrapper>

@@ -20,6 +20,7 @@ interface IAppContext {
   getNewCityWeather: (cityName: string) => Promise<{ message: string }>
   userSettingsPreferences: ISettings
   setUserPreferences: ISetSetting
+  resetAllData: () => void
 }
 
 interface IAppContextProvider {
@@ -36,11 +37,13 @@ const AppContextNewProvider: React.FC<IAppContextProvider> = ({ children }) => {
     localStorage.setItem('@frosty:allCitiesNames', JSON.stringify(MOCK_CITIES))
     return MOCK_CITIES
   })
+
   const [choosenCitiesNames, setChoosenCitiesNames] = useState<string[]>(() => {
     const citiesString = localStorage.getItem('@frosty:choosenCitiesNames')
     if (citiesString) return JSON.parse(citiesString)
     return []
   })
+
   const [citiesInformations, setCitiesInformations] =
     useState<ICitiesInformationMap>({})
 
@@ -172,6 +175,12 @@ const AppContextNewProvider: React.FC<IAppContextProvider> = ({ children }) => {
       }),
   }
 
+  const resetAllData = () => {
+    setAllCitiesNames(MOCK_CITIES)
+    setChoosenCitiesNames([])
+    localStorage.clear()
+  }
+
   useEffect(() => {
     if (!choosenCitiesNames.length) return
     getCitiesWeatherOnAppInit()
@@ -188,6 +197,7 @@ const AppContextNewProvider: React.FC<IAppContextProvider> = ({ children }) => {
         getNewCityWeather,
         userSettingsPreferences,
         setUserPreferences,
+        resetAllData,
       }}
     >
       {children}

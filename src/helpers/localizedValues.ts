@@ -10,7 +10,7 @@ export const localizedTime = (time: Date) => {
 export const localizedPercentage = (percent: number) => {
   return Intl.NumberFormat(locale, {
     style: 'percent',
-    maximumFractionDigits: 2,
+    maximumFractionDigits: 0,
   }).format(percent)
 }
 
@@ -25,5 +25,6 @@ export const localizedTemperature = (temperature: number, unit = 'celsius') => {
   return Intl.NumberFormat(locale, {
     style: 'unit',
     unit,
+    maximumFractionDigits: 0,
   }).format(temperature)
 }

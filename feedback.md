@@ -33,13 +33,13 @@
 - [x] What does `preSet` mean? A better (explanatory) name would be helpful
 - [x] `mockWithSavedCities` is typed as `any[]`. `Any`s should be avoided as much as possible.
 - [x] `mockWithSavedCities.filter((item, index) => mockWithSavedCities.indexOf(item) === index)`
-- [ ] Probably unnecessary if you use a Javascript `Set` or a simple object (`«»`) to take care of duplicated items
-- [ ] Shouldn't `citiesToChoose` have the same elements of `featuredCities`? Why do you need separate variables?
+- [x] Probably unnecessary if you use a Javascript `Set` or a simple object (`«»`) to take care of duplicated items
+- [x] Shouldn't `citiesToChoose` have the same elements of `featuredCities`? Why do you need separate variables?
 - [x] `setdataWeathers` -> `setDataWeathers` (naming conventions)
 - [x] Code tip: `const weathers = await Promise.all(featuredCities.map(weatherServices.getCityWeather))`
-- [ ] Too much confusion with the relation between all these variables: `citiesToChoose`, `dataWeathers`, `citiesWaitingData` and `featuredCities`
-- [ ] All the methods that use these variables are super confusing to understand. Why do they do it? Which variables should be affected? etc...
-- [ ] Suggestion: What if you just have 1 state variable that is a map (an object `«»`) like: `« Lisboa: « weatherData: null, isLoading: true », Bangkok: « weatherData: « ... », isLoading: false »`
+- [x] Too much confusion with the relation between all these variables: `citiesToChoose`, `dataWeathers`, `citiesWaitingData` and `featuredCities`
+- [x] All the methods that use these variables are super confusing to understand. Why do they do it? Which variables should be affected? etc...
+- [x] Suggestion: What if you just have 1 state variable that is a map (an object `«»`) like: `« Lisboa: « weatherData: null, isLoading: true », Bangkok: « weatherData: « ... », isLoading: false »`
 
 ### `useEffect` on `AddCityMenu`
 
@@ -52,7 +52,7 @@
 
 - [x] Should be a component that contains all cities (`<ul>`) because it allows to pick cities
 - [x] Each city should be a `<li>` and accessible through the usage of the `Tab` key
-- [ ] Pressing the `Enter` key should result in the same interaction as the `onClick`
+- [x] Pressing the `Enter` key should result in the same interaction as the `onClick`
 
 ### `ChooseCity`
 
@@ -64,7 +64,7 @@
 
 ### Cached API request responses:
 
-- [ ] Will be staled indefinitely. An expiration timestamp must be added otherwise the weather data of each city will be the same forever unless the user knows how to `localStorage.clear()` (of course he doesn't, we do)
+- [x] Will be staled indefinitely. An expiration timestamp must be added otherwise the weather data of each city will be the same forever unless the user knows how to `localStorage.clear()` (of course he doesn't, we do)
 
 ### No global error fallback/handler. Any problem that occurs beyond the ones expected can severely compromise UX.
 
@@ -90,11 +90,11 @@
 
 ### Temperature texts, percentage numbers and wind speeds should have been properly localized (intl)
 
-- [ ] Browser's native Intl.NumberFormat API supports all those units
+- [x] Browser's native Intl.NumberFormat API supports all those units
 
 ### Dates/Timestamps should have been properly localized (intl)
 
-- [ ] Browser's native Intl.DateTimeFormat API and language/locale could have been used
+- [x] Browser's native Intl.DateTimeFormat API and language/locale could have been used
 
 # Positive remarks:
 

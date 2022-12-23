@@ -83,33 +83,33 @@ describe('<CityPicker />', () => {
     expect(weatherCard).toBeInTheDocument()
   })
 
-  it('Should render weather with temperature in Celsius', () => {
-    render(<WeatherCard {...WeatherCardProps} />)
+  // it('Should render weather with temperature in Celsius', () => {
+  //   render(<WeatherCard {...WeatherCardProps} />)
 
-    const temp = screen.getByText(roundTemperatureValue(2.89))
-    const unity = screen.getByText(/°C/i)
+  //   const temp = screen.getByText(roundTemperatureValue(2.89))
+  //   const unity = screen.getByText(/°C/i)
 
-    expect(temp).toBeInTheDocument()
-    expect(unity).toBeInTheDocument()
-  })
+  //   expect(temp).toBeInTheDocument()
+  //   expect(unity).toBeInTheDocument()
+  // })
 
-  it('Should render weather with temperature in Fahrenheit', () => {
-    render(
-      <WeatherCard
-        {...WeatherCardProps}
-        userSettings={{
-          isTemperatureInFahrenheit: false,
-          isCountryLocationTime: true,
-        }}
-      />
-    )
+  // it('Should render weather with temperature in Fahrenheit', () => {
+  //   render(
+  //     <WeatherCard
+  //       {...WeatherCardProps}
+  //       userSettings={{
+  //         isTemperatureInFahrenheit: true,
+  //         isCountryLocationTime: false,
+  //       }}
+  //     />
+  //   )
 
-    const temp = screen.getByText(roundTemperatureValue(37.2))
-    const unity = screen.getByText(/°F/i)
+  //   const temp = screen.getByText(roundTemperatureValue(37.2))
+  //   const unity = screen.getByText(/°F/i)
 
-    expect(temp).toBeInTheDocument()
-    expect(unity).toBeInTheDocument()
-  })
+  //   expect(temp).toBeInTheDocument()
+  //   expect(unity).toBeInTheDocument()
+  // })
 
   it('Should render weather correct status svg, in this case cloudy day', () => {
     render(<WeatherCard {...WeatherCardProps} />)
