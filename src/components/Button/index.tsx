@@ -5,7 +5,7 @@ type IButton = {
   styleType?: ButtonStyleType
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
-export type ButtonStyleType = 'blue' | 'white'
+export type ButtonStyleType = 'blue' | 'white' | 'red'
 
 const Button: React.FC<IButton> = ({
   children,

@@ -35,3 +35,9 @@ export const CitiesPickerWrapper = styled.ul`
     display: none;
   }
 `
+
+export const ButtonsWrapper = styled.div`
+  button + button {
+    margin-left: 40px;
+  }
+`

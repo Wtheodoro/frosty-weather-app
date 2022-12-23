@@ -21,6 +21,7 @@ interface IAppContext {
   userSettingsPreferences: ISettings
   setUserPreferences: ISetSetting
   resetAllData: () => void
+  deleteCity: (cityName: string) => void
 }
 
 interface IAppContextProvider {
@@ -175,6 +176,15 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
       }),
   }
 
+  const deleteCity = (currentCity: string) => {
+    const newCities = allCitiesNames.filter((city) => city !== currentCity)
+    const { [currentCity]: remove, ...newCitiesInformation } =
+      citiesInformations
+
+    setCitiesInformations(newCitiesInformation)
+    setAllCitiesNames(newCities)
+  }
+
   const resetAllData = () => {
     setAllCitiesNames(MOCK_CITIES)
     setChoosenCitiesNames([])
@@ -197,6 +207,7 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
         getNewCityWeather,
         userSettingsPreferences,
         setUserPreferences,
+        deleteCity,
         resetAllData,
       }}
     >

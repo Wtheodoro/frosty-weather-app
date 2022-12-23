@@ -1,12 +1,19 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button, CityPicker, PagehigherOrderComponent } from '../../components'
-import AddCityMenu from '../../components/AddCityMenu'
+import {
+  AddCityMenu,
+  Button,
+  CityPicker,
+  DeleteCityMenu,
+  PagehigherOrderComponent,
+} from '../../components'
 import { useAppContext } from '../../hooks/useAppContext'
-import { CitiesPickerWrapper, Container } from './styles'
+import { CitiesPickerWrapper, Container, ButtonsWrapper } from './styles'
 
 const ChooseCity = () => {
   const [isAddCityMenuVisible, setIsAddCityMenuVisible] =
+    useState<boolean>(false)
+  const [isDeleteCityMenuVisible, setIsDeleteCityMenuVisible] =
     useState<boolean>(false)
   const [newCityCondition, setnewCityCondition] = useState({
     isLoading: false,
@@ -20,6 +27,7 @@ const ChooseCity = () => {
     toggleCityName,
     choosenCitiesNames,
     getNewCityWeather,
+    deleteCity,
   } = useAppContext()
 
   const pushToHome = () => navigate('/home')
@@ -27,10 +35,12 @@ const ChooseCity = () => {
   const toggleisAddCityMenuVisible = () =>
     setIsAddCityMenuVisible(!isAddCityMenuVisible)
 
-  const handleContainerClick = () => {
-    if (!isAddCityMenuVisible) return
+  const toggleDeleteCityMenuVisible = () =>
+    setIsDeleteCityMenuVisible(!isDeleteCityMenuVisible)
 
-    setIsAddCityMenuVisible(false)
+  const handleContainerClick = () => {
+    if (isAddCityMenuVisible) setIsAddCityMenuVisible(false)
+    if (isDeleteCityMenuVisible) setIsDeleteCityMenuVisible(false)
   }
 
   const addNewCity = async (newCityName: string) => {
@@ -48,21 +58,38 @@ const ChooseCity = () => {
   return (
     <>
       <Container
-        isSecondPlan={isAddCityMenuVisible}
+        isSecondPlan={isAddCityMenuVisible || isDeleteCityMenuVisible}
         onClick={handleContainerClick}
       >
         <h1>CHOOSE CITY</h1>
 
-        <p>
-          Please choose <span>one</span> or <span>more</span> cities to display
-        </p>
+        {!allCitiesNames.length ? (
+          <p>
+            Please add at least <span>one</span> or <span>more</span> city
+          </p>
+        ) : (
+          <p>
+            Please choose <span>one</span> or <span>more</span> cities to
+            display
+          </p>
+        )}
 
-        <Button
-          onClick={toggleisAddCityMenuVisible}
-          disabled={isAddCityMenuVisible}
-        >
-          + add city
-        </Button>
+        <ButtonsWrapper>
+          <Button
+            onClick={toggleisAddCityMenuVisible}
+            disabled={isAddCityMenuVisible}
+          >
+            + add city
+          </Button>
+
+          <Button
+            onClick={toggleDeleteCityMenuVisible}
+            disabled={isDeleteCityMenuVisible || !allCitiesNames.length}
+            styleType='red'
+          >
+            - delete city
+          </Button>
+        </ButtonsWrapper>
 
         <CitiesPickerWrapper>
           {allCitiesNames.map((city) => (
@@ -86,6 +113,12 @@ const ChooseCity = () => {
         onClose={toggleisAddCityMenuVisible}
         isOpen={isAddCityMenuVisible}
         newCityCondition={newCityCondition}
+      />
+      <DeleteCityMenu
+        cities={allCitiesNames}
+        isOpen={isDeleteCityMenuVisible}
+        onClose={toggleDeleteCityMenuVisible}
+        onDeleteCity={deleteCity}
       />
     </>
   )

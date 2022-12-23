@@ -24,6 +24,8 @@ import ClearNight from './svgs/ClearNight'
 import CloudyNight from './svgs/CloudyNight'
 import CloudyDay from './svgs/CloudyDay'
 import RefreshIcon from './icons/RefreshIcon'
+import AddCityMenu from './AddCityMenu'
+import DeleteCityMenu from './DeleteCityMenu'
 
 export {
   PagehigherOrderComponent,
@@ -52,4 +54,6 @@ export {
   CloudyNight,
   CloudyDay,
   RefreshIcon,
+  AddCityMenu,
+  DeleteCityMenu,
 }

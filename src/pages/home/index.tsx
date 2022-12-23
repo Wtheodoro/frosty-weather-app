@@ -16,10 +16,6 @@ const Home = () => {
     .map((cityName) => citiesInformations[cityName])
     .filter((cityInformation) => cityInformation.weatherData)
 
-  // const featuredWeathers = dataWeathers.filter((data) =>
-  //   featuredCities.includes(data.name)
-  // )
-
   const showFourLessCards = citiesAbleToDisplay.length < 4
 
   return (
