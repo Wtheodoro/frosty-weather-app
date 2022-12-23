@@ -21,7 +21,7 @@ const buttonColorModifier = {
     background: #ff5232;
     color: white;
     border: none;
-    opacity: 0.5;
+    opacity: 0.7;
     transition: all 0.5s;
     &:hover {
       opacity: 1;

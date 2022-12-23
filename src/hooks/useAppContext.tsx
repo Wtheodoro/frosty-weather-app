@@ -150,6 +150,11 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
         },
       }))
 
+      localStorage.setItem(
+        '@frosty:allCitiesNames',
+        JSON.stringify([...allCitiesNames, currentWeather.name])
+      )
+
       return {
         message: `Uhul! We found ${newCityName} weather informations.`,
         cityFound: true,
@@ -183,6 +188,7 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
 
     setCitiesInformations(newCitiesInformation)
     setAllCitiesNames(newCities)
+    localStorage.setItem('@frosty:allCitiesNames', JSON.stringify(newCities))
   }
 
   const resetAllData = () => {
