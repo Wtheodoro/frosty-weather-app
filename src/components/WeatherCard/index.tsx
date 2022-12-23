@@ -87,7 +87,9 @@ const WeatherCard: React.FC<IWeatherCard> = ({
   return (
     <Container data-testid='weatherCard-test-id'>
       <ReloadIconWrapper
-        onClick={() => onUpdateWeather(name)}
+        onClick={() => {
+          if (!isWaitingNewData) onUpdateWeather(name)
+        }}
         isRotating={isWaitingNewData}
       >
         <RefreshIcon />

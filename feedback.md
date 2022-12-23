@@ -17,15 +17,15 @@
 
 ### `PagehigherOrderComponent` -> `PageHigherOrderComponent`
 
-- [ ] Higher order components are already a bit outdated like class components.
-- [ ] Hooks or composable components are +/- the standard right now
+- [x] Higher order components are already a bit outdated like class components.
+- [x] Hooks or composable components are +/- the standard right now
 
 ### Usage of Higher Order components like `export default PagehigherOrderComponent(COMPONENT)`
 
-- [ ] hinders search
-- [ ] When looking at `AppRoutes` if one tries to see the component of any route, one is redirected to the source code of `PagehigherOrderComponent`
-- [ ] Are already a bit outdated like class components.
-- [ ] Hooks or composable components are +/- the standard right now
+- [x] hinders search
+- [x] When looking at `AppRoutes` if one tries to see the component of any route, one is redirected to the source code of `PagehigherOrderComponent`
+- [x] Are already a bit outdated like class components.
+- [x] Hooks or composable components are +/- the standard right now
 
 ### `preSet.tsx`
 
