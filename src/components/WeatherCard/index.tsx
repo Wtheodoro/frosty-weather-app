@@ -17,8 +17,12 @@ import {
 } from '..'
 import MOCK_WEATHERS from '../../constants/weather'
 import celsiusToFahrenheit from '../../helpers/celsiusToFahrenheit'
-import unixTimestampToLocalTime from '../../helpers/unixTimestampToLocalTime'
-import unixTimestampToMyLocalTime from '../../helpers/unixTimestampToMyLocalTime'
+import {
+  localizedPercentage,
+  localizedSpeed,
+  localizedTemperature,
+  localizedTime,
+} from '../../helpers/localizedValues'
 import { IWeather } from '../../types/weather'
 import {
   Container,
@@ -72,26 +76,16 @@ const WeatherCard: React.FC<IWeatherCard> = ({
   }
 
   const localSunrise = isCountryLocationTime
-    ? unixTimestampToLocalTime({
-        timestamp: sunrise,
-        timezone,
-      })
-    : unixTimestampToMyLocalTime({
-        timestamp: sunrise,
-      })
+    ? localizedTime(new Date(sunrise * 1000))
+    : localizedTime(new Date((sunrise - timezone) * 1000))
 
   const localSunset = isCountryLocationTime
-    ? unixTimestampToLocalTime({
-        timestamp: sunset,
-        timezone,
-      })
-    : unixTimestampToMyLocalTime({
-        timestamp: sunset,
-      })
+    ? localizedTime(new Date(sunset * 1000))
+    : localizedTime(new Date((sunset = timezone) * 1000))
 
   const temp = isTemperatureInFahrenheit
-    ? celsiusToFahrenheit(main.temp)
-    : main.temp
+    ? localizedTemperature(celsiusToFahrenheit(main.temp), 'fahrenheit')
+    : localizedTemperature(main.temp, 'celsius')
 
   return (
     <Container data-testid='weatherCard-test-id'>
@@ -110,8 +104,8 @@ const WeatherCard: React.FC<IWeatherCard> = ({
         <h2>{weather[0].description}</h2>
 
         <TempText onClick={toggleSettingsTempUnity}>
-          {Math.round(temp)}
-          <span>{isTemperatureInFahrenheit ? '°F' : '°C'}</span>
+          {temp.slice(0, -2)}
+          <span>{temp.slice(temp.length - 2)}</span>
         </TempText>
       </MainInfoWrapper>
 
@@ -151,20 +145,20 @@ const WeatherCard: React.FC<IWeatherCard> = ({
             <Wind />
 
             <p>Wind</p>
-            <p>{wind.speed} m/h</p>
+            <p>{localizedSpeed(wind.speed)}</p>
           </SubItem>
 
           <SubItem>
             <Humidity />
 
-            <p>{main.humidity} %</p>
+            <p>{localizedPercentage(main.humidity)}</p>
             <p>Humidity</p>
           </SubItem>
 
           <SubItem>
             <Cloud />
 
-            <p>{clouds.all} %</p>
+            <p>{localizedPercentage(clouds.all)}</p>
             <p>Cloudiness</p>
           </SubItem>
         </SubItemsWrapper>
