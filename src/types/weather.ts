@@ -1,3 +1,9 @@
+export interface ICitiesInformationMap {
+  [key: string]: {
+    isLoading: true
+  } & IWeather
+}
+
 export interface IWeather {
   coord: {
     lon: number

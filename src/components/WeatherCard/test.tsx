@@ -48,6 +48,8 @@ const WeatherCardProps = {
   toggleSettingsTempUnity: () => {},
   isCountryLocationTime: false,
   toggleSettingsLocationTime: () => {},
+  onUpdateWeather: () => {},
+  isWaitingNewData: false,
 }
 
 const roundTemperatureValue = (temp: number) => Math.round(temp)

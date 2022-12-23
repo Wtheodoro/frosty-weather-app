@@ -13,6 +13,7 @@ import {
   ClearNight,
   CloudyNight,
   CloudyDay,
+  RefreshIcon,
 } from '..'
 import MOCK_WEATHERS from '../../constants/weather'
 import celsiusToFahrenheit from '../../helpers/celsiusToFahrenheit'
@@ -28,6 +29,7 @@ import {
   TempText,
   SubItemsSwitter,
   ClickableSubItem,
+  ReloadIconWrapper,
 } from './styles'
 
 type IWeatherCard = {
@@ -35,6 +37,8 @@ type IWeatherCard = {
   toggleSettingsTempUnity: () => void
   isCountryLocationTime: boolean
   toggleSettingsLocationTime: () => void
+  onUpdateWeather: (cityName: string) => void
+  isWaitingNewData: boolean
 } & IWeather
 
 const WeatherCard: React.FC<IWeatherCard> = ({
@@ -49,6 +53,8 @@ const WeatherCard: React.FC<IWeatherCard> = ({
   toggleSettingsTempUnity,
   isCountryLocationTime,
   toggleSettingsLocationTime,
+  onUpdateWeather,
+  isWaitingNewData,
 }) => {
   const currentWeather = MOCK_WEATHERS.includes(weather[0].main)
     ? weather[0].main
@@ -89,6 +95,13 @@ const WeatherCard: React.FC<IWeatherCard> = ({
 
   return (
     <Container data-testid='weatherCard-test-id'>
+      <ReloadIconWrapper
+        onClick={() => onUpdateWeather(name)}
+        isRotating={isWaitingNewData}
+      >
+        <RefreshIcon />
+      </ReloadIconWrapper>
+
       <MainInfoWrapper>
         {WeatherIconManeger[currentWeather]}
 

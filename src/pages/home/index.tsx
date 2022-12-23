@@ -10,9 +10,10 @@ const Home = () => {
     featuredCities,
     toggleSettingsTempUnity,
     isTemperatureInFahrenheit,
-
     toggleSettingsLocationTime,
     isCountryLocationTime,
+    updateCityWeather,
+    citiesWaitingData,
   } = useAppContext()
 
   const featuredWeathers = dataWeathers.filter((data) =>
@@ -37,6 +38,8 @@ const Home = () => {
             isTemperatureInFahrenheit={isTemperatureInFahrenheit}
             toggleSettingsLocationTime={toggleSettingsLocationTime}
             isCountryLocationTime={isCountryLocationTime}
+            onUpdateWeather={updateCityWeather}
+            isWaitingNewData={citiesWaitingData.includes(featuredWeather.name)}
           />
         ))}
 

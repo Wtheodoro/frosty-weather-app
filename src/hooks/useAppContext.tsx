@@ -22,6 +22,8 @@ interface IAppContext {
   getNewCityWeather: (newCityName: string) => void
   citiesToChoose: string[]
   setnewCityMessage: (message: string) => void
+  updateCityWeather: (cityName: string) => void
+  citiesWaitingData: string[]
 }
 
 interface IAppContextProvider {
@@ -138,6 +140,26 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
 
   const hasSomeFeaturedCity = !!featuredCities.length
 
+  const updateCityWeather = async (cityName: string) => {
+    if (citiesWaitingData.includes(cityName)) return
+    setCitiesWaitingData([...citiesWaitingData, cityName])
+
+    const cityNewData = await weatherServices.getCityWeather(cityName)
+
+    const allCitiesData: IWeather[] = dataWeathers
+    const updateCityDataIndex = dataWeathers.findIndex(
+      (dataWeather) => dataWeather.name === cityName
+    )
+
+    if (updateCityDataIndex) {
+      allCitiesData[updateCityDataIndex] = cityNewData
+    }
+
+    setCitiesWaitingData(
+      citiesWaitingData.filter((cityWaiting) => cityWaiting !== cityName)
+    )
+  }
+
   const updateFeaturedCities = async (city: string, isCustomCity?: boolean) => {
     const currentCityAlreadyChoosen = featuredCities.find(
       (featuredCity: string) => featuredCity === city
@@ -209,6 +231,8 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
         getNewCityWeather,
         citiesToChoose,
         setnewCityMessage,
+        updateCityWeather,
+        citiesWaitingData,
       }}
     >
       {children}

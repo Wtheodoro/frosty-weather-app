@@ -1,6 +1,7 @@
-import styled, { keyframes } from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 
 export const Container = styled.div`
+  position: relative;
   min-width: 100vw;
   height: 100%;
   max-height: 550px;
@@ -159,4 +160,27 @@ export const SubItemsSwitter = styled.section`
     animation: ${SecondAppearAnimation} 8s infinite alternate;
     z-index: 0;
   }
+`
+
+interface IReloadIconWrapper {
+  isRotating?: boolean
+}
+
+const SpinAnimation = keyframes`
+  100% {
+    transform:rotate(360deg);
+  }
+`
+
+const ReloadWrapperModifier = {
+  animationLoading: () => css`
+    animation: ${SpinAnimation} 4s infinite;
+  `,
+}
+
+export const ReloadIconWrapper = styled.div<IReloadIconWrapper>`
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  ${({ isRotating }) => isRotating && ReloadWrapperModifier.animationLoading}
 `

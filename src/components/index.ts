@@ -23,6 +23,7 @@ import EarthIcon from './icons/EarthIcon'
 import ClearNight from './svgs/ClearNight'
 import CloudyNight from './svgs/CloudyNight'
 import CloudyDay from './svgs/CloudyDay'
+import RefreshIcon from './icons/RefreshIcon'
 
 export {
   PagehigherOrderComponent,
@@ -50,4 +51,5 @@ export {
   ClearNight,
   CloudyNight,
   CloudyDay,
+  RefreshIcon,
 }
