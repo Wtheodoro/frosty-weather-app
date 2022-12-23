@@ -53,6 +53,7 @@ const ChooseCity = () => {
       isLoading: false,
     })
   }
+  console.log(choosenCitiesNames)
 
   return (
     <>

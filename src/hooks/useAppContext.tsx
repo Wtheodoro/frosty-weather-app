@@ -186,9 +186,18 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
     const { [currentCity]: remove, ...newCitiesInformation } =
       citiesInformations
 
+    const newChoosenCities = choosenCitiesNames.filter(
+      (city) => city !== currentCity
+    )
+
+    setChoosenCitiesNames(newChoosenCities)
     setCitiesInformations(newCitiesInformation)
     setAllCitiesNames(newCities)
     localStorage.setItem('@frosty:allCitiesNames', JSON.stringify(newCities))
+    localStorage.setItem(
+      '@frosty:choosenCitiesNames',
+      JSON.stringify(newChoosenCities)
+    )
   }
 
   const resetAllData = () => {
