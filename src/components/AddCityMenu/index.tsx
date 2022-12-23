@@ -1,22 +1,32 @@
 import React, { useState } from 'react'
-import { useAppContext } from '../../hooks/useAppContext'
 import Button from '../Button'
 import { Container, SearchWrapper, Message } from './styles'
 
 interface IAddCityMenu {
   onClose: () => void
   isOpen: boolean
+  onSearchCity: (cityName: string) => void
+  newCityCondition: {
+    isLoading: boolean
+    message: string
+  }
 }
 
-const AddCityMenu: React.FC<IAddCityMenu> = ({ onClose, isOpen }) => {
+const AddCityMenu: React.FC<IAddCityMenu> = ({
+  onClose,
+  isOpen,
+  onSearchCity,
+  newCityCondition,
+}) => {
   const [newCityName, setNewCityName] = useState<string>('')
 
-  const { getNewCityWeather, newCityMessage, setnewCityMessage } =
-    useAppContext()
-
   const handleCloseClick = () => {
-    setnewCityMessage('')
+    setNewCityName('')
     onClose()
+  }
+
+  const handleKeypress = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter') onSearchCity(newCityName.toLowerCase())
   }
 
   return (
@@ -29,11 +39,13 @@ const AddCityMenu: React.FC<IAddCityMenu> = ({ onClose, isOpen }) => {
       <SearchWrapper>
         <input
           type='text'
+          value={newCityName}
           onChange={({ target }) => setNewCityName(target.value)}
+          onKeyDown={handleKeypress}
         />
 
         <Button
-          onClick={() => getNewCityWeather(newCityName.toLowerCase())}
+          onClick={() => onSearchCity(newCityName.toLowerCase())}
           styleType='white'
         >
           Search
@@ -44,7 +56,7 @@ const AddCityMenu: React.FC<IAddCityMenu> = ({ onClose, isOpen }) => {
         Close
       </Button>
 
-      <Message>{newCityMessage}</Message>
+      <Message>{newCityCondition.message}</Message>
     </Container>
   )
 }

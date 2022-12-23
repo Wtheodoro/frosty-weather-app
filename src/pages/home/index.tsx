@@ -3,6 +3,7 @@ import { PagehigherOrderComponent, WeatherCard } from '../../components'
 import { useAppContext } from '../../hooks/useAppContext'
 import { Container, WeatherCardsWrapper } from './styles'
 import { isMobile } from 'react-device-detect'
+import { useAppContextNew } from '../../hooks/useAppContextNew'
 
 const Home = () => {
   const {
@@ -16,11 +17,17 @@ const Home = () => {
     citiesWaitingData,
   } = useAppContext()
 
-  const featuredWeathers = dataWeathers.filter((data) =>
-    featuredCities.includes(data.name)
-  )
+  const { citiesInformations, reFetchCityWeather } = useAppContextNew()
 
-  const showFourLessCards = featuredWeathers.length < 4
+  const citiesAbleToDisplay = Object.keys(citiesInformations)
+    .map((cityName) => citiesInformations[cityName])
+    .filter((cityInformation) => cityInformation.weatherData)
+
+  // const featuredWeathers = dataWeathers.filter((data) =>
+  //   featuredCities.includes(data.name)
+  // )
+
+  const showFourLessCards = citiesAbleToDisplay.length < 4
 
   return (
     <Container>
@@ -30,20 +37,20 @@ const Home = () => {
         centralizerCards={showFourLessCards}
         isMobile={isMobile}
       >
-        {featuredWeathers.map((featuredWeather) => (
+        {citiesAbleToDisplay.map(({ weatherData, isLoading }) => (
           <WeatherCard
-            key={featuredWeather?.id}
-            {...featuredWeather}
+            key={weatherData?.id}
+            {...weatherData!}
             toggleSettingsTempUnity={toggleSettingsTempUnity}
             isTemperatureInFahrenheit={isTemperatureInFahrenheit}
             toggleSettingsLocationTime={toggleSettingsLocationTime}
             isCountryLocationTime={isCountryLocationTime}
-            onUpdateWeather={updateCityWeather}
-            isWaitingNewData={citiesWaitingData.includes(featuredWeather.name)}
+            onUpdateWeather={reFetchCityWeather}
+            isWaitingNewData={isLoading}
           />
         ))}
 
-        {!featuredCities.length && (
+        {!citiesAbleToDisplay.length && (
           <p>
             Please, choose at least one city so you can see some weather
             information

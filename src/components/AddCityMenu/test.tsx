@@ -4,8 +4,14 @@ import AddCityMenu from '.'
 import { renderWithRoute } from '../../utils/tests/renderWithRoute'
 
 const AddCityMenuProps = {
+  onSearchCity: () => {},
   onClose: () => {},
   isOpen: true,
+  newCityCondition: {
+    isLoading: false,
+    message: '',
+    cityFound: false,
+  },
 }
 
 describe('<CityPicker />', () => {

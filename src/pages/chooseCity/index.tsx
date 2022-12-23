@@ -2,19 +2,25 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, CityPicker, PagehigherOrderComponent } from '../../components'
 import AddCityMenu from '../../components/AddCityMenu'
-import { useAppContext } from '../../hooks/useAppContext'
+import { useAppContextNew } from '../../hooks/useAppContextNew'
 import { CitiesPickerWrapper, Container } from './styles'
 
 const ChooseCity = () => {
   const [isAddCityMenuVisible, setIsAddCityMenuVisible] =
     useState<boolean>(false)
+  const [newCityCondition, setnewCityCondition] = useState({
+    isLoading: false,
+    message: '',
+  })
+
   const navigate = useNavigate()
+
   const {
-    citiesToChoose,
-    updateFeaturedCities,
-    featuredCities,
-    hasSomeFeaturedCity,
-  } = useAppContext()
+    allCitiesNames,
+    toggleCityName,
+    choosenCitiesNames,
+    getNewCityWeather,
+  } = useAppContextNew()
 
   const pushToHome = () => navigate('/home')
 
@@ -25,6 +31,18 @@ const ChooseCity = () => {
     if (!isAddCityMenuVisible) return
 
     setIsAddCityMenuVisible(false)
+  }
+
+  const addNewCity = async (newCityName: string) => {
+    if (!newCityName) return
+    setnewCityCondition({ message: '', isLoading: true })
+
+    const addCityResponse = await getNewCityWeather(newCityName)
+
+    setnewCityCondition({
+      ...addCityResponse,
+      isLoading: false,
+    })
   }
 
   return (
@@ -47,11 +65,11 @@ const ChooseCity = () => {
         </Button>
 
         <CitiesPickerWrapper>
-          {citiesToChoose.map((city) => (
+          {allCitiesNames.map((city) => (
             <CityPicker
               key={city}
-              isChoosen={featuredCities.includes(city)}
-              onClick={() => updateFeaturedCities(city)}
+              isChoosen={choosenCitiesNames.includes(city)}
+              onClick={() => toggleCityName(city)}
               disabled={isAddCityMenuVisible}
             >
               {city}
@@ -59,13 +77,15 @@ const ChooseCity = () => {
           ))}
         </CitiesPickerWrapper>
 
-        <Button onClick={pushToHome} disabled={!hasSomeFeaturedCity}>
+        <Button onClick={pushToHome} disabled={!choosenCitiesNames.length}>
           Ready!
         </Button>
       </Container>
       <AddCityMenu
+        onSearchCity={addNewCity}
         onClose={toggleisAddCityMenuVisible}
         isOpen={isAddCityMenuVisible}
+        newCityCondition={newCityCondition}
       />
     </>
   )

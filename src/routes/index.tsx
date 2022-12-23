@@ -36,14 +36,15 @@ const AppRoutes: React.FC = () => {
             </Suspense>
           }
         />
-        <Route
+
+        {/* <Route
           path='/info'
           element={
             <Suspense fallback={<div>Loading...</div>}>
               <Info />
             </Suspense>
           }
-        />
+        /> */}
       </Routes>
     </BrowserRouter>
   )
