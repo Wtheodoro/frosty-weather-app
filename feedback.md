@@ -78,15 +78,15 @@
 
 > [] A fetch() promise only rejects when a network error is encountered (which is usually when there's a permissions issue or similar). A fetch() promise does not reject on HTTP errors (404, etc.). Instead, a then() handler must check the Response.ok and/or Response.status properties.`
 
-### [ ] A test for the temperature conversion could have been implemented
+### [x] A test for the temperature conversion could have been implemented
 
-### [ ] Browser console errors: `Warning: validateDOMNesting(...): <button> cannot appear as a descendant of <button>.`
+### [?] Browser console errors: `Warning: validateDOMNesting(...): <button> cannot appear as a descendant of <button>.`
 
 ### Loading state:
 
 - [x] No loading state when locations are added and the user quickly goes clicks on `Ready!`. Perceived easily under slower networks.
 
-### [ ] Tests could have been implemented to test e.g: Function that converts temperatures
+### [x] Tests could have been implemented to test e.g: Function that converts temperatures
 
 ### Temperature texts, percentage numbers and wind speeds should have been properly localized (intl)
 

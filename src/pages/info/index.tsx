@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button, PagehigherOrderComponent } from '../../components'
+import { Button } from '../../components'
 import { useAppContext } from '../../hooks/useAppContext'
 import { Container, LogoWrapper } from './styles'
 
@@ -57,4 +57,4 @@ const Info = () => {
   )
 }
 
-export default PagehigherOrderComponent(Info, true)
+export default Info

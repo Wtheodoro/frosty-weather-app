@@ -1,11 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import {
-  Button,
-  LogoStorm,
-  LogoRain,
-  PagehigherOrderComponent,
-} from '../../components'
+import { Button, LogoStorm, LogoRain } from '../../components'
 import { useAppContext } from '../../hooks/useAppContext'
 import {
   Container,
@@ -49,4 +44,4 @@ const Welcome = () => {
   )
 }
 
-export default PagehigherOrderComponent(Welcome)
+export default Welcome

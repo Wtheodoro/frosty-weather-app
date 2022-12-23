@@ -1,4 +1,3 @@
-import PagehigherOrderComponent from './PagehigherOrderComponent'
 import LogoStorm from './svgs/LogoStorm'
 import LogoRain from './svgs/LogoRain'
 import CityPicker from './CityPicker'
@@ -26,9 +25,9 @@ import CloudyDay from './svgs/CloudyDay'
 import RefreshIcon from './icons/RefreshIcon'
 import AddCityMenu from './AddCityMenu'
 import DeleteCityMenu from './DeleteCityMenu'
+import PageLayout from './PageLayout'
 
 export {
-  PagehigherOrderComponent,
   LogoStorm,
   LogoRain,
   CityPicker,
@@ -56,4 +55,5 @@ export {
   RefreshIcon,
   AddCityMenu,
   DeleteCityMenu,
+  PageLayout,
 }

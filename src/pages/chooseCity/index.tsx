@@ -5,7 +5,6 @@ import {
   Button,
   CityPicker,
   DeleteCityMenu,
-  PagehigherOrderComponent,
 } from '../../components'
 import { useAppContext } from '../../hooks/useAppContext'
 import { CitiesPickerWrapper, Container, ButtonsWrapper } from './styles'
@@ -124,4 +123,4 @@ const ChooseCity = () => {
   )
 }
 
-export default PagehigherOrderComponent(ChooseCity)
+export default ChooseCity

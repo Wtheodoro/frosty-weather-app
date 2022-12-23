@@ -1,5 +1,5 @@
 import React from 'react'
-import { PagehigherOrderComponent, WeatherCard } from '../../components'
+import { WeatherCard } from '../../components'
 import { Container, WeatherCardsWrapper } from './styles'
 import { isMobile } from 'react-device-detect'
 import { useAppContext } from '../../hooks/useAppContext'
@@ -48,4 +48,4 @@ const Home = () => {
   )
 }
 
-export default PagehigherOrderComponent(Home, true)
+export default Home

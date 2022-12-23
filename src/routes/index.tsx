@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react'
 import { Route, BrowserRouter, Routes } from 'react-router-dom'
+import { PageLayout } from '../components'
 
 const Home = React.lazy(() => import('../pages/home'))
 const Welcome = React.lazy(() => import('../pages/welcome'))
@@ -10,41 +11,43 @@ const AppRoutes: React.FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path='/'
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <Welcome />
-            </Suspense>
-          }
-        />
+        <Route path='/' element={<PageLayout />}>
+          <Route
+            path=''
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Welcome />
+              </Suspense>
+            }
+          />
 
-        <Route
-          path='/home'
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <Home />
-            </Suspense>
-          }
-        />
+          <Route
+            path='home'
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Home />
+              </Suspense>
+            }
+          />
 
-        <Route
-          path='/chooseCity'
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <ChooseCity />
-            </Suspense>
-          }
-        />
+          <Route
+            path='chooseCity'
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <ChooseCity />
+              </Suspense>
+            }
+          />
 
-        {/* <Route
-          path='/info'
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <Info />
-            </Suspense>
-          }
-        /> */}
+          <Route
+            path='info'
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <Info />
+              </Suspense>
+            }
+          />
+        </Route>
       </Routes>
     </BrowserRouter>
   )
