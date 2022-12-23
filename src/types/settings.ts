@@ -1,4 +1,9 @@
 export interface ISettings {
-  temperatureUnity: 'celsius' | 'fahrenheit'
-  locationTime: 'user' | 'country'
+  isTemperatureInFahrenheit: boolean
+  isCountryLocationTime: boolean
+}
+
+export interface ISetSetting {
+  toggleTemperatureUnit: () => void
+  toggleTimeLocation: () => void
 }

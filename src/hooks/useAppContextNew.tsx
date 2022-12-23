@@ -8,7 +8,7 @@ import React, {
 import MOCK_CITIES from '../constants/cities'
 import weatherServices from '../services/weather-services'
 import { ICitiesInformationMap } from '../types/city'
-import { ISettings } from '../types/settings'
+import { ISetSetting, ISettings } from '../types/settings'
 import { IWeather } from '../types/weather'
 
 interface IAppContext {
@@ -18,6 +18,8 @@ interface IAppContext {
   citiesInformations: ICitiesInformationMap
   reFetchCityWeather: (cityName: string) => void
   getNewCityWeather: (cityName: string) => Promise<{ message: string }>
+  userSettingsPreferences: ISettings
+  setUserPreferences: ISetSetting
 }
 
 interface IAppContextProvider {
@@ -41,6 +43,12 @@ const AppContextNewProvider: React.FC<IAppContextProvider> = ({ children }) => {
   })
   const [citiesInformations, setCitiesInformations] =
     useState<ICitiesInformationMap>({})
+
+  const [userSettingsPreferences, setUserSettingsPreferences] =
+    useState<ISettings>({
+      isCountryLocationTime: false,
+      isTemperatureInFahrenheit: false,
+    })
 
   const toggleCityName = async (currentCityName: string) => {
     setCitiesInformations((prev) => ({
@@ -150,6 +158,20 @@ const AppContextNewProvider: React.FC<IAppContextProvider> = ({ children }) => {
     }
   }
 
+  const setUserPreferences = {
+    toggleTemperatureUnit: () =>
+      setUserSettingsPreferences({
+        ...userSettingsPreferences,
+        isTemperatureInFahrenheit:
+          !userSettingsPreferences.isTemperatureInFahrenheit,
+      }),
+    toggleTimeLocation: () =>
+      setUserSettingsPreferences({
+        ...userSettingsPreferences,
+        isCountryLocationTime: !userSettingsPreferences.isCountryLocationTime,
+      }),
+  }
+
   useEffect(() => {
     if (!choosenCitiesNames.length) return
     getCitiesWeatherOnAppInit()
@@ -164,6 +186,8 @@ const AppContextNewProvider: React.FC<IAppContextProvider> = ({ children }) => {
         citiesInformations,
         reFetchCityWeather,
         getNewCityWeather,
+        userSettingsPreferences,
+        setUserPreferences,
       }}
     >
       {children}

@@ -23,6 +23,7 @@ import {
   localizedTemperature,
   localizedTime,
 } from '../../helpers/localizedValues'
+import { ISetSetting, ISettings } from '../../types/settings'
 import { IWeather } from '../../types/weather'
 import {
   Container,
@@ -37,10 +38,8 @@ import {
 } from './styles'
 
 type IWeatherCard = {
-  isTemperatureInFahrenheit: boolean
-  toggleSettingsTempUnity: () => void
-  isCountryLocationTime: boolean
-  toggleSettingsLocationTime: () => void
+  userSettings: ISettings
+  setUserPreferences: ISetSetting
   onUpdateWeather: (cityName: string) => void
   isWaitingNewData: boolean
 } & IWeather
@@ -53,12 +52,10 @@ const WeatherCard: React.FC<IWeatherCard> = ({
   name,
   sys: { sunrise, sunset },
   timezone,
-  isTemperatureInFahrenheit,
-  toggleSettingsTempUnity,
-  isCountryLocationTime,
-  toggleSettingsLocationTime,
+  userSettings,
   onUpdateWeather,
   isWaitingNewData,
+  setUserPreferences,
 }) => {
   const currentWeather = MOCK_WEATHERS.includes(weather[0].main)
     ? weather[0].main
@@ -75,15 +72,15 @@ const WeatherCard: React.FC<IWeatherCard> = ({
     Clouds: isDay ? <CloudyDay /> : <CloudyNight />,
   }
 
-  const localSunrise = isCountryLocationTime
+  const localSunrise = userSettings.isCountryLocationTime
     ? localizedTime(new Date(sunrise * 1000))
-    : localizedTime(new Date((sunrise - timezone) * 1000))
+    : localizedTime(new Date((sunrise + timezone) * 1000))
 
-  const localSunset = isCountryLocationTime
+  const localSunset = userSettings.isCountryLocationTime
     ? localizedTime(new Date(sunset * 1000))
-    : localizedTime(new Date((sunset = timezone) * 1000))
+    : localizedTime(new Date((sunset + timezone) * 1000))
 
-  const temp = isTemperatureInFahrenheit
+  const temp = userSettings.isTemperatureInFahrenheit
     ? localizedTemperature(celsiusToFahrenheit(main.temp), 'fahrenheit')
     : localizedTemperature(main.temp, 'celsius')
 
@@ -103,7 +100,7 @@ const WeatherCard: React.FC<IWeatherCard> = ({
 
         <h2>{weather[0].description}</h2>
 
-        <TempText onClick={toggleSettingsTempUnity}>
+        <TempText onClick={setUserPreferences.toggleTemperatureUnit}>
           {temp.slice(0, -2)}
           <span>{temp.slice(temp.length - 2)}</span>
         </TempText>
@@ -118,10 +115,10 @@ const WeatherCard: React.FC<IWeatherCard> = ({
             <p>Sunrise</p>
           </SubItem>
 
-          <ClickableSubItem onClick={toggleSettingsLocationTime}>
+          <ClickableSubItem onClick={setUserPreferences.toggleTimeLocation}>
             <EarthIcon />
 
-            {isCountryLocationTime ? (
+            {userSettings.isCountryLocationTime ? (
               <p>
                 Country <br /> location
               </p>
