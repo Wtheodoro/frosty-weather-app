@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, CityPicker, PagehigherOrderComponent } from '../../components'
 import AddCityMenu from '../../components/AddCityMenu'
-import { useAppContextNew } from '../../hooks/useAppContextNew'
+import { useAppContext } from '../../hooks/useAppContext'
 import { CitiesPickerWrapper, Container } from './styles'
 
 const ChooseCity = () => {
@@ -20,7 +20,7 @@ const ChooseCity = () => {
     toggleCityName,
     choosenCitiesNames,
     getNewCityWeather,
-  } = useAppContextNew()
+  } = useAppContext()
 
   const pushToHome = () => navigate('/home')
 

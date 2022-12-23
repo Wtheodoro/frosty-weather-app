@@ -1,29 +1,26 @@
 import React, {
   createContext,
-  useState,
+  useCallback,
   useContext,
   useEffect,
-  useCallback,
+  useState,
 } from 'react'
 import MOCK_CITIES from '../constants/cities'
 import weatherServices from '../services/weather-services'
+import { ICitiesInformationMap } from '../types/city'
+import { ISetSetting, ISettings } from '../types/settings'
 import { IWeather } from '../types/weather'
 
 interface IAppContext {
-  featuredCities: string[]
-  dataWeathers: IWeather[]
-  hasSomeFeaturedCity: boolean
-  updateFeaturedCities: (city: string) => void
-  isTemperatureInFahrenheit: boolean
-  toggleSettingsTempUnity: () => void
-  isCountryLocationTime: boolean
-  toggleSettingsLocationTime: () => void
-  newCityMessage: string
-  getNewCityWeather: (newCityName: string) => void
-  citiesToChoose: string[]
-  setnewCityMessage: (message: string) => void
-  updateCityWeather: (cityName: string) => void
-  citiesWaitingData: string[]
+  allCitiesNames: string[]
+  choosenCitiesNames: string[]
+  toggleCityName: (cityName: string) => void
+  citiesInformations: ICitiesInformationMap
+  reFetchCityWeather: (cityName: string) => void
+  getNewCityWeather: (cityName: string) => Promise<{ message: string }>
+  userSettingsPreferences: ISettings
+  setUserPreferences: ISetSetting
+  resetAllData: () => void
 }
 
 interface IAppContextProvider {
@@ -33,206 +30,174 @@ interface IAppContextProvider {
 const AppContext = createContext<IAppContext>({} as IAppContext)
 
 const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
-  const [citiesToChoose, setCitiesToChoose] = useState<string[]>(() => {
-    const citiesString = localStorage.getItem('@frosty:featuredCities')
-
-    if (citiesString) {
-      const mockWithSavedCities: string[] = [
-        ...MOCK_CITIES,
-        ...JSON.parse(citiesString),
-      ]
-
-      return mockWithSavedCities.filter(
-        (item, index) => mockWithSavedCities.indexOf(item) === index
-      )
-    }
-
-    return MOCK_CITIES
-  })
-  const [newCityMessage, setnewCityMessage] = useState<string>('')
-  const [dataWeathers, setDataWeathers] = useState<IWeather[]>([])
-  const [citiesWaitingData, setCitiesWaitingData] = useState<string[]>([])
-  const [featuredCities, setFeaturedCities] = useState<string[]>(() => {
-    const citiesString = localStorage.getItem('@frosty:featuredCities')
-
+  const [allCitiesNames, setAllCitiesNames] = useState<string[]>(() => {
+    const citiesString = localStorage.getItem('@frosty:allCitiesNames')
     if (citiesString) return JSON.parse(citiesString)
 
+    localStorage.setItem('@frosty:allCitiesNames', JSON.stringify(MOCK_CITIES))
+    return MOCK_CITIES
+  })
+
+  const [choosenCitiesNames, setChoosenCitiesNames] = useState<string[]>(() => {
+    const citiesString = localStorage.getItem('@frosty:choosenCitiesNames')
+    if (citiesString) return JSON.parse(citiesString)
     return []
   })
-  const [isTemperatureInFahrenheit, setIsTemperatureInFahrenheit] =
-    useState<boolean>(() => {
-      const settings = localStorage.getItem('@frosty:settingsAsFahrenheit')
 
-      return !!settings
+  const [citiesInformations, setCitiesInformations] =
+    useState<ICitiesInformationMap>({})
+
+  const [userSettingsPreferences, setUserSettingsPreferences] =
+    useState<ISettings>({
+      isCountryLocationTime: false,
+      isTemperatureInFahrenheit: false,
     })
-  const [isCountryLocationTime, setIsCountryLocationTime] = useState<boolean>(
-    () => {
-      const settings = localStorage.getItem(
-        '@frosty:settingsAsCountryLocationTime'
+
+  const toggleCityName = async (currentCityName: string) => {
+    setCitiesInformations((prev) => ({
+      ...prev,
+      ...{
+        [currentCityName]: { isLoading: true, weatherData: null },
+      },
+    }))
+
+    if (choosenCitiesNames.includes(currentCityName)) {
+      const updatedChoosenCitiesNames = choosenCitiesNames.filter(
+        (name) => name !== currentCityName
       )
 
-      return !!settings
-    }
-  )
-
-  const addCityOnCitiesToChooseList = (newCityName: string) =>
-    setCitiesToChoose([...citiesToChoose, newCityName])
-
-  const getNewCityWeather = async (newCityName: string) => {
-    if (citiesToChoose.includes(newCityName)) return
-    if (citiesWaitingData.includes(newCityName)) return
-
-    setCitiesWaitingData([...citiesWaitingData, newCityName])
-    setnewCityMessage('')
-
-    const currentWeather = await weatherServices.getCityWeather(newCityName)
-
-    const citiesDataAlreadyRequested = dataWeathers.map(
-      (dataWeather) => dataWeather.id
-    )
-
-    const isCurrentCityAlreadyRequested = citiesDataAlreadyRequested.includes(
-      currentWeather.id
-    )
-
-    if (isCurrentCityAlreadyRequested)
-      return setnewCityMessage(
-        `It looks like we already have ${newCityName} selected.`
+      setChoosenCitiesNames(updatedChoosenCitiesNames)
+      localStorage.setItem(
+        '@frosty:choosenCitiesNames',
+        JSON.stringify(updatedChoosenCitiesNames)
       )
 
-    if (currentWeather.message === 'city not found') {
-      return setnewCityMessage(
-        `Sorry, It looks like we don't have ${newCityName} weather information yet.`
-      )
-    }
-
-    setnewCityMessage(`Uhul! We found ${newCityName} weather informations.`)
-
-    setDataWeathers((prevData) => [...prevData, currentWeather])
-    addCityOnCitiesToChooseList(currentWeather.name)
-    updateFeaturedCities(currentWeather.name, true)
-    setCitiesWaitingData(
-      citiesWaitingData.filter((cityWaiting) => cityWaiting !== newCityName)
-    )
-  }
-
-  const toggleSettingsTempUnity = () => {
-    if (isTemperatureInFahrenheit) {
-      setIsTemperatureInFahrenheit(false)
-      localStorage.removeItem('@frosty:settingsAsFahrenheit')
       return
     }
 
-    setIsTemperatureInFahrenheit(true)
-    localStorage.setItem('@frosty:settingsAsFahrenheit', 'true')
-  }
-
-  const toggleSettingsLocationTime = () => {
-    if (isCountryLocationTime) {
-      setIsCountryLocationTime(false)
-      localStorage.removeItem('@frosty:settingsAsCountryLocationTime')
-      return
-    }
-
-    setIsCountryLocationTime(true)
-    localStorage.setItem('@frosty:settingsAsCountryLocationTime', 'true')
-  }
-
-  const hasSomeFeaturedCity = !!featuredCities.length
-
-  const updateCityWeather = async (cityName: string) => {
-    if (citiesWaitingData.includes(cityName)) return
-    setCitiesWaitingData([...citiesWaitingData, cityName])
-
-    const cityNewData = await weatherServices.getCityWeather(cityName)
-
-    const allCitiesData: IWeather[] = dataWeathers
-    const updateCityDataIndex = dataWeathers.findIndex(
-      (dataWeather) => dataWeather.name === cityName
-    )
-
-    if (updateCityDataIndex) {
-      allCitiesData[updateCityDataIndex] = cityNewData
-    }
-
-    setCitiesWaitingData(
-      citiesWaitingData.filter((cityWaiting) => cityWaiting !== cityName)
-    )
-  }
-
-  const updateFeaturedCities = async (city: string, isCustomCity?: boolean) => {
-    const currentCityAlreadyChoosen = featuredCities.find(
-      (featuredCity: string) => featuredCity === city
-    )
-
-    let newSetOfCities: string[] = []
-
-    if (currentCityAlreadyChoosen)
-      newSetOfCities = featuredCities.filter(
-        (featuredCity) => featuredCity !== city
-      )
-
-    if (!currentCityAlreadyChoosen) newSetOfCities = [...featuredCities, city]
-
-    setFeaturedCities(newSetOfCities)
-
-    if (!isCustomCity) await getCityWeather(city)
-
+    setChoosenCitiesNames([...choosenCitiesNames, currentCityName])
     localStorage.setItem(
-      '@frosty:featuredCities',
-      JSON.stringify(newSetOfCities)
+      '@frosty:choosenCitiesNames',
+      JSON.stringify([...choosenCitiesNames, currentCityName])
     )
+
+    const currentWeather: IWeather = await weatherServices.getCityWeather(
+      currentCityName
+    )
+
+    if (currentWeather.cod === 200) {
+      setCitiesInformations((prev) => ({
+        ...prev,
+        ...{
+          [currentCityName]: { isLoading: false, weatherData: currentWeather },
+        },
+      }))
+    }
   }
 
-  const getCityWeather = async (currentCityName: string) => {
-    if (citiesWaitingData.includes(currentCityName)) return
+  const reFetchCityWeather = async (cityName: string) => {
+    setCitiesInformations((prev) => ({
+      ...prev,
+      ...{
+        [cityName]: {
+          ...prev[cityName],
+          isLoading: true,
+        },
+      },
+    }))
 
-    setCitiesWaitingData([...citiesWaitingData, currentCityName])
+    const currentWeather = await weatherServices.getCityWeather(cityName)
 
-    const currentCityAlreadyRequested = dataWeathers
-      .map((dataWeather) => dataWeather.name)
-      .includes(currentCityName)
-
-    if (currentCityAlreadyRequested) return
-
-    const currentWeather = await weatherServices.getCityWeather(currentCityName)
-
-    setDataWeathers((prevData) => [...prevData, currentWeather])
-    setCitiesWaitingData(
-      citiesWaitingData.filter((cityWaiting) => cityWaiting !== currentCityName)
-    )
+    if (currentWeather.cod === 200) {
+      setCitiesInformations((prev) => ({
+        ...citiesInformations,
+        ...{
+          [cityName]: { isLoading: false, weatherData: currentWeather },
+        },
+      }))
+    }
   }
 
   const getCitiesWeatherOnAppInit = useCallback(async () => {
-    const weathers = await Promise.all(
-      featuredCities.map(weatherServices.getCityWeather)
+    const weathersData: IWeather[] = await Promise.all(
+      choosenCitiesNames.map(weatherServices.getCityWeather)
     )
 
-    setDataWeathers(weathers)
-  }, [featuredCities])
+    const citiesReduce = weathersData.reduce<any>((accumulator, current) => {
+      accumulator[current.name] = { weatherData: current, isLoading: false }
+      return accumulator
+    }, {})
+
+    setCitiesInformations(citiesReduce)
+  }, [choosenCitiesNames])
+
+  const getNewCityWeather = async (newCityName: string) => {
+    try {
+      const currentWeather: IWeather = await weatherServices.getCityWeather(
+        newCityName
+      )
+
+      setAllCitiesNames((prev) => [...prev, currentWeather.name])
+      setChoosenCitiesNames([...choosenCitiesNames, currentWeather.name])
+      setCitiesInformations((prev) => ({
+        ...prev,
+        ...{
+          [currentWeather.name]: {
+            isLoading: false,
+            weatherData: currentWeather,
+          },
+        },
+      }))
+
+      return {
+        message: `Uhul! We found ${newCityName} weather informations.`,
+        cityFound: true,
+      }
+    } catch (error) {
+      return {
+        message: `Sorry, It looks like we don't have ${newCityName} weather information yet.`,
+        cityFound: false,
+      }
+    }
+  }
+
+  const setUserPreferences = {
+    toggleTemperatureUnit: () =>
+      setUserSettingsPreferences({
+        ...userSettingsPreferences,
+        isTemperatureInFahrenheit:
+          !userSettingsPreferences.isTemperatureInFahrenheit,
+      }),
+    toggleTimeLocation: () =>
+      setUserSettingsPreferences({
+        ...userSettingsPreferences,
+        isCountryLocationTime: !userSettingsPreferences.isCountryLocationTime,
+      }),
+  }
+
+  const resetAllData = () => {
+    setAllCitiesNames(MOCK_CITIES)
+    setChoosenCitiesNames([])
+    localStorage.clear()
+  }
 
   useEffect(() => {
-    if (!hasSomeFeaturedCity) return
+    if (!choosenCitiesNames.length) return
     getCitiesWeatherOnAppInit()
-  }, [getCitiesWeatherOnAppInit, hasSomeFeaturedCity])
+  }, [choosenCitiesNames.length, getCitiesWeatherOnAppInit])
 
   return (
     <AppContext.Provider
       value={{
-        featuredCities,
-        hasSomeFeaturedCity,
-        updateFeaturedCities,
-        dataWeathers,
-        isTemperatureInFahrenheit,
-        toggleSettingsTempUnity,
-        isCountryLocationTime,
-        toggleSettingsLocationTime,
-        newCityMessage,
+        allCitiesNames,
+        choosenCitiesNames,
+        toggleCityName,
+        citiesInformations,
+        reFetchCityWeather,
         getNewCityWeather,
-        citiesToChoose,
-        setnewCityMessage,
-        updateCityWeather,
-        citiesWaitingData,
+        userSettingsPreferences,
+        setUserPreferences,
+        resetAllData,
       }}
     >
       {children}

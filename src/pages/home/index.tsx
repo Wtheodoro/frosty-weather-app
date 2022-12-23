@@ -2,7 +2,7 @@ import React from 'react'
 import { PagehigherOrderComponent, WeatherCard } from '../../components'
 import { Container, WeatherCardsWrapper } from './styles'
 import { isMobile } from 'react-device-detect'
-import { useAppContextNew } from '../../hooks/useAppContextNew'
+import { useAppContext } from '../../hooks/useAppContext'
 
 const Home = () => {
   const {
@@ -10,7 +10,7 @@ const Home = () => {
     reFetchCityWeather,
     userSettingsPreferences,
     setUserPreferences,
-  } = useAppContextNew()
+  } = useAppContext()
 
   const citiesAbleToDisplay = Object.keys(citiesInformations)
     .map((cityName) => citiesInformations[cityName])

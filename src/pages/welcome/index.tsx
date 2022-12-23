@@ -6,7 +6,7 @@ import {
   LogoRain,
   PagehigherOrderComponent,
 } from '../../components'
-import { useAppContextNew } from '../../hooks/useAppContextNew'
+import { useAppContext } from '../../hooks/useAppContext'
 import {
   Container,
   LogoWrapper,
@@ -16,7 +16,7 @@ import {
 
 const Welcome = () => {
   const navigate = useNavigate()
-  const { choosenCitiesNames } = useAppContextNew()
+  const { choosenCitiesNames } = useAppContext()
 
   const pushToApp = () => {
     if (choosenCitiesNames.length) return navigate('/home')

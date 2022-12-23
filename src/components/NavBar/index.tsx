@@ -1,6 +1,6 @@
 import React from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { useAppContextNew } from '../../hooks/useAppContextNew'
+import { useLocation } from 'react-router-dom'
+import { useAppContext } from '../../hooks/useAppContext'
 import CardsIcon from '../icons/CardsIcon'
 import CoffeIcon from '../icons/CoffeIcon'
 import HomeIcon from '../icons/HomeIcon'
@@ -10,7 +10,7 @@ import { Container, IconWrapper, LogoWrapper } from './styles'
 const NavBar = () => {
   const { pathname } = useLocation()
 
-  const { resetAllData } = useAppContextNew()
+  const { resetAllData } = useAppContext()
 
   return (
     <Container data-testid='navBar-test-id'>

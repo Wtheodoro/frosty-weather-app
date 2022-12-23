@@ -5,7 +5,12 @@ import { useAppContext } from '../../hooks/useAppContext'
 import { Container, LogoWrapper } from './styles'
 
 const Info = () => {
-  const { isTemperatureInFahrenheit, isCountryLocationTime } = useAppContext()
+  const {
+    userSettingsPreferences: {
+      isCountryLocationTime,
+      isTemperatureInFahrenheit,
+    },
+  } = useAppContext()
   const navigate = useNavigate()
 
   return (
