@@ -182,7 +182,18 @@ export const ReloadIconWrapper = styled.div<IReloadIconWrapper>`
   position: absolute;
   top: 20px;
   right: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   opacity: 0.9;
-  ${({ isRotating }) => isRotating && ReloadWrapperModifier.animationLoading}
+
+  > svg {
+    ${({ isRotating }) => isRotating && ReloadWrapperModifier.animationLoading}
+  }
+
+  span {
+    font-size: 12px;
+  }
 `

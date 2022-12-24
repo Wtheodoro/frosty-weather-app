@@ -105,6 +105,7 @@ const WeatherCard: React.FC<IWeatherCard> = ({
         isRotating={isRefreshIconRotating}
       >
         <RefreshIcon />
+        <span>Refresh</span>
       </ReloadIconWrapper>
 
       <MainInfoWrapper>
