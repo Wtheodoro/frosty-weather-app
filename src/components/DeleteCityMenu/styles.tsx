@@ -34,9 +34,10 @@ export const ButtonsWrapper = styled.ul`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  list-style: none;
 
-  > button {
-    margin: 20px;
+  > li {
+    margin: 10px;
   }
 `
 
