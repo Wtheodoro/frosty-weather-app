@@ -203,6 +203,7 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
   const resetAllData = () => {
     setAllCitiesNames(MOCK_CITIES)
     setChoosenCitiesNames([])
+    setCitiesInformations({})
     localStorage.clear()
   }
 
