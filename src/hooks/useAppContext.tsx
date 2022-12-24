@@ -7,7 +7,7 @@ import React, {
 } from 'react'
 import MOCK_CITIES from '../constants/cities'
 import weatherServices from '../services/weather-services'
-import { ICitiesInformationMap } from '../types/city'
+import { ICitiesInformationMap, ICity } from '../types/city'
 import { ISetSetting, ISettings } from '../types/settings'
 import { IWeather } from '../types/weather'
 
@@ -124,10 +124,13 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
       choosenCitiesNames.map(weatherServices.getCityWeather)
     )
 
-    const citiesReduce = weathersData.reduce<any>((accumulator, current) => {
-      accumulator[current.name] = { weatherData: current, isLoading: false }
-      return accumulator
-    }, {})
+    const citiesReduce = weathersData.reduce<ICitiesInformationMap>(
+      (accumulator, current) => {
+        accumulator[current.name] = { weatherData: current, isLoading: false }
+        return accumulator
+      },
+      {} as ICitiesInformationMap
+    )
 
     setCitiesInformations(citiesReduce)
   }, [choosenCitiesNames])
