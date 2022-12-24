@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   ClearDay,
   Cloud,
@@ -57,6 +57,8 @@ const WeatherCard: React.FC<IWeatherCard> = ({
   isWaitingNewData,
   setUserPreferences,
 }) => {
+  const [isRefreshIconRotating, setIsRefreshIconRotationg] =
+    useState<boolean>(false)
   const currentWeather = MOCK_WEATHERS.includes(weather[0].main)
     ? weather[0].main
     : 'Clear'
@@ -84,13 +86,23 @@ const WeatherCard: React.FC<IWeatherCard> = ({
     ? localizedTemperature(celsiusToFahrenheit(main.temp), 'fahrenheit')
     : localizedTemperature(main.temp, 'celsius')
 
+  useEffect(() => {
+    if (isWaitingNewData) return setIsRefreshIconRotationg(true)
+
+    const timer = setTimeout(() => {
+      setIsRefreshIconRotationg(false)
+    }, 3000)
+
+    return () => clearTimeout(timer)
+  }, [isWaitingNewData])
+
   return (
     <Container data-testid='weatherCard-test-id'>
       <ReloadIconWrapper
         onClick={() => {
           if (!isWaitingNewData) onUpdateWeather(name)
         }}
-        isRotating={isWaitingNewData}
+        isRotating={isRefreshIconRotating}
       >
         <RefreshIcon />
       </ReloadIconWrapper>

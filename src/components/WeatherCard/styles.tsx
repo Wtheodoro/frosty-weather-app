@@ -182,5 +182,7 @@ export const ReloadIconWrapper = styled.div<IReloadIconWrapper>`
   position: absolute;
   top: 20px;
   right: 40px;
+  cursor: pointer;
+  opacity: 0.9;
   ${({ isRotating }) => isRotating && ReloadWrapperModifier.animationLoading}
 `
