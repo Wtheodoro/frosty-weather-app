@@ -10,15 +10,11 @@ const Home = () => {
     reFetchCityWeather,
     userSettingsPreferences,
     setUserPreferences,
-    choosenCitiesNames,
   } = useAppContext()
 
   const citiesAbleToDisplay = Object.keys(citiesInformations)
     .map((cityName) => citiesInformations[cityName])
     .filter((cityInformation) => cityInformation.weatherData)
-
-  console.log(citiesAbleToDisplay)
-  console.log(choosenCitiesNames)
 
   const showFourLessCards = citiesAbleToDisplay.length < 4
 
