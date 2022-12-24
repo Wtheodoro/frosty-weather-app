@@ -29,7 +29,7 @@ export const Container = styled.div<IMenuContainer>`
   }
 `
 
-export const ButtonsWrapper = styled.div`
+export const ButtonsWrapper = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,3 +39,5 @@ export const ButtonsWrapper = styled.div`
     margin: 20px;
   }
 `
+
+export const Item = styled.li``

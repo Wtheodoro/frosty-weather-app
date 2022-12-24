@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from '../Button'
-import { Container, ButtonsWrapper } from './styles'
+import { Container, ButtonsWrapper, Item } from './styles'
 
 interface IDeleteCityMenu {
   onClose: () => void
@@ -29,13 +29,11 @@ const DeleteCityMenu: React.FC<IDeleteCityMenu> = ({
 
       <ButtonsWrapper>
         {cities.map((city) => (
-          <Button
-            key={city}
-            onClick={() => handleClick(city)}
-            styleType='white'
-          >
-            {city}
-          </Button>
+          <Item key={city}>
+            <Button onClick={() => handleClick(city)} styleType='white'>
+              {city}
+            </Button>
+          </Item>
         ))}
       </ButtonsWrapper>
 
