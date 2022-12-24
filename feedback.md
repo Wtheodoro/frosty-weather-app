@@ -68,7 +68,7 @@
 
 ### No global error fallback/handler. Any problem that occurs beyond the ones expected can severely compromise UX.
 
-- [ ] Implementing an Error Boundary would fix the problem plus executing an extra check on the result of the 'fetch' like 'if (!response.ok) « throw Error('Something went wrong') »' https://reactjs.org/docs/error-boundaries.html
+- [?] Implementing an Error Boundary would fix the problem plus executing an extra check on the result of the 'fetch' like 'if (!response.ok) « throw Error('Something went wrong') »' https://reactjs.org/docs/error-boundaries.html
 
 ### Compilation warnings should be avoided
 

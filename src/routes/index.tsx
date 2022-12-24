@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react'
 import { Route, BrowserRouter, Routes } from 'react-router-dom'
 import { PageLayout } from '../components'
+import FallbackPage from '../pages/FallbackPage'
 
 const Home = React.lazy(() => import('../pages/home'))
 const Welcome = React.lazy(() => import('../pages/welcome'))
@@ -15,7 +16,7 @@ const AppRoutes: React.FC = () => {
           <Route
             path=''
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<FallbackPage />}>
                 <Welcome />
               </Suspense>
             }
@@ -24,7 +25,7 @@ const AppRoutes: React.FC = () => {
           <Route
             path='home'
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<FallbackPage />}>
                 <Home />
               </Suspense>
             }
@@ -33,7 +34,7 @@ const AppRoutes: React.FC = () => {
           <Route
             path='chooseCity'
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<FallbackPage />}>
                 <ChooseCity />
               </Suspense>
             }
@@ -42,7 +43,7 @@ const AppRoutes: React.FC = () => {
           <Route
             path='info'
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<FallbackPage />}>
                 <Info />
               </Suspense>
             }
