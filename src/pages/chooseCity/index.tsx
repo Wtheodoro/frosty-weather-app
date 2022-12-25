@@ -96,7 +96,7 @@ const ChooseCity = () => {
               key={city}
               isChoosen={choosenCitiesNames.includes(city)}
               onClick={() => toggleCityName(city)}
-              disabled={isAddCityMenuVisible}
+              disabled={isAddCityMenuVisible || isDeleteCityMenuVisible}
             >
               {city}
             </CityPicker>
