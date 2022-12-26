@@ -41,8 +41,6 @@ const AddCityMenu: React.FC<IAddCityMenu> = ({
         Well, no problem! Just add your city in the field below.
       </p>
 
-      <h1></h1>
-
       <SearchWrapper>
         <input
           type='text'

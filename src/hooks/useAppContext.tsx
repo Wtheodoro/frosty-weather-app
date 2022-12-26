@@ -153,6 +153,19 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
         newCityName
       )
 
+      if (currentWeather.name in citiesInformations) {
+        setCitiesInformations((prev) => {
+          const { [newCityName]: remove, ...newCitiesInformation } = prev
+
+          return newCitiesInformation
+        })
+
+        return {
+          message: `It looks like we already have ${newCityName}.`,
+          cityFound: true,
+        }
+      }
+
       setAllCitiesNames((prev) => [...prev, currentWeather.name])
       setChoosenCitiesNames([...choosenCitiesNames, currentWeather.name])
       setCitiesInformations((prev) => ({
@@ -181,10 +194,11 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
       }
     }
 
-    const { [newCityName]: remove, ...newCitiesInformation } =
-      citiesInformations
+    setCitiesInformations((prev) => {
+      const { [newCityName]: remove, ...newCitiesInformation } = prev
 
-    setCitiesInformations(newCitiesInformation)
+      return newCitiesInformation
+    })
 
     return newCityStatus
   }
