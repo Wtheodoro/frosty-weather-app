@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useAppContext } from '../../hooks/useAppContext'
 import Button from '../Button'
 import { Container, SearchWrapper, Message } from './styles'
 
@@ -20,6 +21,8 @@ const AddCityMenu: React.FC<IAddCityMenu> = ({
 }) => {
   const [newCityName, setNewCityName] = useState<string>('')
 
+  const { citiesInformations } = useAppContext()
+
   const handleCloseClick = () => {
     setNewCityName('')
     onClose()
@@ -29,12 +32,18 @@ const AddCityMenu: React.FC<IAddCityMenu> = ({
     if (e.key === 'Enter') onSearchCity(newCityName.toLowerCase())
   }
 
+  const isLoading = citiesInformations[newCityName]?.isLoading
+
+  console.log(isLoading)
+
   return (
     <Container data-testid='addCityMenu-test-id' isOpen={isOpen}>
       <p>
         Ooops, looks like your city is not on our list, is it true? <br />
         Well, no problem! Just add your city in the field below.
       </p>
+
+      <h1></h1>
 
       <SearchWrapper>
         <input
@@ -47,6 +56,7 @@ const AddCityMenu: React.FC<IAddCityMenu> = ({
         <Button
           onClick={() => onSearchCity(newCityName.toLowerCase())}
           styleType='white'
+          disabled={isLoading}
         >
           Search
         </Button>

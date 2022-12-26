@@ -136,6 +136,18 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
   }, [choosenCitiesNames])
 
   const getNewCityWeather = async (newCityName: string) => {
+    setCitiesInformations((prev) => ({
+      ...prev,
+      ...{
+        [newCityName]: {
+          isLoading: true,
+          weatherData: null,
+        },
+      },
+    }))
+
+    let newCityStatus = { message: '', cityFound: false }
+
     try {
       const currentWeather: IWeather = await weatherServices.getCityWeather(
         newCityName
@@ -158,16 +170,23 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
         JSON.stringify([...allCitiesNames, currentWeather.name])
       )
 
-      return {
+      newCityStatus = {
         message: `Uhul! We found ${newCityName} weather informations.`,
         cityFound: true,
       }
     } catch (error) {
-      return {
+      newCityStatus = {
         message: `Sorry, It looks like we don't have ${newCityName} weather information yet.`,
         cityFound: false,
       }
     }
+
+    const { [newCityName]: remove, ...newCitiesInformation } =
+      citiesInformations
+
+    setCitiesInformations(newCitiesInformation)
+
+    return newCityStatus
   }
 
   const setUserPreferences = {
