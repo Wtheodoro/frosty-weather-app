@@ -91,7 +91,7 @@ const WeatherCard: React.FC<IWeatherCard> = ({
 
     const timer = setTimeout(() => {
       setIsRefreshIconRotationg(false)
-    }, 3000)
+    }, 1000)
 
     return () => clearTimeout(timer)
   }, [isWaitingNewData])
@@ -116,7 +116,7 @@ const WeatherCard: React.FC<IWeatherCard> = ({
         <h2>{weather[0].description}</h2>
 
         <TempText onClick={setUserPreferences.toggleTemperatureUnit}>
-          {temp.slice(0, -2)}
+          {isRefreshIconRotating ? '-' : temp.slice(0, -2)}
           <span>{temp.slice(temp.length - 2)}</span>
         </TempText>
       </MainInfoWrapper>
@@ -126,7 +126,7 @@ const WeatherCard: React.FC<IWeatherCard> = ({
           <SubItem>
             <Sunrise />
 
-            <p>{localSunrise}</p>
+            <p>{isRefreshIconRotating ? '-' : localSunrise}</p>
             <p>Sunrise</p>
           </SubItem>
 
@@ -147,7 +147,7 @@ const WeatherCard: React.FC<IWeatherCard> = ({
           <SubItem>
             <Moonrise />
 
-            <p>{localSunset}</p>
+            <p>{isRefreshIconRotating ? '-' : localSunset}</p>
             <p>Sunset</p>
           </SubItem>
         </SubItemsWrapper>
@@ -157,20 +157,28 @@ const WeatherCard: React.FC<IWeatherCard> = ({
             <Wind />
 
             <p>Wind</p>
-            <p>{localizedSpeed(wind.speed)}</p>
+            <p>{isRefreshIconRotating ? '-' : localizedSpeed(wind.speed)}</p>
           </SubItem>
 
           <SubItem>
             <Humidity />
 
-            <p>{localizedPercentage(main.humidity / 100)}</p>
+            <p>
+              {isRefreshIconRotating
+                ? '-'
+                : localizedPercentage(main.humidity / 100)}
+            </p>
             <p>Humidity</p>
           </SubItem>
 
           <SubItem>
             <Cloud />
 
-            <p>{localizedPercentage(clouds.all / 100)}</p>
+            <p>
+              {isRefreshIconRotating
+                ? '-'
+                : localizedPercentage(clouds.all / 100)}
+            </p>
             <p>Cloudiness</p>
           </SubItem>
         </SubItemsWrapper>

@@ -174,7 +174,7 @@ const SpinAnimation = keyframes`
 
 const ReloadWrapperModifier = {
   animationLoading: () => css`
-    animation: ${SpinAnimation} 4s infinite;
+    animation: ${SpinAnimation} 1500ms infinite;
   `,
 }
 
