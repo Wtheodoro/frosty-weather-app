@@ -34,8 +34,6 @@ const AddCityMenu: React.FC<IAddCityMenu> = ({
 
   const isLoading = citiesInformations[newCityName]?.isLoading
 
-  console.log(isLoading)
-
   return (
     <Container data-testid='addCityMenu-test-id' isOpen={isOpen}>
       <p>
