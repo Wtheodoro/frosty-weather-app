@@ -23,7 +23,7 @@ const DeleteCityMenu: React.FC<IDeleteCityMenu> = ({
   return (
     <Container data-testid='DeleteCityMenu-test-id' isOpen={isOpen}>
       <p>
-        Do you want yo remove any city from you app? <br />
+        Do you want yo remove any city from your app? <br />
         Just select the city you want to remove.
       </p>
 
