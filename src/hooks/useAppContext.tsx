@@ -55,12 +55,10 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
     })
 
   const toggleCityName = async (currentCityName: string) => {
-    setCitiesInformations((prev) => ({
-      ...prev,
-      ...{
-        [currentCityName]: { isLoading: true, weatherData: null },
-      },
-    }))
+    addNewKeyToCitiesInformationsObject(currentCityName, {
+      isLoading: true,
+      weatherData: null,
+    })
 
     if (choosenCitiesNames.includes(currentCityName)) {
       const updatedChoosenCitiesNames = choosenCitiesNames.filter(
@@ -87,13 +85,28 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
     )
 
     if (currentWeather.cod === 200) {
-      setCitiesInformations((prev) => ({
-        ...prev,
-        ...{
-          [currentCityName]: { isLoading: false, weatherData: currentWeather },
-        },
-      }))
+      addNewKeyToCitiesInformationsObject(currentCityName, {
+        isLoading: false,
+        weatherData: currentWeather,
+      })
     }
+  }
+
+  const addNewKeyToCitiesInformationsObject = (key: string, value: ICity) => {
+    setCitiesInformations((prev) => ({
+      ...prev,
+      ...{
+        [key]: value,
+      },
+    }))
+  }
+
+  const removeKeyFromCitiesInformationsObject = (key: string) => {
+    setCitiesInformations((prev) => {
+      const { [key]: remove, ...newCitiesInformation } = prev
+
+      return newCitiesInformation
+    })
   }
 
   const reFetchCityWeather = async (cityName: string) => {
@@ -110,12 +123,10 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
     const currentWeather = await weatherServices.getCityWeather(cityName)
 
     if (currentWeather.cod === 200) {
-      setCitiesInformations((prev) => ({
-        ...citiesInformations,
-        ...{
-          [cityName]: { isLoading: false, weatherData: currentWeather },
-        },
-      }))
+      addNewKeyToCitiesInformationsObject(cityName, {
+        isLoading: false,
+        weatherData: currentWeather,
+      })
     }
   }
 
@@ -136,15 +147,10 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
   }, [choosenCitiesNames])
 
   const getNewCityWeather = async (newCityName: string) => {
-    setCitiesInformations((prev) => ({
-      ...prev,
-      ...{
-        [newCityName]: {
-          isLoading: true,
-          weatherData: null,
-        },
-      },
-    }))
+    addNewKeyToCitiesInformationsObject(newCityName, {
+      isLoading: true,
+      weatherData: null,
+    })
 
     let newCityStatus = { message: '', cityFound: false }
 
@@ -154,11 +160,7 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
       )
 
       if (currentWeather.name in citiesInformations) {
-        setCitiesInformations((prev) => {
-          const { [newCityName]: remove, ...newCitiesInformation } = prev
-
-          return newCitiesInformation
-        })
+        removeKeyFromCitiesInformationsObject(newCityName)
 
         return {
           message: `It looks like we already have ${newCityName}.`,
@@ -168,15 +170,11 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
 
       setAllCitiesNames((prev) => [...prev, currentWeather.name])
       setChoosenCitiesNames([...choosenCitiesNames, currentWeather.name])
-      setCitiesInformations((prev) => ({
-        ...prev,
-        ...{
-          [currentWeather.name]: {
-            isLoading: false,
-            weatherData: currentWeather,
-          },
-        },
-      }))
+
+      addNewKeyToCitiesInformationsObject(currentWeather.name, {
+        isLoading: false,
+        weatherData: currentWeather,
+      })
 
       localStorage.setItem(
         '@frosty:allCitiesNames',
@@ -194,11 +192,7 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
       }
     }
 
-    setCitiesInformations((prev) => {
-      const { [newCityName]: remove, ...newCitiesInformation } = prev
-
-      return newCitiesInformation
-    })
+    removeKeyFromCitiesInformationsObject(newCityName)
 
     return newCityStatus
   }
@@ -219,15 +213,14 @@ const AppContextProvider: React.FC<IAppContextProvider> = ({ children }) => {
 
   const deleteCity = (currentCity: string) => {
     const newCities = allCitiesNames.filter((city) => city !== currentCity)
-    const { [currentCity]: remove, ...newCitiesInformation } =
-      citiesInformations
 
     const newChoosenCities = choosenCitiesNames.filter(
       (city) => city !== currentCity
     )
 
+    removeKeyFromCitiesInformationsObject(currentCity)
+
     setChoosenCitiesNames(newChoosenCities)
-    setCitiesInformations(newCitiesInformation)
     setAllCitiesNames(newCities)
     localStorage.setItem('@frosty:allCitiesNames', JSON.stringify(newCities))
     localStorage.setItem(
